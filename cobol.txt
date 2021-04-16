@@ -1,0 +1,16 @@
+IDENTIFICATION       DIVISION.
+ PROGRAM-ID. PROGRAMA1.
+ AUTHOR. Vinicius Nunes.      
+ DATA-WRITTEN. 14/04/2021.
+
+DATA DIVISION.
+ WORKING-STORAGE SECTION.
+       01  input-string pic x(20).
+       01  Inbox.
+           02 Message-name Pic x(200).
+           02 Repository-Name Pic X(100).
+           02 Message-State Pic X(30).
+           02 Error-Message Pic X(200).
+           02 Sender Pic X(255).
+           02 Last-Updated Pic X(200).
+PROCEDURE DIVISION.
