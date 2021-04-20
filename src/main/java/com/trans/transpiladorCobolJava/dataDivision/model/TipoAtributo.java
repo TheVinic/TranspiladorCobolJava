@@ -1,4 +1,4 @@
-package com.trans.transpiladorCobolJava.dataDivision;
+package com.trans.transpiladorCobolJava.dataDivision.model;
 
 public enum TipoAtributo {
 	CARACTERE("String"),

@@ -1,4 +1,4 @@
-package com.trans.transpiladorCobolJava.main;
+package com.trans.transpiladorCobolJava.arquivo;
 
 public class Codigo {
 

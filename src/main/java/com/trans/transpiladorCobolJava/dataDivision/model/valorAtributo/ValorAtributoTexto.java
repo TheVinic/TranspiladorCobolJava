@@ -1,4 +1,6 @@
-package com.trans.transpiladorCobolJava.dataDivision;
+package com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo;
+
+import com.trans.transpiladorCobolJava.dataDivision.model.ValorAtributo;
 
 public class ValorAtributoTexto implements ValorAtributo{
 

@@ -1,6 +1,12 @@
-package com.trans.transpiladorCobolJava.dataDivision;
+package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 
 import java.math.BigDecimal;
+
+import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
+import com.trans.transpiladorCobolJava.dataDivision.model.ValorAtributo;
+import com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo.ValorAtributoDecimal;
+import com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo.ValorAtributoNumero;
+import com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo.ValorAtributoTexto;
 
 public class AtributoElementar extends Atributo {
 

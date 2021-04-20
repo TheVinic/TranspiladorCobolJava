@@ -5,7 +5,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.trans.transpiladorCobolJava.main.Codigo;
+import com.trans.transpiladorCobolJava.arquivo.Codigo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 
 public class DataDivision {
 	

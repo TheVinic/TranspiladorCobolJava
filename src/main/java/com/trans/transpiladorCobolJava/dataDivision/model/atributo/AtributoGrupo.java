@@ -1,9 +1,9 @@
-package com.trans.transpiladorCobolJava.dataDivision;
+package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 
 import java.io.IOException;
 import java.util.Set;
 
-import com.trans.transpiladorCobolJava.main.ArquivoEscrita;
+import com.trans.transpiladorCobolJava.arquivo.ArquivoEscrita;
 
 public class AtributoGrupo extends Atributo{
 

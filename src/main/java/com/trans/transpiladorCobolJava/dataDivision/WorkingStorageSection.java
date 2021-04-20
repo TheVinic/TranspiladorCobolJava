@@ -5,7 +5,11 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.trans.transpiladorCobolJava.main.Codigo;
+import com.trans.transpiladorCobolJava.arquivo.Codigo;
+import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 import com.trans.transpiladorCobolJava.main.Divisoes;
 
 public class WorkingStorageSection {

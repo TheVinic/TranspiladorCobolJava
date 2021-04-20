@@ -1,4 +1,4 @@
-package com.trans.transpiladorCobolJava.main;
+package com.trans.transpiladorCobolJava.arquivo;
 
 import java.io.FileWriter;
 import java.io.IOException;

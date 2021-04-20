@@ -1,4 +1,4 @@
-package com.trans.transpiladorCobolJava.dataDivision;
+package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 
 import java.io.IOException;
 

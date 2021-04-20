@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.trans.transpiladorCobolJava.arquivo.ArquivoLeitura;
+import com.trans.transpiladorCobolJava.arquivo.OrdemExecucaoDivisao;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.environmentDivision.EnvironmentDivision;
 import com.trans.transpiladorCobolJava.identificationDivision.IdentificationDivision;

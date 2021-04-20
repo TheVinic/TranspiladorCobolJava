@@ -1,6 +1,8 @@
-package com.trans.transpiladorCobolJava.dataDivision;
+package com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo;
 
 import java.math.BigDecimal;
+
+import com.trans.transpiladorCobolJava.dataDivision.model.ValorAtributo;
 
 public class ValorAtributoDecimal implements ValorAtributo{
 

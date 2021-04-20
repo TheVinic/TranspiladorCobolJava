@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-import com.trans.transpiladorCobolJava.main.OrdemExecucaoDivisao;
-
 public class ArquivoLeitura {
 
 	FileReader arquivoCobol;

@@ -3,7 +3,8 @@ package com.trans.transpiladorCobolJava.dataDivision;
 import java.io.IOException;
 import java.util.Set;
 
-import com.trans.transpiladorCobolJava.main.ArquivoEscrita;
+import com.trans.transpiladorCobolJava.arquivo.ArquivoEscrita;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 
 public class EscritaWorkingStorageSection {
 
