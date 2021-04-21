@@ -2,7 +2,7 @@ package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 
 import java.io.IOException;
 
-public class Atributo {
+public abstract class Atributo{
 
 	protected String nome;
 
@@ -11,16 +11,16 @@ public class Atributo {
 	@Deprecated
 	public Atributo() {	}
 	
-	public Atributo(String nomeAtributo, Integer nivel) {
-		this.nome = nomeAtributo.toLowerCase();
+	protected Atributo(String nomeAtributo, Integer nivel) {
+		this.nome = nomeAtributo.replaceAll("-", "_");
 		this.nivel = nivel;
 	}
 
-	public String getNome() {
+	protected String getNome() {
 		return nome;
 	}
 
-	public Integer getNivel() {
+	protected Integer getNivel() {
 		return nivel;
 	}
 
@@ -29,8 +29,10 @@ public class Atributo {
 		return "Atributo [nome=" + nome + ", nivel=" + nivel + "]";
 	}
 
-	public String escreveArquivo()  throws IOException {
-		return null;
-	}
+	public abstract String escreveArquivo() throws IOException;
+
+	protected abstract Object getTipoAtributo();
+
+	public abstract String escreveImport() throws IOException;
 
 }

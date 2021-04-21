@@ -16,7 +16,9 @@ public class ArquivoEscrita {
 	}
 
 	public void escreveLinha(String escreveArquivo) {
-		gravaCodigo.println(escreveArquivo);
+		if(escreveArquivo != null) {
+			gravaCodigo.println(escreveArquivo);
+		}
 	}
 
 	public void fechaArquivo() {

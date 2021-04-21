@@ -1,5 +1,6 @@
 package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
@@ -20,7 +21,7 @@ public class AtributoElementar extends Atributo {
 
 	public AtributoElementar(String nomeAtributo, Integer nivel, Integer comprimento, Integer comprimentoDecimal,
 			TipoAtributo tipoAtributo, String valorAtributo) {
-		super(nomeAtributo, nivel);
+		super(nomeAtributo.toLowerCase(), nivel);
 		this.comprimento = comprimento;
 		this.comprimentoDecimal = comprimentoDecimal;
 		this.tipoAtributo = tipoAtributo;
@@ -48,7 +49,7 @@ public class AtributoElementar extends Atributo {
 		return comprimentoDecimal;
 	}
 
-	public TipoAtributo getTipoAtributo() {
+	public Object getTipoAtributo() {
 		return tipoAtributo;
 	}
 
@@ -66,6 +67,11 @@ public class AtributoElementar extends Atributo {
 	@Override
 	public String escreveArquivo() {
 		return "\tprivate " + tipoAtributo.getDescricao() + " " + getNome() + ((valor==null) ? ";" : " = " + valor.getValor() + ";");
+	}
+
+	@Override
+	public String escreveImport() throws IOException {
+		return null;
 	}
 
 }
