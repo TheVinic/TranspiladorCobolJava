@@ -1,22 +1,26 @@
 package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 
 import java.io.IOException;
+import java.util.List;
 
 public abstract class Atributo{
 
 	protected String nome;
 
 	protected Integer nivel;
+	
+	private List<String> classes;
 
 	@Deprecated
 	public Atributo() {	}
 	
-	protected Atributo(String nomeAtributo, Integer nivel) {
+	protected Atributo(String nomeAtributo, Integer nivel, List<String> classe) {
 		this.nome = nomeAtributo.replaceAll("-", "_");
 		this.nivel = nivel;
+		this.classes = classe;
 	}
 
-	protected String getNome() {
+	public String getNome() {
 		return nome;
 	}
 
@@ -24,15 +28,38 @@ public abstract class Atributo{
 		return nivel;
 	}
 
-	@Override
-	public String toString() {
-		return "Atributo [nome=" + nome + ", nivel=" + nivel + "]";
+	public List<String> getClasses() {
+		return classes;
 	}
 
-	public abstract String escreveArquivo() throws IOException;
+	public String getClassesSucessoras() {
+		String texto = new String();
+		texto += classes.get(0) + ".";
+		for(int i = 1; i<classes.size(); i++) {
+			texto += "get" + classes.get(i) + "().";
+		}
+		return texto;
+	}
 
-	protected abstract Object getTipoAtributo();
+	public abstract String escreveVariaveis() throws IOException;
 
-	public abstract String escreveImport() throws IOException;
+	public abstract String escreveImportWorkingStorage() throws IOException;
+
+	public abstract String getImport();
+
+	public abstract String escreveGet() throws IOException;
+
+	public abstract String escreveSet();
+
+	public abstract String getSentencaGet();
+
+	public abstract String getSentencaSet();
+	
+	public abstract Object getValor();
+
+	public String getSentencaSet(String valor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

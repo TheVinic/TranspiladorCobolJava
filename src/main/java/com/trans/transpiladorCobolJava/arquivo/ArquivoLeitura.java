@@ -76,8 +76,9 @@ public class ArquivoLeitura {
 			codigoLido = lerLinha();
 		}
 
-		String[] codigoDividido = codigoCompleto.trim().replaceAll("\\s+", " ")
-				.split("IDENTIFICATION DIVISION. |DATA DIVISION. |ENVIRONMENT DIVISION. |PROCEDURE DIVISION. ");
+		String[] codigoDividido = codigoCompleto.trim().replaceAll("\\s+", " ").replace("'", "\"")
+				.split("IDENTIFICATION DIVISION. |DATA DIVISION. |ENVIRONMENT DIVISION. |PROCEDURE DIVISION.  |"
+						+ "IDENTIFICATION DIVISION\\s+\\. |DATA DIVISION\\s+\\. |ENVIRONMENT DIVISION\\s+\\. |PROCEDURE DIVISION\\s+\\. ");
 
 		return codigoDividido;
 	}

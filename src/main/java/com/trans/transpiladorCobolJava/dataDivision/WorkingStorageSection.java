@@ -1,7 +1,7 @@
 package com.trans.transpiladorCobolJava.dataDivision;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,54 +14,57 @@ import com.trans.transpiladorCobolJava.main.Divisoes;
 
 public class WorkingStorageSection {
 
-	Set<Atributo> atributos = new HashSet<Atributo>();
+	ArrayList<Atributo> atributos = new ArrayList<Atributo>();
+	
+	String classeMain = "DadosPrincipal";
 
 	@Autowired
 	Codigo codigoCompleto;
 
-	public Set<Atributo> popula(Codigo codigoCobol) {
+	public ArrayList<Atributo> popula(Codigo codigoCobol) {
+		List<String> classes = new ArrayList<String>();
+		classes.add(classeMain);
 		while (!codigoCobol.getProximaInstrucaoLeitura().isEmpty()
 				&& SecoesDataDivision
 						.encontraParagrafo(codigoCobol.getInstrucaoAtualLeitura()) == SecoesDataDivision.OUTRO
 				&& Divisoes.encontraDivisao(codigoCobol.getInstrucaoAtualLeitura()) == Divisoes.OUTRO) {
-			atributos.add(criaItem(new Codigo(codigoCobol.getInstrucaoAtualLeitura().split("\\s")), codigoCobol));
+			atributos.add(criaItem(new Codigo(codigoCobol.getInstrucaoAtualLeitura().split("\\s")), codigoCobol, classes));
 		}
-		//System.out.println(atributos);
 		return atributos;
 	}
 
-	private Atributo criaItem(Codigo instrucao, Codigo codigoCobol) {
+	private Atributo criaItem(Codigo instrucao, Codigo codigoCobol, List<String> classe) {
 
-		Integer nivel = Integer.parseInt(instrucao.getProximaInstrucaoLeitura());
+		Integer nivel = Integer.parseInt(instrucao.getInstrucaoAtualLeitura());
 
 		String nomeAtributo = instrucao.getProximaInstrucaoLeitura();
 
 		if (!instrucao.getProximaInstrucaoLeitura().isEmpty()) {
-			return criaElemento(nivel, nomeAtributo, instrucao);
+			return criaElemento(nivel, nomeAtributo, instrucao, classe);
 		} else {
-			return criaGrupo(nivel, nomeAtributo, codigoCobol);
+			return criaGrupo(nivel, nomeAtributo, codigoCobol, classe);
 		}
 	}
 
-	private AtributoGrupo criaGrupo(Integer nivel, String nomeAtributo, Codigo codigoCobol) {
-
-		Set<Atributo> filhos = new HashSet<Atributo>();
+	private AtributoGrupo criaGrupo(Integer nivel, String nomeAtributo, Codigo codigoCobol, List<String> classe) {
+		classe.add(nomeAtributo);
+		List<Atributo> filhos = new ArrayList<Atributo>();
 		Codigo instrucao = new Codigo(codigoCobol.getProximaInstrucaoLeitura().split("\\s"));
 
-		while (instrucao.getCodigoCobol().length > 1 && nivel < Integer.parseInt(instrucao.getInstrucaoLeitura(1))) {
-			filhos.add(criaItem(instrucao, codigoCobol));
+		while (instrucao.getCodigoCobol().length > 1 && nivel < Integer.parseInt(instrucao.getInstrucaoLeitura(0))) {
+			filhos.add(criaItem(instrucao, codigoCobol, classe));
 			instrucao = new Codigo(codigoCobol.getProximaInstrucaoLeitura().split("\\s"));
 		}
 
 		codigoCobol.setVoltaPosicaoLeitura();
-		return new AtributoGrupo(nomeAtributo, nivel, filhos);
+		return new AtributoGrupo(nomeAtributo, nivel, filhos, classe);
 	}
 
-	private AtributoElementar criaElemento(Integer nivel, String nomeAtributo, Codigo instrucao) {
+	private AtributoElementar criaElemento(Integer nivel, String nomeAtributo, Codigo instrucao, List<String> classe) {
 
 		if (!instrucao.getInstrucaoAtualLeitura().equals("PIC")
 				&& !instrucao.getInstrucaoAtualLeitura().equals("PICTURE")) {
-			System.out.println("Erro ao criar elemento");
+			System.out.println("Erro ao criar elemento " + nivel + " " + nomeAtributo + " " + instrucao);
 		}
 
 		TipoAtributo tipoAtributo = validaTipoAtributo(instrucao.getProximaInstrucaoLeitura());
@@ -84,7 +87,7 @@ public class WorkingStorageSection {
 			}
 		}
 		
-		return new AtributoElementar(nomeAtributo, nivel, comprimento, comprimentoDecimal, tipoAtributo, valorAtributo);
+		return new AtributoElementar(nomeAtributo, nivel, comprimento, comprimentoDecimal, tipoAtributo, valorAtributo, classe);
 	}
 
 	private Integer comprimentoAtributo(String stringComprimentoElemento) {

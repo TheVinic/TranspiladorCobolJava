@@ -32,7 +32,7 @@ public enum Divisoes {
 	
 	public static Divisoes encontraDivisao(String divisaoProcurada) {
 		for(Divisoes divisao : Divisoes.values()) {
-			if(divisao.getDescricao().equals(divisaoProcurada)) {
+			if(divisao.getDescricao().contains(divisaoProcurada)) {
 				return divisao;
 			}
 		}

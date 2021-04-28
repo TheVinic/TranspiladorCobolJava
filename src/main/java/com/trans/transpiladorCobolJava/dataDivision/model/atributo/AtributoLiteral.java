@@ -10,21 +10,15 @@ import com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo.ValorAtr
 import com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo.ValorAtributoNumero;
 import com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo.ValorAtributoTexto;
 
-public class AtributoElementar extends Atributo {
-
-	private Integer comprimento;
-
-	private Integer comprimentoDecimal;
+public class AtributoLiteral extends Atributo {
 
 	private TipoAtributo tipoAtributo;
 
 	private ValorAtributo valor;
 
-	public AtributoElementar(String nomeAtributo, Integer nivel, Integer comprimento, Integer comprimentoDecimal,
+	public AtributoLiteral(String nomeAtributo, Integer nivel, Integer comprimento, Integer comprimentoDecimal,
 			TipoAtributo tipoAtributo, String valorAtributo, List<String> classe) {
-		super((nomeAtributo == null) ? null : nomeAtributo.toLowerCase(), nivel, classe);
-		this.comprimento = comprimento;
-		this.comprimentoDecimal = comprimentoDecimal;
+		super((nomeAtributo==null) ? null : nomeAtributo.toLowerCase(), nivel, classe);
 		this.tipoAtributo = tipoAtributo;
 		if (valorAtributo != null) {
 			switch (tipoAtributo) {
@@ -36,22 +30,10 @@ public class AtributoElementar extends Atributo {
 						BigDecimal.valueOf(Double.parseDouble(valorAtributo.replace(",", "."))));
 				break;
 			case NUMERO:
-				if (valorAtributo.equals("ZERO") || valorAtributo.equals("ZEROS")) {
-					valor = new ValorAtributoNumero(0);
-				} else {
-					valor = new ValorAtributoNumero(Integer.parseInt(valorAtributo));
-				}
+				valor = new ValorAtributoNumero(Integer.parseInt(valorAtributo));
 				break;
 			}
 		}
-	}
-
-	public Integer getComprimento() {
-		return comprimento;
-	}
-
-	public Integer getComprimentoDecimal() {
-		return comprimentoDecimal;
 	}
 
 	public Object getTipoAtributo() {
@@ -63,48 +45,35 @@ public class AtributoElementar extends Atributo {
 	}
 
 	@Override
-	public String toString() {
-		return "\n[[nivel=" + getNivel() + ", nome=" + getNome() + ", comprimento=" + comprimento
-				+ ", comprimentoDecimal=" + comprimentoDecimal + ", tipoAtributo=" + tipoAtributo + ", valor=" + valor
-				+ "]";
-	}
-
-	@Override
-	public String escreveVariaveis() {
-		return "\tprivate " + tipoAtributo.getDescricao() + " " + getNome()
-				+ ((valor == null) ? ";" : " = " + valor.getValor() + ";");
-	}
-
-	@Override
 	public String escreveImportWorkingStorage() throws IOException {
 		return null;
 	}
 
 	@Override
+	@Deprecated
 	public String escreveGet() throws IOException {
 		return "\n\tpublic " + tipoAtributo.getDescricao() + " " + getSentencaGet() + " {\n\t\treturn this." + getNome()
 				+ ";\n\t}";
 	}
 
 	@Override
+	@Deprecated
 	public String escreveSet() {
 		return "\n\tpublic void set" + getNome() + "(" + tipoAtributo.getDescricao() + " " + getNome()
 				+ ") {\n\t\tthis." + getNome() + " = " + getNome() + ";\n\t}";
 	}
 
 	@Override
+	@Deprecated
 	public String getSentencaGet() {
 		return "get" + toUpperFistCase(getNome()) + "()";
 	}
 
 	@Override
+	@Deprecated
 	public String getSentencaSet() {
-		return "set" + getNome() + "(" + tipoAtributo.getDescricao() + " " + getNome().toLowerCase() + ")";
-	}
-
-	@Override
-	public String getSentencaSet(String valor) {
-		return "set" + toUpperFistCase(getNome()) + "(" + valor + ")";
+		return "set" + tipoAtributo.getDescricao() + "(" + tipoAtributo.getDescricao() + " " + getNome().toLowerCase()
+				+ ")";
 	}
 
 	private static String toUpperFistCase(String nome) {
@@ -114,7 +83,13 @@ public class AtributoElementar extends Atributo {
 	@Override
 	@Deprecated
 	public String getImport() {
-		return "import com.trans.transpiladorCobolJava.model." + getClasses().get(0) + ";\n";
+		return "import com.trans.transpiladorCobolJava.model." + getClasses().get(0) + ";";
+	}
+
+	@Override
+	public String escreveVariaveis() throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

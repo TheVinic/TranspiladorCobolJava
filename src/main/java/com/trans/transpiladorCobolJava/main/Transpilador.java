@@ -35,9 +35,10 @@ public class Transpilador {
 		identificationDivision.popula(codigoCobol[ordemExecucao.getIdentificationDivision()]);
 		environmentDivision.popula(codigoCobol[ordemExecucao.getEnvironmentDivision()]);
 		dataDivision.popula(codigoCobol[ordemExecucao.getDataDivision()]);
-		//TODO procedureDivision
+		procedureDivision.popula(codigoCobol[ordemExecucao.getProcedureDivision()], dataDivision);
 		
 		dataDivision.escreve();
+		procedureDivision.escreve();
 	}
 
 }

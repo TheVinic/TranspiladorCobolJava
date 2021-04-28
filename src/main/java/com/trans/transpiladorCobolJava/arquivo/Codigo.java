@@ -34,12 +34,28 @@ public class Codigo {
 
 	
 	public String getInstrucaoAtualLeitura() {
-		return codigoCobol[posicaoLeitura];
+		return (posicaoLeitura >= codigoCobol.length) ? new String() : codigoCobol[posicaoLeitura];
 	}
 
 	
 	public String getInstrucaoLeitura(Integer i) {
 		return (i >= codigoCobol.length) ? new String() : codigoCobol[i];
+	}
+	
+	private boolean acabarNaProximaIteracao = false;
+	
+	public boolean isOver() {
+		if(acabarNaProximaIteracao || posicaoLeitura >= codigoCobol.length) {
+			acabarNaProximaIteracao = false;
+			return true;
+		}else {
+			acabarNaProximaIteracao = (codigoCobol[posicaoLeitura].endsWith(".")) ? true : false; 
+			return false;
+		}
+	}
+
+	public void avancaPosicaoLeitura() {
+		posicaoLeitura++;
 	}
 	
 }
