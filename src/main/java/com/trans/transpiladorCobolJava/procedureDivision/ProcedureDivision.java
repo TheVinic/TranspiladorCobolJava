@@ -30,6 +30,7 @@ public class ProcedureDivision {
 			Codigo umaSecao = new Codigo(secao.split("\\s+"));
 			while (!umaSecao.isOver()
 					&& ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura())) {
+				
 				ParagrafosProcedureDivision paragrafo = ParagrafosProcedureDivision
 						.valueOf(umaSecao.getInstrucaoAtualLeitura());
 

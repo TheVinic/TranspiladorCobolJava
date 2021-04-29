@@ -3,21 +3,25 @@ package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class Atributo{
+public abstract class Atributo {
 
 	protected String nome;
 
 	protected Integer nivel;
-	
-	private List<String> classes;
+
+	protected List<String> classes;
+
+	protected Integer occurs;
 
 	@Deprecated
-	public Atributo() {	}
-	
-	protected Atributo(String nomeAtributo, Integer nivel, List<String> classe) {
+	public Atributo() {
+	}
+
+	protected Atributo(String nomeAtributo, Integer nivel, List<String> classe, Integer occurs) {
 		this.nome = nomeAtributo.replaceAll("-", "_");
 		this.nivel = nivel;
 		this.classes = classe;
+		this.occurs = occurs;
 	}
 
 	public String getNome() {
@@ -32,34 +36,70 @@ public abstract class Atributo{
 		return classes;
 	}
 
+	public Integer getOccurs() {
+		return occurs;
+	}
+
+	protected String getStringDeclaraOccurs() {
+		if (occurs == null) {
+			return "";
+		} else {
+			return "[]";
+		}
+	}
+
+	protected String getIniciaOccurs() {
+		if (occurs == null) {
+			return "";
+		} else {
+			return "[" + occurs + "]";
+		}
+	}
+
 	public String getClassesSucessoras() {
 		String texto = new String();
 		texto += classes.get(0) + ".";
-		for(int i = 1; i<classes.size(); i++) {
+		for (int i = 1; i < classes.size(); i++) {
 			texto += "get" + classes.get(i) + "().";
 		}
 		return texto;
 	}
 
+	public String escreveGet() throws IOException {
+
+		return "\n\tpublic " + tipoObjeto() + getStringDeclaraOccurs() + " " + getSentencaGet() + " {\n\t\treturn this."
+				+ nome + ";\n\t}";
+	}
+
+	public String escreveSet() {
+		return "\n\tpublic void set" + toUpperFistCase(nome) + "(" + tipoObjeto() + getStringDeclaraOccurs() + " "
+				+ nome.toLowerCase() + ") {\n\t\tthis." + nome.toLowerCase() + " = " + nome.toLowerCase() + ";\n\t}";
+	}
+
+	public String getSentencaGet() {
+		return "get" + toUpperFistCase(getNome()) + "()";
+	}
+
+	public String getSentencaSet(String valor) {
+		return "set" + toUpperFistCase(nome) + "(" + valor + ")";
+	}
+
+	public String getSentencaSet() {
+		return "set" + toUpperFistCase(nome) + "(" + tipoObjeto() + " " + nome.toLowerCase() + ")";
+	}
+
+	protected static String toUpperFistCase(String nome) {
+		return nome.substring(0, 1).toUpperCase() + nome.toLowerCase().substring(1);
+	}
+
+	public abstract Object getValor();
+
+	public abstract void escreveGetSet() throws IOException;
+
 	public abstract String escreveVariaveis() throws IOException;
 
 	public abstract String escreveImportWorkingStorage() throws IOException;
 
-	public abstract String getImport();
-
-	public abstract String escreveGet() throws IOException;
-
-	public abstract String escreveSet();
-
-	public abstract String getSentencaGet();
-
-	public abstract String getSentencaSet();
-	
-	public abstract Object getValor();
-
-	public String getSentencaSet(String valor) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract String tipoObjeto();
 
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.trans.transpiladorCobolJava.arquivo.ArquivoEscrita;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 
 public class EscritaWorkingStorageSection {
 
@@ -18,26 +20,39 @@ public class EscritaWorkingStorageSection {
 
 	ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
 	String nomeClasse = "DadosPrincipais";
-	
+
 	public void escreve(ArrayList<Atributo> atributosWorkingStorage) throws IOException {
 
 		arquivoEscrita.abreArquivo("model\\" + nomeClasse + ".java");
 		arquivoEscrita.escreveLinha("package com.trans.transpiladorCobolJava.model." + nomeClasse + ";\n");
-		//For para escrever atributos
+
+		arquivoEscrita.escreveLinha("import java.math.BigDecimal;");
+
+		// For para escrever atributos
 		for (Atributo atributoUnitario : atributosWorkingStorage) {
-			arquivoEscrita.escreveLinha(atributoUnitario.escreveImportWorkingStorage());
+			String imports = atributoUnitario.escreveImportWorkingStorage();
+			if (atributoUnitario instanceof AtributoElementar) {
+				arquivoEscrita.escreveLinha(imports);
+			}
 		}
-		//For para escrever declaração variaveis
-		arquivoEscrita.escreveLinha("\npublic class " + nomeClasse + "{"); 
+		// For para escrever declaração variaveis
+		arquivoEscrita.escreveLinha("\npublic class " + nomeClasse + "{");
 		for (Atributo atributoUnitario : atributosWorkingStorage) {
-			arquivoEscrita.escreveLinha(atributoUnitario.escreveVariaveis());
+			String variaveis = atributoUnitario.escreveVariaveis();
+			if (atributoUnitario instanceof AtributoElementar) {
+				arquivoEscrita.escreveLinha(variaveis);
+			}
 		}
-		//For para escrever Get e Set
+		// For para escrever Get e Set
 		for (Atributo atributoUnitario : atributosWorkingStorage) {
-			arquivoEscrita.escreveLinha(atributoUnitario.escreveGet());
-			arquivoEscrita.escreveLinha(atributoUnitario.escreveSet());
+			if (atributoUnitario instanceof AtributoElementar) {
+				arquivoEscrita.escreveLinha(atributoUnitario.escreveGet());
+				arquivoEscrita.escreveLinha(atributoUnitario.escreveSet());
+			} else if (atributoUnitario instanceof AtributoGrupo) {
+				atributoUnitario.escreveGetSet();
+			}
 		}
-		arquivoEscrita.escreveLinha("}"); 
+		arquivoEscrita.escreveLinha("}");
 		arquivoEscrita.fechaArquivo();
 	}
 

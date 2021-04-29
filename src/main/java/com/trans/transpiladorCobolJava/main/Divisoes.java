@@ -4,8 +4,7 @@ public enum Divisoes {
 	IDENTIFICATION_DIVISION("IDENTIFICATION DIVISION"), 
 	ENVIRONMENT_DIVISION("ENVIRONMENT DIVISION"), 
 	DATA_DIVISION("DATA DIVISION"), 
-	PROCEDURE_DIVISION("PROCEDURE DIVISION"),
-	OUTRO("Erro na divisao");
+	PROCEDURE_DIVISION("PROCEDURE DIVISION");
 	
 	String descricao;
 	
@@ -17,6 +16,7 @@ public enum Divisoes {
 		this.descricao = descricao;
 	}
 
+	@Deprecated
 	public static boolean fimDivisaoAtual(String palavra) {
 		if(palavra == null) {
 			return true;
@@ -30,13 +30,13 @@ public enum Divisoes {
 		return false;
 	}
 	
-	public static Divisoes encontraDivisao(String divisaoProcurada) {
+	public static boolean acabouDivisaoAtual(String divisaoProcurada) {
 		for(Divisoes divisao : Divisoes.values()) {
 			if(divisao.getDescricao().contains(divisaoProcurada)) {
-				return divisao;
+				return true;
 			}
 		}
-		return Divisoes.OUTRO;
+		return false;
 	}
 	
 }

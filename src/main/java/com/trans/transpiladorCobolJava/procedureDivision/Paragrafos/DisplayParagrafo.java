@@ -28,7 +28,7 @@ public class DisplayParagrafo implements Paragrafo {
 					frase += umaSecao.getProximaInstrucaoLeitura() + " ";
 				}
 				texto.add(new AtributoElementar(new String(), null, frase.length(), null, TipoAtributo.CARACTERE, frase,
-						null));
+						null, null));
 			} else if (!PalavrasReservadasDisplayParagrafo.isPresent(umaSecao.getInstrucaoAtualLeitura())) {
 				// Identificador
 				if (umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 1).equals("OF")) {

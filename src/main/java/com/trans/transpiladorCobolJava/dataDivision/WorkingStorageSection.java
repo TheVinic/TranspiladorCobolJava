@@ -15,7 +15,7 @@ import com.trans.transpiladorCobolJava.main.Divisoes;
 public class WorkingStorageSection {
 
 	ArrayList<Atributo> atributos = new ArrayList<Atributo>();
-	
+
 	String classeMain = "DadosPrincipal";
 
 	@Autowired
@@ -25,10 +25,10 @@ public class WorkingStorageSection {
 		List<String> classes = new ArrayList<String>();
 		classes.add(classeMain);
 		while (!codigoCobol.getProximaInstrucaoLeitura().isEmpty()
-				&& SecoesDataDivision
-						.encontraParagrafo(codigoCobol.getInstrucaoAtualLeitura()) == SecoesDataDivision.OUTRO
-				&& Divisoes.encontraDivisao(codigoCobol.getInstrucaoAtualLeitura()) == Divisoes.OUTRO) {
-			atributos.add(criaItem(new Codigo(codigoCobol.getInstrucaoAtualLeitura().split("\\s")), codigoCobol, classes));
+				&& !SecoesDataDivision.acabouParagrafoAtual(codigoCobol.getInstrucaoAtualLeitura())
+				&& !Divisoes.acabouDivisaoAtual(codigoCobol.getInstrucaoAtualLeitura())) {
+			atributos.add(
+					criaItem(new Codigo(codigoCobol.getInstrucaoAtualLeitura().split("\\s")), codigoCobol, classes));
 		}
 		return atributos;
 	}
@@ -39,14 +39,15 @@ public class WorkingStorageSection {
 
 		String nomeAtributo = instrucao.getProximaInstrucaoLeitura();
 
-		if (!instrucao.getProximaInstrucaoLeitura().isEmpty()) {
-			return criaElemento(nivel, nomeAtributo, instrucao, classe);
+		if (instrucao.getProximaInstrucaoLeitura().isEmpty() || instrucao.getInstrucaoAtualLeitura().equals("OCCURS")) {
+			return criaGrupo(nivel, nomeAtributo, instrucao, codigoCobol, classe);
 		} else {
-			return criaGrupo(nivel, nomeAtributo, codigoCobol, classe);
+			return criaElemento(nivel, nomeAtributo, instrucao, classe);
 		}
 	}
 
-	private AtributoGrupo criaGrupo(Integer nivel, String nomeAtributo, Codigo codigoCobol, List<String> classe) {
+	private AtributoGrupo criaGrupo(Integer nivel, String nomeAtributo, Codigo instrucaoAtual, Codigo codigoCobol,
+			List<String> classe) {
 		classe.add(nomeAtributo);
 		List<Atributo> filhos = new ArrayList<Atributo>();
 		Codigo instrucao = new Codigo(codigoCobol.getProximaInstrucaoLeitura().split("\\s"));
@@ -56,8 +57,14 @@ public class WorkingStorageSection {
 			instrucao = new Codigo(codigoCobol.getProximaInstrucaoLeitura().split("\\s"));
 		}
 
+		Integer occurs = null;
+		if (instrucaoAtual.getInstrucaoAtualLeitura().equals("OCCURS")) {
+			occurs = Integer.parseInt(instrucaoAtual.getProximaInstrucaoLeitura());
+		}
+
 		codigoCobol.setVoltaPosicaoLeitura();
-		return new AtributoGrupo(nomeAtributo, nivel, filhos, classe);
+
+		return new AtributoGrupo(nomeAtributo, nivel, filhos, classe, occurs);
 	}
 
 	private AtributoElementar criaElemento(Integer nivel, String nomeAtributo, Codigo instrucao, List<String> classe) {
@@ -76,18 +83,26 @@ public class WorkingStorageSection {
 				: null;
 
 		String valorAtributo = null;
-		if(instrucao.getProximaInstrucaoLeitura().equals("VALUE")) {
+		if (instrucao.getProximaInstrucaoLeitura().equals("VALUE")) {
 			valorAtributo = instrucao.getProximaInstrucaoLeitura();
-			if(valorAtributo.equals("IS")){
+			if (valorAtributo.equals("IS")) {
 				valorAtributo = instrucao.getProximaInstrucaoLeitura();
 			}
-			while(valorAtributo.startsWith("\"") && !valorAtributo.endsWith("\"")) {
+			while (valorAtributo.startsWith("\"") && !valorAtributo.endsWith("\"")) {
 				valorAtributo += " ";
 				valorAtributo += instrucao.getProximaInstrucaoLeitura();
 			}
+		} else {
+			instrucao.setVoltaPosicaoLeitura();
 		}
-		
-		return new AtributoElementar(nomeAtributo, nivel, comprimento, comprimentoDecimal, tipoAtributo, valorAtributo, classe);
+
+		Integer occurs = null;
+		if (instrucao.getProximaInstrucaoLeitura().equals("OCCURS")) {
+			occurs = Integer.parseInt(instrucao.getProximaInstrucaoLeitura());
+		}
+
+		return new AtributoElementar(nomeAtributo, nivel, comprimento, comprimentoDecimal, tipoAtributo, valorAtributo,
+				classe, occurs);
 	}
 
 	private Integer comprimentoAtributo(String stringComprimentoElemento) {

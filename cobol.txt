@@ -2,9 +2,9 @@
        Program-id.	HelloWorld	is	initial.
        DATA DIVISION.                                                   
        WORKING-STORAGE SECTION.
- 01  ITEM-1.                                                      
+ 01  ITEM-1 OCCURS 5 TIMES.                                                      
      02  KEY-1 PIC 99   VALUE ZERO.                               
-     02  LINE-1 PIC X(6).                                         
+     02  LINE-1 PIC X(6) OCCURS 5 TIMES.                                         
      02  NAME-1 PIC X(30).                                        
      02  UNQUAL-NAME-1 PIC X(30).                                 
      02  SUB-1-1 PIC X(5).                                        
@@ -13,22 +13,19 @@
      02  CONTENTS-1 PIC X(30).                                    
  01  ITEM-2.                                                      
      02  KEY-2 PIC 99.                                            
-     02  LINE-2 PIC X(6).                                         
+     02  LINE-2 PIC X(6) VALUE "VINI".                                         
      02  NAME-2 PIC X(30).                                        
-     02  UNQUAL-NAME-2 PIC X(30).                                 
-     02  CONTENTS-2 PIC X(30).                                    
-       01  WS-NUM              PIC S9(6)V9(6).
-       01  B                   PIC S9(10)          VALUE 7.
-       01  E                   PIC S9(5)V9(5)      VALUE 34.26.
-	   01    COMPUT1 USAGE COMPUTATIONAL-1.
-	   01    COMPUT2 USAGE COMPUTATIONAL-2.
-	   01    COMPUT11 USAGE COMPUTATIONAL-1.
-	   01    COMPUT22 USAGE COMPUTATIONAL-2.
-	   01    DEC1 PIC S99999V999999 VALUE 1024.1024.
-	   01    DEC2 PIC S99999V999999 VALUE 1024.1024.
-	   01    CHAR1. 02 CHAR12 PIC X(1).
-	   01    CHAR2. 02 CHAR22 PIC X(2).
-	   01    CHARN PIC X(99).
+     02  UNQUAL-NAME-2 PIC X(30).      
+     03  SUB-CLASS OCCURS 5 TIMES.                           
+    	 05  CONTENTS-2 PIC X(30).                                    
+ 01  WS-NUM              PIC S9(6)V9(6).
+ 01  B                   PIC S9(10)          VALUE 7.
+ 01  E                   PIC S9(5)V9(5)      VALUE 34.26.
+ 01    DEC1 PIC S99999V999999 VALUE 1024.1024.
+ 01    DEC2 PIC S99999V999999 VALUE 1024.1024.
+ 01    CHAR1. 02 CHAR12 PIC X(1).
+ 01    CHAR2. 02 CHAR22 PIC X(2).
+ 01    CHARN PIC X(99).
        Procedure division .
            DISPLAY "Hello World???".
            COMPUTE KEY-2 = FUNCTION LENGTH("A")	
@@ -90,9 +87,6 @@
            COMPUTE WS-NUM = FUNCTION MAX(4, B, E, 6.3, -2.0).
            COMPUTE WS-NUM = FUNCTION MAX(4, B, E) + 2.
 			EXEC SQL FOO1 1111 SSEEE END-EXEC.
-           if DEC1 is = to comput22 then display 'Equual 2'.
-           DISPLAY "COMpuatational1 = " COMPUT1.
-           DISPLAY "COMpuatational2 = " COMPUT2.
            DISPLAY "Dec1 = " Dec1.
            DISPLAY "Dec2 = " Dec2.
            DISPLAY "Char1 = " Char1.

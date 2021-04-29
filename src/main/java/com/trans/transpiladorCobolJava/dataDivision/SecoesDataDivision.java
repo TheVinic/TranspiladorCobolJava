@@ -4,8 +4,7 @@ public enum SecoesDataDivision {
 	FILESECTION("FILE SECTION"), 
 	WORKINGSTORAGESECTION("WORKING-STORAGE SECTION"), 
 	LOCALSTORAGESECTION("LOCAL-STORAGE SECTION"), 
-	LINKAGESECTION("LINKAGE SECTION"),
-	OUTRO("Outro");
+	LINKAGESECTION("LINKAGE SECTION");
 	
 	String descricao;
 	
@@ -17,12 +16,12 @@ public enum SecoesDataDivision {
 		this.descricao = descricao;
 	}
 	
-	public static SecoesDataDivision encontraParagrafo(String paragrafoProcurado) {
+	public static Boolean acabouParagrafoAtual(String paragrafoProcurado) {
 		for(SecoesDataDivision paragrafo : SecoesDataDivision.values()) {
 			if(paragrafo.getDescricao().equals(paragrafoProcurado)) {
-				return paragrafo;
+				return true;
 			}
 		}
-		return SecoesDataDivision.OUTRO;
+		return false;
 	}
 }

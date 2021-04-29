@@ -26,11 +26,11 @@ public class AddParagrafo implements Paragrafo {
 			if (elemento.matches("[0-9]+")) {
 				// Tipo númerico
 				somar.add(new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.NUMERO, elemento,
-						null));
+						null, null));
 			} else if (elemento.matches("[0-9]+\\,[0-9]+")) {
 				// Tipo decimal
 				somar.add(new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.DECIMAL, elemento,
-						null));
+						null, null));
 			} else {
 				// Identificador
 				if (umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 1).equals("OF")) {
@@ -60,12 +60,12 @@ public class AddParagrafo implements Paragrafo {
 		Set<String> imprimir = new HashSet<>();
 		for (Atributo elemento : somar) {
 			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.add(elemento.getImport());
+				//imprimir.add(elemento.getImport());
 			}
 		}
 		for (Atributo elemento : adicionarEm) {
 			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.add(elemento.getImport());
+				//imprimir.add(elemento.getImport());
 			}
 		}
 		return imprimir;

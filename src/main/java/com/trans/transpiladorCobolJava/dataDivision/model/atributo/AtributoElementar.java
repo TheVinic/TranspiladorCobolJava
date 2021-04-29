@@ -21,8 +21,8 @@ public class AtributoElementar extends Atributo {
 	private ValorAtributo valor;
 
 	public AtributoElementar(String nomeAtributo, Integer nivel, Integer comprimento, Integer comprimentoDecimal,
-			TipoAtributo tipoAtributo, String valorAtributo, List<String> classe) {
-		super((nomeAtributo == null) ? null : nomeAtributo.toLowerCase(), nivel, classe);
+			TipoAtributo tipoAtributo, String valorAtributo, List<String> classe, Integer occurs) {
+		super((nomeAtributo == null) ? null : nomeAtributo.toLowerCase(), nivel, classe, occurs);
 		this.comprimento = comprimento;
 		this.comprimentoDecimal = comprimentoDecimal;
 		this.tipoAtributo = tipoAtributo;
@@ -63,58 +63,27 @@ public class AtributoElementar extends Atributo {
 	}
 
 	@Override
-	public String toString() {
-		return "\n[[nivel=" + getNivel() + ", nome=" + getNome() + ", comprimento=" + comprimento
-				+ ", comprimentoDecimal=" + comprimentoDecimal + ", tipoAtributo=" + tipoAtributo + ", valor=" + valor
-				+ "]";
-	}
-
-	@Override
-	public String escreveVariaveis() {
-		return "\tprivate " + tipoAtributo.getDescricao() + " " + getNome()
-				+ ((valor == null) ? ";" : " = " + valor.getValor() + ";");
-	}
-
-	@Override
+	@Deprecated
 	public String escreveImportWorkingStorage() throws IOException {
 		return null;
 	}
 
 	@Override
-	public String escreveGet() throws IOException {
-		return "\n\tpublic " + tipoAtributo.getDescricao() + " " + getSentencaGet() + " {\n\t\treturn this." + getNome()
-				+ ";\n\t}";
+	public String escreveVariaveis() {
+		return "\tprivate " + tipoAtributo.getDescricao() + getStringDeclaraOccurs() + " " + getNome()
+				+ ((valor == null) ? ";" : " = " + valor.getValor() + getStringDeclaraOccurs() + ";");
 	}
 
 	@Override
-	public String escreveSet() {
-		return "\n\tpublic void set" + getNome() + "(" + tipoAtributo.getDescricao() + " " + getNome()
-				+ ") {\n\t\tthis." + getNome() + " = " + getNome() + ";\n\t}";
-	}
-
-	@Override
-	public String getSentencaGet() {
-		return "get" + toUpperFistCase(getNome()) + "()";
-	}
-
-	@Override
-	public String getSentencaSet() {
-		return "set" + getNome() + "(" + tipoAtributo.getDescricao() + " " + getNome().toLowerCase() + ")";
-	}
-
-	@Override
-	public String getSentencaSet(String valor) {
-		return "set" + toUpperFistCase(getNome()) + "(" + valor + ")";
-	}
-
-	private static String toUpperFistCase(String nome) {
-		return nome.substring(0, 1).toUpperCase() + nome.toLowerCase().substring(1);
+	public String tipoObjeto() {
+		return tipoAtributo.getDescricao();
 	}
 
 	@Override
 	@Deprecated
-	public String getImport() {
-		return "import com.trans.transpiladorCobolJava.model." + getClasses().get(0) + ";\n";
+	public void escreveGetSet() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

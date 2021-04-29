@@ -29,7 +29,7 @@ public class DataDivision {
 		Codigo codigo = new Codigo(codigoCobol.split("\\.\\s+"));
 
 		for (; codigo.getPosicaoLeitura() < codigo.getCodigoCobol().length;) {
-			switch (SecoesDataDivision.encontraParagrafo(codigo.getInstrucaoAtualLeitura())) {
+			switch (SecoesDataDivision.valueOf(codigo.getInstrucaoAtualLeitura().replaceAll("\\s|-", ""))) {
 			case FILESECTION:
 				System.out.println(codigo.getInstrucaoAtualLeitura() + " não implementado.");
 				codigo.getProximaInstrucaoLeitura();
@@ -44,10 +44,6 @@ public class DataDivision {
 				break;
 			case WORKINGSTORAGESECTION:
 				atributosWorkingStorage = workingStorageSection.popula(codigo);
-				break;
-			case OUTRO:
-				System.out.println("Seção incorreta na DATA DIVISION: " + codigo.getInstrucaoAtualLeitura());
-				codigo.getProximaInstrucaoLeitura();
 				break;
 			}
 		}
@@ -72,7 +68,5 @@ public class DataDivision {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
 
 }
