@@ -1,6 +1,5 @@
 package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -47,7 +46,26 @@ public class AtributoElementar extends Atributo {
 	}
 
 	public Integer getComprimento() {
+		switch(tipoAtributo) {
+		case CARACTERE:
+		case NUMERO:
+			return comprimento;
+		case DECIMAL:
+			return comprimento + comprimentoDecimal;
+		}
 		return comprimento;
+	}
+	
+	public String getComprimentoToString() {
+		switch(tipoAtributo) {
+		case CARACTERE:
+			return "\"|%" + comprimento + "d|\"";
+		case DECIMAL:
+			return "\"|0%" + (comprimento + comprimentoDecimal) + "d|\"";
+		case NUMERO:
+			return "\"|0%" + comprimento + "d|\"";
+		}
+		return null;
 	}
 
 	public Integer getComprimentoDecimal() {
@@ -63,27 +81,14 @@ public class AtributoElementar extends Atributo {
 	}
 
 	@Override
-	@Deprecated
-	public String escreveImportWorkingStorage() throws IOException {
-		return null;
-	}
-
-	@Override
 	public String escreveVariaveis() {
-		return "\tprivate " + tipoAtributo.getDescricao() + getStringDeclaraOccurs() + " " + getNome()
+		return "\tprivate " + tipoAtributo.getDescricao() + getStringDeclaraOccurs() + " " + getNome().toLowerCase()
 				+ ((valor == null) ? ";" : " = " + valor.getValor() + getStringDeclaraOccurs() + ";");
 	}
 
 	@Override
 	public String tipoObjeto() {
 		return tipoAtributo.getDescricao();
-	}
-
-	@Override
-	@Deprecated
-	public void escreveGetSet() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Atributo {
@@ -17,10 +18,17 @@ public abstract class Atributo {
 	public Atributo() {
 	}
 
-	protected Atributo(String nomeAtributo, Integer nivel, List<String> classe, Integer occurs) {
-		this.nome = nomeAtributo.replaceAll("-", "_");
+	protected Atributo(String nomeAtributo, Integer nivel, List<String> classes, Integer occurs) {
+		this.nome = toUpperFistCase(nomeAtributo.replaceAll("-", "_"));
 		this.nivel = nivel;
-		this.classes = classe;
+		if (classes != null) {
+			this.classes = new ArrayList<String>();
+			for (String classe : classes) {
+				this.classes.add(toUpperFistCase(classe));
+			}
+		} else {
+			this.classes = classes;
+		}
 		this.occurs = occurs;
 	}
 
@@ -67,8 +75,8 @@ public abstract class Atributo {
 
 	public String escreveGet() throws IOException {
 
-		return "\n\tpublic " + tipoObjeto() + getStringDeclaraOccurs() + " " + getSentencaGet() + " {\n\t\treturn this."
-				+ nome + ";\n\t}";
+		return "\n\tpublic " + tipoObjeto() + getStringDeclaraOccurs() + " " + getSentencaGet() + " {\n\t\treturn "
+				+ nome.toLowerCase() + ";\n\t}";
 	}
 
 	public String escreveSet() {
@@ -89,17 +97,14 @@ public abstract class Atributo {
 	}
 
 	protected static String toUpperFistCase(String nome) {
-		return nome.substring(0, 1).toUpperCase() + nome.toLowerCase().substring(1);
+		return (nome == null || nome.isEmpty()) ? null
+				: nome.substring(0, 1).toUpperCase() + nome.toLowerCase().substring(1);
 	}
-
-	public abstract Object getValor();
-
-	public abstract void escreveGetSet() throws IOException;
 
 	public abstract String escreveVariaveis() throws IOException;
 
-	public abstract String escreveImportWorkingStorage() throws IOException;
-
 	public abstract String tipoObjeto();
+	
+	public abstract Integer getComprimento();
 
 }

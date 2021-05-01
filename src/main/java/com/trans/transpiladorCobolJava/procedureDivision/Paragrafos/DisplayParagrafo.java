@@ -9,9 +9,10 @@ import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
-public class DisplayParagrafo implements Paragrafo {
+public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 
 	ArrayList<Atributo> texto = new ArrayList<Atributo>();
 	
@@ -32,8 +33,8 @@ public class DisplayParagrafo implements Paragrafo {
 			} else if (!PalavrasReservadasDisplayParagrafo.isPresent(umaSecao.getInstrucaoAtualLeitura())) {
 				// Identificador
 				if (umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 1).equals("OF")) {
-					texto.add(dataDivision.localizaAtributo(umaSecao.getInstrucaoAtualLeitura(),
-							umaSecao.getProximaInstrucaoLeitura()));
+					//texto.add(dataDivision.localizaAtributo(umaSecao.getInstrucaoAtualLeitura(),
+					//		umaSecao.getProximaInstrucaoLeitura()));
 				} else {
 					Atributo atributo = dataDivision.localizaAtributo(umaSecao.getInstrucaoAtualLeitura());
 					texto.add(atributo);
@@ -58,9 +59,9 @@ public class DisplayParagrafo implements Paragrafo {
 		String imprimir = new String();
 		for (Atributo elemento : texto) {
 			if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
-				imprimir += elemento.getValor();
+				imprimir += ((AtributoElementar) elemento).getValor();
 			} else {
-				imprimir += toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet();
+				imprimir += toLowerFistCase(elemento.getClassesSucessoras()) + ((elemento instanceof AtributoGrupo) ? "toTrancode()" : elemento.getSentencaGet());
 			}
 		}
 		return "\t\tSystem.out.println(" + imprimir + ");";
@@ -72,9 +73,5 @@ public class DisplayParagrafo implements Paragrafo {
 
 	public Set<String> getImports() {
 		return imports;
-	}
-	
-	private static String toLowerFistCase(String nome) {
-		return nome.substring(0, 1).toLowerCase() + nome.substring(1);
 	}
 }

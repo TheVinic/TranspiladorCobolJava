@@ -11,7 +11,7 @@ import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
 import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
-public class AddParagrafo implements Paragrafo {
+public class AddParagrafo implements ParagrafoImpl {
 
 	ArrayList<Atributo> somar = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class AddParagrafo implements Paragrafo {
 			} else {
 				// Identificador
 				if (umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 1).equals("OF")) {
-					somar.add(dataDivision.localizaAtributo(elemento, umaSecao.getProximaInstrucaoLeitura()));
+					//somar.add(dataDivision.localizaAtributo(elemento, umaSecao.getProximaInstrucaoLeitura()));
 				} else {
 					somar.add(dataDivision.localizaAtributo(elemento));
 				}
@@ -46,7 +46,7 @@ public class AddParagrafo implements Paragrafo {
 						.avancaPosicaoLeitura()) {
 			elemento = umaSecao.getInstrucaoAtualLeitura();
 			if (umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 1).equals("OF")) {
-				adicionarEm.add(dataDivision.localizaAtributo(elemento, umaSecao.getProximaInstrucaoLeitura()));
+				//adicionarEm.add(dataDivision.localizaAtributo(elemento, umaSecao.getProximaInstrucaoLeitura()));
 			} else {
 				adicionarEm.add(dataDivision.localizaAtributo(elemento));
 			}
@@ -78,7 +78,7 @@ public class AddParagrafo implements Paragrafo {
 
 		for (Atributo elemento : somar) {
 			if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
-				imprimirSomar += elemento.getValor().toString();
+				imprimirSomar += ((AtributoElementar) elemento).getValor().toString();
 			} else {
 				imprimirSomar += toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + " + ";
 			}

@@ -1,13 +1,9 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
-import java.util.Set;
+public class Paragrafo {
 
-public interface Paragrafo {
-
-	public String escreveArquivo();
-
-	public Set<String> escreveImports();
-	
-	public Set<String> getImports();
+	protected static String toLowerFistCase(String nome) {
+		return nome.substring(0, 1).toLowerCase() + nome.substring(1);
+	}
 	
 }

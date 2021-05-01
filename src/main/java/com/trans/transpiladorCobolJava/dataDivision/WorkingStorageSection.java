@@ -16,21 +16,23 @@ public class WorkingStorageSection {
 
 	ArrayList<Atributo> atributos = new ArrayList<Atributo>();
 
+	AtributoGrupo DadosPrincipais;
+
 	String classeMain = "DadosPrincipal";
 
 	@Autowired
 	Codigo codigoCompleto;
 
-	public ArrayList<Atributo> popula(Codigo codigoCobol) {
+	public AtributoGrupo popula(Codigo codigoCobol) {
 		List<String> classes = new ArrayList<String>();
-		classes.add(classeMain);
 		while (!codigoCobol.getProximaInstrucaoLeitura().isEmpty()
 				&& !SecoesDataDivision.acabouParagrafoAtual(codigoCobol.getInstrucaoAtualLeitura())
 				&& !Divisoes.acabouDivisaoAtual(codigoCobol.getInstrucaoAtualLeitura())) {
 			atributos.add(
 					criaItem(new Codigo(codigoCobol.getInstrucaoAtualLeitura().split("\\s")), codigoCobol, classes));
 		}
-		return atributos;
+		DadosPrincipais = new AtributoGrupo("DadosPrincipais", 0, atributos, null, null);
+		return DadosPrincipais;
 	}
 
 	private Atributo criaItem(Codigo instrucao, Codigo codigoCobol, List<String> classe) {
@@ -48,12 +50,20 @@ public class WorkingStorageSection {
 
 	private AtributoGrupo criaGrupo(Integer nivel, String nomeAtributo, Codigo instrucaoAtual, Codigo codigoCobol,
 			List<String> classe) {
-		classe.add(nomeAtributo);
+
+		List<String> novaClasse = null;
+		if (nivel.equals(1)) {
+			novaClasse = new ArrayList<String>();
+			novaClasse.add(nomeAtributo);
+		} else {
+			classe.add(nomeAtributo);
+		}
+
 		List<Atributo> filhos = new ArrayList<Atributo>();
 		Codigo instrucao = new Codigo(codigoCobol.getProximaInstrucaoLeitura().split("\\s"));
 
 		while (instrucao.getCodigoCobol().length > 1 && nivel < Integer.parseInt(instrucao.getInstrucaoLeitura(0))) {
-			filhos.add(criaItem(instrucao, codigoCobol, classe));
+			filhos.add(criaItem(instrucao, codigoCobol, (novaClasse == null) ? classe : novaClasse));
 			instrucao = new Codigo(codigoCobol.getProximaInstrucaoLeitura().split("\\s"));
 		}
 
@@ -63,11 +73,15 @@ public class WorkingStorageSection {
 		}
 
 		codigoCobol.setVoltaPosicaoLeitura();
-
-		return new AtributoGrupo(nomeAtributo, nivel, filhos, classe, occurs);
+			return new AtributoGrupo(nomeAtributo, nivel, filhos, (novaClasse == null) ? classe : novaClasse, occurs);
 	}
 
 	private AtributoElementar criaElemento(Integer nivel, String nomeAtributo, Codigo instrucao, List<String> classe) {
+
+		if (nivel.equals(1)) {
+			classe = new ArrayList<String>();
+			classe.add(classeMain);
+		}
 
 		if (!instrucao.getInstrucaoAtualLeitura().equals("PIC")
 				&& !instrucao.getInstrucaoAtualLeitura().equals("PICTURE")) {
