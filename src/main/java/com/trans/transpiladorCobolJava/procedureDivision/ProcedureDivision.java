@@ -169,7 +169,7 @@ public class ProcedureDivision {
 					.escreveLinha("\n\t" + elemento + " " + toLowerFistCase(elemento) + " = new " + elemento + "();");
 		}
 
-		arquivoEscrita.escreveLinha("\tpublic void home(){\n");
+		arquivoEscrita.escreveLinha("\n\tpublic void home(){\n");
 
 		// For para escrever
 		for (ParagrafoImpl paragrafo : paragrafos) {

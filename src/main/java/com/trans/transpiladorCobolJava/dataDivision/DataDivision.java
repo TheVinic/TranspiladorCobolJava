@@ -58,4 +58,14 @@ public class DataDivision {
 		return atributosWorkingStorage.getLocalizaAtributo(nomeVariavel);
 	}
 
+	public Atributo localizaAtributo(String nomeVariavel, String proximaInstrucaoLeitura) {
+		nomeVariavel = nomeVariavel.replace(".", "");
+		proximaInstrucaoLeitura = proximaInstrucaoLeitura.replace(".", "");
+		Atributo grupo = atributosWorkingStorage.getLocalizaAtributo(proximaInstrucaoLeitura);
+		if(grupo instanceof AtributoGrupo) {
+			return ((AtributoGrupo) grupo).getLocalizaAtributo(nomeVariavel);
+		}
+		return null;
+	}
+
 }

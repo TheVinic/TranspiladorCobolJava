@@ -9,7 +9,7 @@ public class Item_2{
 	private String line_2 = "VINI";
 	private String name_2;
 	private String unqual_name_2;
-	private Sub_class[] sub_class = new Sub_class[5];
+	private Sub_class[] sub_class = new Sub_class[5]();
 
 	public Integer getKey_2() {
 		return key_2;

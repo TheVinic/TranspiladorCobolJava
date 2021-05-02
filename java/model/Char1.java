@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class Char1{
 	private String char12;
-	private Char2 char2 = new Char2;
+	private Char2 char2 = new Char2();
 
 	public String getChar12() {
 		return char12;

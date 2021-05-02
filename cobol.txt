@@ -29,7 +29,7 @@
  01    CHARN PIC X(99).
        Procedure division .
            DISPLAY "Hello World???".
-           DISPLAY CHAR3.
+           DISPLAY CHAR3 OF CHAR2.
            COMPUTE KEY-2 = FUNCTION LENGTH("A")	
            COMPUTE WS-NUM = FUNCTION ACOS(.999)	
            COMPUTE WS-NUM = FUNCTION MAX(4, B, E, 6.3, -2.0)		

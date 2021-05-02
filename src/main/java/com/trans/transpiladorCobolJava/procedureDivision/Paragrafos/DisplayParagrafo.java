@@ -15,7 +15,7 @@ import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivi
 public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 
 	ArrayList<Atributo> texto = new ArrayList<Atributo>();
-	
+
 	Set<String> imports = new HashSet<String>();
 
 	public DisplayParagrafo(Codigo umaSecao, DataDivision dataDivision) {
@@ -32,14 +32,9 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 						null, null));
 			} else if (!PalavrasReservadasDisplayParagrafo.isPresent(umaSecao.getInstrucaoAtualLeitura())) {
 				// Identificador
-				if (umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 1).equals("OF")) {
-					//texto.add(dataDivision.localizaAtributo(umaSecao.getInstrucaoAtualLeitura(),
-					//		umaSecao.getProximaInstrucaoLeitura()));
-				} else {
-					Atributo atributo = dataDivision.localizaAtributo(umaSecao.getInstrucaoAtualLeitura());
-					texto.add(atributo);
-					imports.add(atributo.getClasses().get(0));
-				}
+				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
+				texto.add(atributo);
+				imports.add(atributo.getClasses().get(0));
 			}
 
 		}
@@ -59,11 +54,13 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 		String imprimir = new String();
 		for (Atributo elemento : texto) {
 			if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
-				imprimir += ((AtributoElementar) elemento).getValor();
+				imprimir += ((AtributoElementar) elemento).getValor() + " + ";
 			} else {
-				imprimir += toLowerFistCase(elemento.getClassesSucessoras()) + ((elemento instanceof AtributoGrupo) ? "toTrancode()" : elemento.getSentencaGet());
+				imprimir += toLowerFistCase(elemento.getClassesSucessoras())
+						+ ((elemento instanceof AtributoGrupo) ? "toTrancode()" : elemento.getSentencaGet()) + " + ";
 			}
 		}
+		imprimir = imprimir.substring(0, imprimir.length() - 3);
 		return "\t\tSystem.out.println(" + imprimir + ");";
 	}
 

@@ -56,7 +56,7 @@ public class AtributoGrupo extends Atributo {
 			arquivoEscrita.escreveLinha(atributoUnitario.escreveVariaveis());
 		}
 		return "\tprivate " + getNome() + getStringDeclaraOccurs() + " " + getNome().toLowerCase() + " = new "
-				+ getNome() + getIniciaOccurs() + ";";
+				+ getNome() + getIniciaOccurs() + "();";
 	}
 
 	public void escreveGetSet() throws IOException {
