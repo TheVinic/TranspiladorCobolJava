@@ -87,7 +87,7 @@ public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 						break;
 					}
 				} else if (elemento instanceof AtributoGrupo) {
-					imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + ".toString()) + ";
+					imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + ".toTrancode()) + ";
 				}
 			}
 		}

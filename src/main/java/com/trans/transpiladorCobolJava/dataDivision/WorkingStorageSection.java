@@ -20,6 +20,8 @@ public class WorkingStorageSection {
 
 	String classeMain = "DadosPrincipal";
 
+	Integer contadorFiller = 1;
+
 	@Autowired
 	Codigo codigoCompleto;
 
@@ -40,6 +42,10 @@ public class WorkingStorageSection {
 		Integer nivel = Integer.parseInt(instrucao.getInstrucaoAtualLeitura());
 
 		String nomeAtributo = instrucao.getProximaInstrucaoLeitura();
+
+		if (nomeAtributo.equalsIgnoreCase("FILLER")) {
+			nomeAtributo += contadorFiller++;
+		}
 
 		if (instrucao.getProximaInstrucaoLeitura().isEmpty() || instrucao.getInstrucaoAtualLeitura().equals("OCCURS")) {
 			return criaGrupo(nivel, nomeAtributo, instrucao, codigoCobol, classe);
@@ -71,7 +77,7 @@ public class WorkingStorageSection {
 		}
 
 		codigoCobol.setVoltaPosicaoLeitura();
-			return new AtributoGrupo(nomeAtributo, nivel, filhos, (novaClasse == null) ? classe : novaClasse, occurs);
+		return new AtributoGrupo(nomeAtributo, nivel, filhos, (novaClasse == null) ? classe : novaClasse, occurs);
 	}
 
 	private AtributoElementar criaElemento(Integer nivel, String nomeAtributo, Codigo instrucao, List<String> classe) {

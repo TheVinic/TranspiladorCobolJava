@@ -55,7 +55,7 @@ public class AtributoGrupo extends Atributo {
 		for (Atributo atributoUnitario : atributos) {
 			arquivoEscrita.escreveLinha(atributoUnitario.escreveVariaveis());
 		}
-		return "\tprivate " + getNome() + getStringDeclaraOccurs() + " " + getNome().toLowerCase() + " = new "
+		return "\t" + ((filler == true) ? "final " : "private ") + getNome() + getStringDeclaraOccurs() + " " + getNome().toLowerCase() + " = new "
 				+ getNome() + getIniciaOccurs() + "();";
 	}
 

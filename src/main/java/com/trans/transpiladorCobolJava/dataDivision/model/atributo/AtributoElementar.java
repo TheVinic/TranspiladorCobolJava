@@ -82,7 +82,7 @@ public class AtributoElementar extends Atributo {
 
 	@Override
 	public String escreveVariaveis() {
-		return "\tprivate " + tipoAtributo.getDescricao() + getStringDeclaraOccurs() + " " + getNome().toLowerCase()
+		return "\t" + ((filler == true) ? "final " : "private ") + tipoAtributo.getDescricao() + getStringDeclaraOccurs() + " " + getNome().toLowerCase()
 				+ ((valor == null) ? ";" : " = " + valor.getValor() + getStringDeclaraOccurs() + ";");
 	}
 

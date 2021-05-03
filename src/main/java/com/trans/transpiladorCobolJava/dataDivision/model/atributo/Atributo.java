@@ -13,6 +13,8 @@ public abstract class Atributo {
 	protected List<String> classes;
 
 	protected Integer occurs;
+	
+	protected boolean filler;
 
 	@Deprecated
 	public Atributo() {
@@ -30,6 +32,7 @@ public abstract class Atributo {
 			this.classes = classes;
 		}
 		this.occurs = occurs;
+		this.filler = (nomeAtributo != null && nomeAtributo.startsWith("filler")) ? true : false;
 	}
 
 	public String getNome() {

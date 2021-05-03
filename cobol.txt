@@ -27,6 +27,9 @@
  02    CHAR2. 03 CHAR22 PIC X(2).
  03    CHAR3. 04 CHAR33 PIC X(2).
  01    CHARN PIC X(99).
+ 01 FILLER PIC X(9) VALUE "OLA".
+ 01 FILLER PIC X(9).
+ 01 FILLER PIC X(9).
        Procedure division .
            DISPLAY "Hello World???".
            DISPLAY CHAR3 OF CHAR2.
