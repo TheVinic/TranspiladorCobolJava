@@ -72,7 +72,7 @@ public class AtributoElementar extends Atributo {
 		return comprimentoDecimal;
 	}
 
-	public Object getTipoAtributo() {
+	public TipoAtributo getTipoAtributo() {
 		return tipoAtributo;
 	}
 

@@ -19,12 +19,12 @@ public abstract class Atributo {
 	}
 
 	protected Atributo(String nomeAtributo, Integer nivel, List<String> classes, Integer occurs) {
-		this.nome = toUpperFistCase(nomeAtributo.replaceAll("-", "_"));
+		this.nome = (nomeAtributo != null) ? toUpperFistCase(nomeAtributo.replaceAll("-", "_")) : null;
 		this.nivel = nivel;
 		if (classes != null) {
 			this.classes = new ArrayList<String>();
 			for (String classe : classes) {
-				this.classes.add(toUpperFistCase(classe));
+				this.classes.add(toUpperFistCase(classe.replaceAll("-", "_")));
 			}
 		} else {
 			this.classes = classes;

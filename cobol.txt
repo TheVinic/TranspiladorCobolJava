@@ -38,59 +38,13 @@
            INTEGER(KEY-2 * KEY-2))		
            MOVE FUNCTION MAX("A", CHARN, "J") TO CHAR12	
            MOVE X"C0" TO UNQUAL-NAME-2(KEY-2:1)   
-           EXEC SQL DECLARE SQL1 CURSOR FOR
-            SELECT HM.HMBRID,
-            HM.BUID,
-            B.NAME,
-            HM.PARENTBUID,
-            HM.HMBRTYPE,
-            H.HID,
-            H.DESCR,
-            H.HTYPE,
-            H.VERSIONNUM
-            FROM HIERARCHYMBR HM,
-            HIERARCHY H,
-            BUSINESSUNIT B,
-            (SELECT DISTINCT HMBRID,  LVL
-            FROM HIERARCHYMBR
-            CONNECT
-            BY PRIOR PARENTBUID = BUID
-            AND PRIOR HID = HID
-            START WITH HMBRID IN (
-            SELECT HM.HMBRID
-            FROM HIERARCHYMBR HM,
-            HMBRINVENTORY HI,
-            HIERARCHY H
-            WHERE HI.INVENTORYID IN (
-            SELECT INVENTORYID
-            FROM INVENTORY
-            CONNECT BY
-            PARENTINVENTORYID =
-            PRIOR INVENTORYID
-            START WITH
-            INVENTORYID = :SV-Q-INVENTORYID)
-            AND HI.HMBRID = HM.HMBRID
-            AND HM.HID = H.HID
-            AND H.HTYPE <> 'C')
-            ) X
-            WHERE HM.HID = H.HID
-            AND HM.BUID = B.BUID
-            AND HM.HMBRID = X.HMBRID
-            ORDER BY HM.HID, X.LVL DESC
-            END-EXEC
-           EXEC SQL
-			 SELECT SupplyPointID
-			 into :CHAR2
-			 FROM SupplyPointParent
-			 CONNECT BY SupplyPointID = PRIOR ParentSupplyPointID
-			 START WITH ParentSupplyPointID = 3910834
-			END-EXEC 
            MOVE FUNCTION MAX("A", CHARN, "J") TO CHAR12.		
            COMPUTE WS-NUM = FUNCTION MAX(4, B, E, 6.3, -2.0).
            COMPUTE WS-NUM = FUNCTION MAX(4, B, E) + 2.
 			EXEC SQL FOO1 1111 SSEEE END-EXEC.
            DISPLAY "Dec1 = " Dec1.
            DISPLAY "Dec2 = " Dec2.
+           ADD 31 Dec2 CHAR1 TO DEC1 Dec2.
            DISPLAY "Char1 = " Char1.
            DISPLAY "Char2 = " Char2.
            DISPLAY "Charn = " Charn.       

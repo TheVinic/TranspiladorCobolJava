@@ -9,9 +9,10 @@ import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
-public class AddParagrafo implements ParagrafoImpl {
+public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 
 	ArrayList<Atributo> somar = new ArrayList<>();
 
@@ -33,24 +34,18 @@ public class AddParagrafo implements ParagrafoImpl {
 						null, null));
 			} else {
 				// Identificador
-				if (umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 1).equals("OF")) {
-					//somar.add(dataDivision.localizaAtributo(elemento, umaSecao.getProximaInstrucaoLeitura()));
-				} else {
-					somar.add(dataDivision.localizaAtributo(elemento));
-				}
+				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
+				somar.add(atributo);
+				imports.add(atributo.getClasses().get(0));
 			}
 		}
 
 		for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
 				&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
 						.avancaPosicaoLeitura()) {
-			elemento = umaSecao.getInstrucaoAtualLeitura();
-			if (umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 1).equals("OF")) {
-				//adicionarEm.add(dataDivision.localizaAtributo(elemento, umaSecao.getProximaInstrucaoLeitura()));
-			} else {
-				adicionarEm.add(dataDivision.localizaAtributo(elemento));
-			}
-
+			Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
+			adicionarEm.add(atributo);
+			imports.add(atributo.getClasses().get(0));
 		}
 
 	}
@@ -60,12 +55,12 @@ public class AddParagrafo implements ParagrafoImpl {
 		Set<String> imprimir = new HashSet<>();
 		for (Atributo elemento : somar) {
 			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				//imprimir.add(elemento.getImport());
+				imprimir.addAll(escreveImportsParagrago(imports));
 			}
 		}
 		for (Atributo elemento : adicionarEm) {
 			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				//imprimir.add(elemento.getImport());
+				imprimir.addAll(escreveImportsParagrago(imports));
 			}
 		}
 		return imprimir;
@@ -74,19 +69,33 @@ public class AddParagrafo implements ParagrafoImpl {
 	@Override
 	public String escreveArquivo() {
 		String imprimirSomar = new String();
+		String imprimirSomarLocal = new String ();
 		String imprimirSomarEm = new String();
 
 		for (Atributo elemento : somar) {
 			if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
-				imprimirSomar += ((AtributoElementar) elemento).getValor().toString();
+				imprimirSomar += ((AtributoElementar) elemento).getValor().toString() + " + ";
 			} else {
-				imprimirSomar += toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + " + ";
+				if(elemento instanceof AtributoElementar) {
+					switch (((AtributoElementar) elemento).getTipoAtributo()) {
+					case CARACTERE:
+						imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + ") + ";
+						break;
+					case DECIMAL:
+					case NUMERO:
+						imprimirSomar += toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + " + ";
+						break;
+					}
+				} else if (elemento instanceof AtributoGrupo) {
+					imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + ".toString()) + ";
+				}
 			}
 		}
-		imprimirSomar = imprimirSomar.substring(0, imprimirSomar.length()-3);
 
 		for (Atributo elemento : adicionarEm) {
-			imprimirSomarEm += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaSet(imprimirSomar) + ";\n");
+			imprimirSomarLocal = imprimirSomar + toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet();
+			imprimirSomarEm += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+					+ elemento.getSentencaSet(imprimirSomarLocal) + ";\n");
 		}
 		return imprimirSomarEm;
 	}
@@ -94,10 +103,6 @@ public class AddParagrafo implements ParagrafoImpl {
 	@Override
 	public Set<String> getImports() {
 		return imports;
-	}
-
-	private static String toLowerFistCase(String nome) {
-		return nome.substring(0, 1).toLowerCase() + nome.substring(1);
 	}
 
 }

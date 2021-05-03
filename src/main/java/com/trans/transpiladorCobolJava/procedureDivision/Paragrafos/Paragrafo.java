@@ -1,5 +1,8 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
@@ -20,6 +23,14 @@ public abstract class Paragrafo {
 		} else {
 			return dataDivision.localizaAtributo(umaSecao.getInstrucaoAtualLeitura());
 		}
+	}
+	
+	protected Set<String> escreveImportsParagrago(Set<String> imports) {
+		Set<String> imprimir = new HashSet<String>();
+		for (String elemento : imports) {
+			imprimir.add("import com.trans.transpiladorCobolJava.model." + elemento + ";\n");
+		}
+		return imprimir;
 	}
 
 }

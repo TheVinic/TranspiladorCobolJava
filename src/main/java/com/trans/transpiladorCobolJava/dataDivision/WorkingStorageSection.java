@@ -51,13 +51,11 @@ public class WorkingStorageSection {
 	private AtributoGrupo criaGrupo(Integer nivel, String nomeAtributo, Codigo instrucaoAtual, Codigo codigoCobol,
 			List<String> classe) {
 
-		List<String> novaClasse = null;
-		if (nivel.equals(1)) {
-			novaClasse = new ArrayList<String>();
-			novaClasse.add(nomeAtributo);
-		} else {
-			classe.add(nomeAtributo);
+		List<String> novaClasse = new ArrayList<String>();
+		if (!nivel.equals(1)) {
+			novaClasse.addAll(classe);
 		}
+		novaClasse.add(nomeAtributo);
 
 		List<Atributo> filhos = new ArrayList<Atributo>();
 		Codigo instrucao = new Codigo(codigoCobol.getProximaInstrucaoLeitura().split("\\s"));

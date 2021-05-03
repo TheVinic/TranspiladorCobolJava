@@ -54,7 +54,7 @@ public class DataDivision {
 	}
 
 	public Atributo localizaAtributo(String nomeVariavel) {
-		nomeVariavel = nomeVariavel.replace(".", "");
+		nomeVariavel = nomeVariavel.replace(".", "").replaceAll("-", "_");
 		return atributosWorkingStorage.getLocalizaAtributo(nomeVariavel);
 	}
 

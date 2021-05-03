@@ -42,11 +42,7 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 
 	@Override
 	public Set<String> escreveImports() {
-		Set<String> imprimir = new HashSet<String>();
-		for (String elemento : imports) {
-			imprimir.add("import com.trans.transpiladorCobolJava.model." + elemento + ";\n");
-		}
-		return imprimir;
+		return escreveImportsParagrago(imports);
 	}
 
 	@Override
