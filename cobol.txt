@@ -1,7 +1,83 @@
-000100 IDENTIFICATION DIVISION.                                         000100
-000200 PROGRAM-ID. HELLO.                                               000101
-000250* THIS IS A COMMENT LINE                                          000102
-000300 PROCEDURE DIVISION.                                              000103
-000350 A000-FIRST-PARA.                                                 000104
-000400     DISPLAY “Coding Sheet”.                                      000105
-000500 STOP RUN.                                                        000106
+       Identification    division.
+       Program-id.    HelloWorld    is    initial.
+       DATA DIVISION.                                                   
+       WORKING-STORAGE SECTION.
+       01  E                   PIC S9(5)V9(5)      VALUE 34.26.
+       01    COMPUT1 USAGE COMPUTATIONAL-1.
+       01    COMPUT2 USAGE COMPUTATIONAL-2.
+       01    COMPUT11 USAGE COMPUTATIONAL-1.
+       01    COMPUT22 USAGE COMPUTATIONAL-2.
+       01    DEC1 PIC S99999V999999 VALUE 1024.1024.
+       01    DEC2 PIC S99999V999999 VALUE 1024.1024.
+       01    CHAR1. 02 CHAR12 PIC X(1).
+       01    CHAR2. 02 CHAR22 PIC X(2).
+       01    CHARN PIC X(99).
+       Procedure division .
+           DISPLAY "Hello World???".
+           COMPUTE KEY-2 = FUNCTION LENGTH("A")    
+           COMPUTE WS-NUM = FUNCTION ACOS(.999)    
+           COMPUTE WS-NUM = FUNCTION MAX(4, B, E, 6.3, -2.0)        
+           COMPUTE WS-NUM = FUNCTION ACOS(1 / DEC1)    
+           COMPUTE WS-NUM = FUNCTION MOD(35, FUNCTION 
+           INTEGER(KEY-2 * KEY-2))        
+           MOVE FUNCTION MAX("A", CHARN, "J") TO CHAR12    
+           MOVE X"C0" TO UNQUAL-NAME-2(KEY-2:1)   
+           EXEC SQL DECLARE SQL1 CURSOR FOR
+            SELECT HM.HMBRID,
+            HM.BUID,
+            B.NAME,
+            HM.PARENTBUID,
+            HM.HMBRTYPE,
+            H.HID,
+            H.DESCR,
+            H.HTYPE,
+            H.VERSIONNUM
+            FROM HIERARCHYMBR HM,
+            HIERARCHY H,
+            BUSINESSUNIT B,
+            (SELECT DISTINCT HMBRID,  LVL
+            FROM HIERARCHYMBR
+            CONNECT
+            BY PRIOR PARENTBUID = BUID
+            AND PRIOR HID = HID
+            START WITH HMBRID IN (
+            SELECT HM.HMBRID
+            FROM HIERARCHYMBR HM,
+            HMBRINVENTORY HI,
+            HIERARCHY H
+            WHERE HI.INVENTORYID IN (
+            SELECT INVENTORYID
+            FROM INVENTORY
+            CONNECT BY
+            PARENTINVENTORYID =
+            PRIOR INVENTORYID
+            START WITH
+            INVENTORYID = :SV-Q-INVENTORYID)
+            AND HI.HMBRID = HM.HMBRID
+            AND HM.HID = H.HID
+            AND H.HTYPE <> 'C')
+            ) X
+            WHERE HM.HID = H.HID
+            AND HM.BUID = B.BUID
+            AND HM.HMBRID = X.HMBRID
+            ORDER BY HM.HID, X.LVL DESC
+            END-EXEC
+           EXEC SQL
+             SELECT SupplyPointID
+             into :CHAR2
+             FROM SupplyPointParent
+             CONNECT BY SupplyPointID = PRIOR ParentSupplyPointID
+             START WITH ParentSupplyPointID = 3910834
+            END-EXEC 
+           MOVE FUNCTION MAX("A", CHARN, "J") TO CHAR12.        
+           COMPUTE WS-NUM = FUNCTION MAX(4, B, E, 6.3, -2.0).
+           COMPUTE WS-NUM = FUNCTION MAX(4, B, E) + 2.
+            EXEC SQL FOO1 1111 SSEEE END-EXEC.
+           if DEC1 is = to comput22 then display 'Equual 2'.
+           DISPLAY "COMpuatational1 = " COMPUT1.
+           DISPLAY "COMpuatational2 = " COMPUT2.
+           DISPLAY "Dec1 = " Dec1.
+           DISPLAY "Dec2 = " Dec2.
+           DISPLAY "Char1 = " Char1.
+           DISPLAY "Char2 = " Char2.
+           DISPLAY "Charn = " Charn.                                 
