@@ -16,13 +16,16 @@ public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 
 	ArrayList<Atributo> somar = new ArrayList<>();
 
-	ArrayList<Atributo> adicionarEm = new ArrayList<>();
+	ArrayList<Atributo> somarCom = new ArrayList<>();
+
+	ArrayList<Atributo> gravarEm = new ArrayList<>();
 
 	Set<String> imports = new HashSet<String>();
 
 	public AddParagrafo(Codigo umaSecao, DataDivision dataDivision) {
 		String elemento;
-		for (; !umaSecao.getInstrucaoAtualLeitura().equals("TO"); umaSecao.avancaPosicaoLeitura()) {
+		for (; !umaSecao.getInstrucaoAtualLeitura().equals("TO")
+				&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING"); umaSecao.avancaPosicaoLeitura()) {
 			elemento = umaSecao.getInstrucaoAtualLeitura();
 			if (elemento.matches("[0-9]+")) {
 				// Tipo númerico
@@ -40,12 +43,25 @@ public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 			}
 		}
 
-		for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-				&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-						.avancaPosicaoLeitura()) {
-			Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
-			adicionarEm.add(atributo);
-			imports.add(atributo.getClasses().get(0));
+		if (!umaSecao.getInstrucaoAtualLeitura().equals("GIVING")) {
+			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
+					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura())
+					&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING"); umaSecao.avancaPosicaoLeitura()) {
+				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
+				somarCom.add(atributo);
+				imports.add(atributo.getClasses().get(0));
+			}
+		}
+
+		if (!umaSecao.isOver() && umaSecao.getInstrucaoAtualLeitura().equals("GIVING")) {
+			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
+					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
+							.avancaPosicaoLeitura()) {
+				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
+				gravarEm.add(atributo);
+				imports.add(atributo.getClasses().get(0));
+			}
+
 		}
 
 	}
@@ -58,7 +74,7 @@ public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 				imprimir.addAll(escreveImportsParagrago(imports));
 			}
 		}
-		for (Atributo elemento : adicionarEm) {
+		for (Atributo elemento : somarCom) {
 			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
 				imprimir.addAll(escreveImportsParagrago(imports));
 			}
@@ -69,34 +85,47 @@ public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 	@Override
 	public String escreveArquivo() {
 		String imprimirSomar = new String();
-		String imprimirSomarLocal = new String ();
+		String imprimirSomarLocal = new String();
 		String imprimirSomarEm = new String();
 
 		for (Atributo elemento : somar) {
 			if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
 				imprimirSomar += ((AtributoElementar) elemento).getValor().toString() + " + ";
 			} else {
-				if(elemento instanceof AtributoElementar) {
+				if (elemento instanceof AtributoElementar) {
 					switch (((AtributoElementar) elemento).getTipoAtributo()) {
 					case CARACTERE:
-						imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + ") + ";
+						imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
+								+ elemento.getSentencaGet() + ") + ";
 						break;
 					case DECIMAL:
 					case NUMERO:
-						imprimirSomar += toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + " + ";
+						imprimirSomar += toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet()
+								+ " + ";
 						break;
 					}
 				} else if (elemento instanceof AtributoGrupo) {
-					imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet() + ".toTrancode()) + ";
+					imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
+							+ elemento.getSentencaGet() + ".toTrancode()) + ";
 				}
 			}
 		}
 
-		for (Atributo elemento : adicionarEm) {
-			imprimirSomarLocal = imprimirSomar + toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet();
+		for (Atributo elemento : somarCom) {
+			imprimirSomarLocal = imprimirSomar + toLowerFistCase(elemento.getClassesSucessoras())
+					+ elemento.getSentencaGet();
 			imprimirSomarEm += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
 					+ elemento.getSentencaSet(imprimirSomarLocal) + ";\n");
 		}
+
+		if (!gravarEm.isEmpty()) {
+			for (Atributo elemento : gravarEm) {
+				imprimirSomarEm += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+						+ elemento.getSentencaSet((somarCom.isEmpty()) ? imprimirSomar : imprimirSomarLocal) + ";\n");
+			}
+			imprimirSomarEm = imprimirSomarEm.replaceAll("\s\\+\s\\)", ")");
+		}
+
 		return imprimirSomarEm;
 	}
 

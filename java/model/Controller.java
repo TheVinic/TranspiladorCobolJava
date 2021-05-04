@@ -15,7 +15,6 @@ public class Controller {
 	public void home(){
 
 		System.out.println("HELLO WORLD???" );
-		System.out.println("EQUUAL 2" );
 		System.out.println("COMPUATATIONAL1 = "  + dadosprincipal.getComput1());
 		System.out.println("COMPUATATIONAL2 = "  + dadosprincipal.getComput2());
 		System.out.println("DEC1 = "  + dadosprincipal.getDec1());
@@ -23,6 +22,9 @@ public class Controller {
 		System.out.println("CHAR1 = "  + char1.toTrancode());
 		System.out.println("CHAR2 = "  + char2.toTrancode());
 		System.out.println("CHARN = "  + dadosprincipal.getCharn());
+		dadosprincipal.setDec2(Integer.parseInt(char2.getChar2().toTrancode()) + dadosprincipal.getE());
+		char1.setChar1(Integer.parseInt(char2.getChar2().toTrancode()) + dadosprincipal.getE());
+
 
 	}
 }

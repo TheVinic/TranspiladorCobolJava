@@ -31,7 +31,6 @@ public class Transpilador {
 		String[] codigoCobol = arquivoLeitura.lerTodoSeparaDivisao(ordemExecucao);
 		arquivoLeitura.fechaArquivo();
 		
-		// Lê Identification Division
 		identificationDivision.popula(codigoCobol[ordemExecucao.getIdentificationDivision()]);
 		environmentDivision.popula(codigoCobol[ordemExecucao.getEnvironmentDivision()]);
 		dataDivision.popula(codigoCobol[ordemExecucao.getDataDivision()]);
