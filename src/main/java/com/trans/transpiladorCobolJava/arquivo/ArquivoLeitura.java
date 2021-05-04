@@ -3,12 +3,14 @@ package com.trans.transpiladorCobolJava.arquivo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class ArquivoLeitura {
 
-	FileReader arquivoCobol;
-	BufferedReader textoCobol;
+	private FileReader arquivoCobol;
+	private BufferedReader textoCobol;
+	
+	private Integer comecaLeitura = 6;
+	private Integer fimLeitura = 72;
 
 	// Realiza a abertura do arquivo com o código cobol
 	public void abreArquivo() {
@@ -56,12 +58,21 @@ public class ArquivoLeitura {
 
 		return linhaComInstrucao;
 	}
+	
+	public String trataComentario(String linha) {
+		return (linha.length() >= fimLeitura) ? linha.substring(comecaLeitura, fimLeitura) : linha.substring(comecaLeitura);
+	}
 
 	public String[] lerTodoSeparaDivisao(OrdemExecucaoDivisao ordemExecucao) throws IOException {
 		String codigoCompleto = new String();
 		Integer contador = 1;
 
 		String codigoLido = lerLinha();
+		if(codigoLido.substring(0, 5).contains("I")){
+			comecaLeitura = 0;
+			fimLeitura = 66;
+		}
+		
 		while (codigoLido != null) {
 			if (ordemExecucao.naoPassouIdentification() && codigoLido.contains("IDENTIFICATION")) {
 				ordemExecucao.setIdentificationDivision(contador++);
@@ -72,12 +83,13 @@ public class ArquivoLeitura {
 			} else if (ordemExecucao.naoPassouProcedure() && codigoLido.contains("PROCEDURE")) {
 				ordemExecucao.setProcedureDivision(contador++);
 			}
-			codigoCompleto += codigoLido;
+			codigoLido = trataComentario(codigoLido);
+			codigoCompleto += (codigoLido.startsWith("*") ? "" : codigoLido);
 			codigoLido = lerLinha();
 		}
 
-		String[] codigoDividido = codigoCompleto.trim().replaceAll("\\s+", " ").replace("'", "\"")
-				.split("IDENTIFICATION DIVISION. |DATA DIVISION. |ENVIRONMENT DIVISION. |PROCEDURE DIVISION.  |"
+		String[] codigoDividido = codigoCompleto.trim().replaceAll("\\s+", " ").replace("'", "\"").replaceAll("“|”", "\"")
+				.split("IDENTIFICATION DIVISION. |DATA DIVISION. |ENVIRONMENT DIVISION. |PROCEDURE DIVISION. |"
 						+ "IDENTIFICATION DIVISION\\s+\\. |DATA DIVISION\\s+\\. |ENVIRONMENT DIVISION\\s+\\. |PROCEDURE DIVISION\\s+\\. ");
 
 		return codigoDividido;

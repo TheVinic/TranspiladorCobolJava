@@ -1,53 +1,7 @@
-       Identification	division.
-       Program-id.	HelloWorld	is	initial.
-       DATA DIVISION.                                                   
-       WORKING-STORAGE SECTION.
- 01  ITEM-1 OCCURS 5 TIMES.                                                      
-     02  KEY-1 PIC 99   VALUE ZERO.                               
-     02  LINE-1 PIC X(6) OCCURS 5 TIMES.                                         
-     02  NAME-1 PIC X(30).                                        
-     02  UNQUAL-NAME-1 PIC X(30).                                 
-     02  SUB-1-1 PIC X(5).                                        
-     02  SUB-2-1 PIC X(5).                                        
-     02  SUB-3-1 PIC X(5).                                        
-     02  CONTENTS-1 PIC X(30).                                    
- 01  ITEM-2.                                                      
-     02  KEY-2 PIC 99.                                            
-     02  LINE-2 PIC X(6) VALUE "VINI".                                         
-     02  NAME-2 PIC X(30).                                        
-     02  UNQUAL-NAME-2 PIC X(30).      
-     03  SUB-CLASS OCCURS 5 TIMES.                           
-    	 05  CONTENTS-2 PIC X(30).                                    
- 01  WS-NUM              PIC S9(6)V9(6).
- 01  B                   PIC S9(10)          VALUE 7.
- 01  E                   PIC S9(5)V9(5)      VALUE 34.26.
- 01    DEC1 PIC S99999V999999 VALUE 1024.1024.
- 01    DEC2 PIC S99999V999999 VALUE 1024.1024.
- 01    CHAR1. 02 CHAR12 PIC X(1).
- 02    CHAR2. 03 CHAR22 PIC X(2).
- 03    CHAR3. 04 CHAR33 PIC X(2).
- 01    CHARN PIC X(99).
- 01 FILLER PIC X(9) VALUE "OLA".
- 01 FILLER PIC X(9).
- 01 FILLER PIC X(9).
-       Procedure division .
-           DISPLAY "Hello World???".
-           DISPLAY CHAR3 OF CHAR2.
-           COMPUTE KEY-2 = FUNCTION LENGTH("A")	
-           COMPUTE WS-NUM = FUNCTION ACOS(.999)	
-           COMPUTE WS-NUM = FUNCTION MAX(4, B, E, 6.3, -2.0)		
-           COMPUTE WS-NUM = FUNCTION ACOS(1 / DEC1)	
-           COMPUTE WS-NUM = FUNCTION MOD(35, FUNCTION 
-           INTEGER(KEY-2 * KEY-2))		
-           MOVE FUNCTION MAX("A", CHARN, "J") TO CHAR12	
-           MOVE X"C0" TO UNQUAL-NAME-2(KEY-2:1)   
-           MOVE FUNCTION MAX("A", CHARN, "J") TO CHAR12.		
-           COMPUTE WS-NUM = FUNCTION MAX(4, B, E, 6.3, -2.0).
-           COMPUTE WS-NUM = FUNCTION MAX(4, B, E) + 2.
-			EXEC SQL FOO1 1111 SSEEE END-EXEC.
-           DISPLAY "Dec1 = " Dec1.
-           DISPLAY "Dec2 = " Dec2.
-           ADD 31 Dec2 CHAR1 TO DEC1 Dec2.
-           DISPLAY "Char1 = " Char1.
-           DISPLAY "Char2 = " Char2.
-           DISPLAY "Charn = " Charn.       
+000100 IDENTIFICATION DIVISION.                                         000100
+000200 PROGRAM-ID. HELLO.                                               000101
+000250* THIS IS A COMMENT LINE                                          000102
+000300 PROCEDURE DIVISION.                                              000103
+000350 A000-FIRST-PARA.                                                 000104
+000400     DISPLAY “Coding Sheet”.                                      000105
+000500 STOP RUN.                                                        000106

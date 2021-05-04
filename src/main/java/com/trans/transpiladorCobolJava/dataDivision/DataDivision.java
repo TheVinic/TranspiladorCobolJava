@@ -11,7 +11,7 @@ import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo
 public class DataDivision {
 
 	@Autowired
-	WorkingStorageSection workingStorageSection = new WorkingStorageSection();
+	WorkingStorageSection workingStorageSection;
 
 	EscritaWorkingStorageSection escritaWorkingStorageSection = new EscritaWorkingStorageSection();
 
@@ -43,6 +43,7 @@ public class DataDivision {
 				codigo.getProximaInstrucaoLeitura();
 				break;
 			case WORKINGSTORAGESECTION:
+				workingStorageSection = new WorkingStorageSection();
 				atributosWorkingStorage = workingStorageSection.popula(codigo);
 				break;
 			}
@@ -50,7 +51,9 @@ public class DataDivision {
 	}
 
 	public void escreve() throws IOException {
-		escritaWorkingStorageSection.escreve(atributosWorkingStorage);
+		if (atributosWorkingStorage != null ) {
+			escritaWorkingStorageSection.escreve(atributosWorkingStorage);
+		}
 	}
 
 	public Atributo localizaAtributo(String nomeVariavel) {
@@ -62,7 +65,7 @@ public class DataDivision {
 		nomeVariavel = nomeVariavel.replace(".", "");
 		proximaInstrucaoLeitura = proximaInstrucaoLeitura.replace(".", "");
 		Atributo grupo = atributosWorkingStorage.getLocalizaAtributo(proximaInstrucaoLeitura);
-		if(grupo instanceof AtributoGrupo) {
+		if (grupo instanceof AtributoGrupo) {
 			return ((AtributoGrupo) grupo).getLocalizaAtributo(nomeVariavel);
 		}
 		return null;
