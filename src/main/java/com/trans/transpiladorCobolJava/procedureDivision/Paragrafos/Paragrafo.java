@@ -5,7 +5,9 @@ import java.util.Set;
 
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
+import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
 
 public abstract class Paragrafo {
 
@@ -14,7 +16,7 @@ public abstract class Paragrafo {
 	}
 
 	protected Atributo encontraIdentificador(Codigo umaSecao, DataDivision dataDivision) {
-		
+
 		if (umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 1).equals("OF")) {
 			Atributo atributo = dataDivision.localizaAtributo(umaSecao.getInstrucaoAtualLeitura(),
 					umaSecao.getInstrucaoLeitura(umaSecao.getPosicaoLeitura() + 2));
@@ -24,13 +26,29 @@ public abstract class Paragrafo {
 			return dataDivision.localizaAtributo(umaSecao.getInstrucaoAtualLeitura());
 		}
 	}
-	
+
 	protected Set<String> escreveImportsParagrago(Set<String> imports) {
 		Set<String> imprimir = new HashSet<String>();
 		for (String elemento : imports) {
 			imprimir.add("import com.trans.transpiladorCobolJava.model." + elemento + ";\n");
 		}
 		return imprimir;
+	}
+
+	protected Atributo encontraCriaAtributo(Codigo umaSecao, DataDivision dataDivision) {
+		String elemento = umaSecao.getInstrucaoAtualLeitura();
+		if (elemento.matches("[0-9]+")) {
+			// Tipo númerico
+			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.NUMERO, elemento, null,
+					null));
+		} else if (elemento.matches("[0-9]+\\,[0-9]+")) {
+			// Tipo decimal
+			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.DECIMAL, elemento, null,
+					null));
+		} else {
+			// Identificador
+			return encontraIdentificador(umaSecao, dataDivision);
+		}
 	}
 
 }

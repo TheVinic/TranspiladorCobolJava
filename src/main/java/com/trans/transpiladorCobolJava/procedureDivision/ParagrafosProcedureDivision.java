@@ -11,7 +11,7 @@ public enum ParagrafosProcedureDivision {
 	CONTINUE("CONTINUE", false),
 	DELETE("DELETE", false),
 	DISPLAY("DISPLAY", true),
-	DIVIDE("DIVIDE", false),
+	DIVIDE("DIVIDE", true),
 	ENTRY("ENTRY", false),
 	EVALUATE("EVALUATE", false),
 	EXIT("EXIT", false),

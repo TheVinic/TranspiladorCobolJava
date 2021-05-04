@@ -9,6 +9,8 @@ import com.trans.transpiladorCobolJava.arquivo.ArquivoEscrita;
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.AddParagrafo;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ComputeParagrafo;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.DivideParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.DisplayParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ParagrafoImpl;
 
@@ -56,6 +58,8 @@ public class ProcedureDivision {
 						case CLOSE:
 							break;
 						case COMPUTE:
+							porPalavra.avancaPosicaoLeitura();
+							paragrafos.add(new ComputeParagrafo(porPalavra, dataDivision));
 							break;
 						case CONTINUE:
 							break;
@@ -66,6 +70,8 @@ public class ProcedureDivision {
 							paragrafos.add(new DisplayParagrafo(porPalavra, dataDivision));
 							break;
 						case DIVIDE:
+							porPalavra.avancaPosicaoLeitura();
+							paragrafos.add(new DivideParagrafo(porPalavra, dataDivision));
 							break;
 						case ENTRY:
 							break;
@@ -124,8 +130,6 @@ public class ProcedureDivision {
 						case XMLGENERATE:
 							break;
 						case XMLPARSE:
-							break;
-						default:
 							break;
 						}
 					} else {

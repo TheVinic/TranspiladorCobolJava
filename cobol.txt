@@ -21,4 +21,5 @@
            DISPLAY "Char1 = " Char1.
            DISPLAY "Char2 = " Char2.
            DISPLAY "Charn = " Charn.         
-           ADD CHAR2 E GIVING DEC2 CHAR1.                        
+           ADD CHAR2 E GIVING DEC2 CHAR1.      
+           DIVIDE CHAR2 INTO CHAR1.                  

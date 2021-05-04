@@ -6,7 +6,6 @@ import java.util.Set;
 
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
-import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
@@ -23,22 +22,11 @@ public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 	Set<String> imports = new HashSet<String>();
 
 	public AddParagrafo(Codigo umaSecao, DataDivision dataDivision) {
-		String elemento;
 		for (; !umaSecao.getInstrucaoAtualLeitura().equals("TO")
 				&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING"); umaSecao.avancaPosicaoLeitura()) {
-			elemento = umaSecao.getInstrucaoAtualLeitura();
-			if (elemento.matches("[0-9]+")) {
-				// Tipo númerico
-				somar.add(new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.NUMERO, elemento,
-						null, null));
-			} else if (elemento.matches("[0-9]+\\,[0-9]+")) {
-				// Tipo decimal
-				somar.add(new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.DECIMAL, elemento,
-						null, null));
-			} else {
-				// Identificador
-				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
-				somar.add(atributo);
+			Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
+			somar.add(atributo);
+			if (atributo.getClasses() != null) {
 				imports.add(atributo.getClasses().get(0));
 			}
 		}
