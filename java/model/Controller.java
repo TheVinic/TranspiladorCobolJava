@@ -25,6 +25,9 @@ public class Controller {
 		dadosprincipal.setDec2(Integer.parseInt(char2.getChar2().toTrancode()) + dadosprincipal.getE());
 		char1.setChar1(Integer.parseInt(char2.getChar2().toTrancode()) + dadosprincipal.getE());
 
+		char2.setChar2(Integer.parseInt(char2.getChar2().toTrancode()) / 5);
+		dadosprincipal.setDec1(Integer.parseInt(char2.getChar2().toTrancode()) % 5);
+
 
 	}
 }
