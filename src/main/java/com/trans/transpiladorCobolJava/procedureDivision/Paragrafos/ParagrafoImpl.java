@@ -8,6 +8,4 @@ public interface ParagrafoImpl {
 
 	public Set<String> escreveImports();
 	
-	public Set<String> getImports();
-	
 }

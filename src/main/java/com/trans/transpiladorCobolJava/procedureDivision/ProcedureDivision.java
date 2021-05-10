@@ -10,13 +10,15 @@ import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.AddParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ComputeParagrafo;
-import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.DivideParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.DisplayParagrafo;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.DivideParagrafo;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.MoveParagrafo;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.Paragrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ParagrafoImpl;
 
 public class ProcedureDivision {
 
-	ArrayList<ParagrafoImpl> paragrafos = new ArrayList<ParagrafoImpl>();
+	ArrayList<Paragrafo> paragrafos = new ArrayList<Paragrafo>();
 
 	public void popula(String codigoCobol, DataDivision dataDivision) {
 		System.out.println("Inicio leitura da PROCEDURE DIVISION");
@@ -94,6 +96,8 @@ public class ProcedureDivision {
 						case MERGE:
 							break;
 						case MOVE:
+							porPalavra.avancaPosicaoLeitura();
+							paragrafos.add(new MoveParagrafo(porPalavra, dataDivision));
 							break;
 						case MULTIPLY:
 							break;
@@ -156,7 +160,7 @@ public class ProcedureDivision {
 		// For para escrever atributos
 		Set<String> imports = new HashSet<String>();
 		Set<String> declaracao = new HashSet<String>();
-		for (ParagrafoImpl paragrafo : paragrafos) {
+		for (Paragrafo paragrafo : paragrafos) {
 			Set<String> texto = paragrafo.escreveImports();
 			if (texto != null && !texto.isEmpty()) {
 				imports.addAll(texto);

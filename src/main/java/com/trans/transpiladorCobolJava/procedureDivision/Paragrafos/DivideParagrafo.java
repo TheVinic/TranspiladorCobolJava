@@ -21,8 +21,6 @@ public class DivideParagrafo extends Paragrafo implements ParagrafoImpl {
 
 	ArrayList<Atributo> resto = new ArrayList<Atributo>();
 
-	Set<String> imports = new HashSet<String>();
-
 	public DivideParagrafo(Codigo umaSecao, DataDivision dataDivision) {
 		for (; !umaSecao.getInstrucaoAtualLeitura().equals("INTO")
 				&& !umaSecao.getInstrucaoAtualLeitura().equals("BY"); umaSecao.avancaPosicaoLeitura()) {
@@ -182,10 +180,4 @@ public class DivideParagrafo extends Paragrafo implements ParagrafoImpl {
 		}
 		return imprimir;
 	}
-
-	@Override
-	public Set<String> getImports() {
-		return imports;
-	}
-
 }

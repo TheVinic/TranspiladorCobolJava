@@ -22,4 +22,4 @@
            DISPLAY "Char2 = " Char2.
            DISPLAY "Charn = " Charn.         
            ADD CHAR2 E GIVING DEC2 CHAR1.      
-           DIVIDE 5 INTO CHAR2 REMAINDER DEC1.                  
+           MOVE CHAR1 TO CHAR2.                  

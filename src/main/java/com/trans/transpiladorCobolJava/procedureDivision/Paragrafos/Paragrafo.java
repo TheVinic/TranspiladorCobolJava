@@ -9,7 +9,9 @@ import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
 
-public abstract class Paragrafo {
+public abstract class Paragrafo implements ParagrafoImpl {
+
+	Set<String> imports = new HashSet<String>();
 
 	protected static String toLowerFistCase(String nome) {
 		return nome.substring(0, 1).toLowerCase() + nome.substring(1);
@@ -49,6 +51,10 @@ public abstract class Paragrafo {
 			// Identificador
 			return encontraIdentificador(umaSecao, dataDivision);
 		}
+	}
+
+	public Set<String> getImports() {
+		return imports;
 	}
 
 }

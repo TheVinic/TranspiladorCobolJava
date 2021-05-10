@@ -23,7 +23,7 @@ public enum ParagrafosProcedureDivision {
 	INSPECT("INSPECT", false),
 	INVOKE("INVOKE", false),
 	MERGE("MERGE", false),
-	MOVE("MOVE", false),
+	MOVE("MOVE", true),
 	MULTIPLY("MULTIPLY", false), 
 	OPEN("OPEN", false),
 	PERFORM("PERFORM", false),

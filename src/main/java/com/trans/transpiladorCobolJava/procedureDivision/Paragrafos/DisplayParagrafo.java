@@ -16,8 +16,6 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 
 	ArrayList<Atributo> texto = new ArrayList<Atributo>();
 
-	Set<String> imports = new HashSet<String>();
-
 	public DisplayParagrafo(Codigo umaSecao, DataDivision dataDivision) {
 		for (; !umaSecao.isOver()
 				&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
@@ -62,9 +60,5 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 
 	public ArrayList<Atributo> getTexto() {
 		return texto;
-	}
-
-	public Set<String> getImports() {
-		return imports;
 	}
 }

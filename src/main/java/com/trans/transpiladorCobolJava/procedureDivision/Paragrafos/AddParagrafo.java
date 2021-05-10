@@ -19,8 +19,6 @@ public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 
 	ArrayList<Atributo> gravarEm = new ArrayList<>();
 
-	Set<String> imports = new HashSet<String>();
-
 	public AddParagrafo(Codigo umaSecao, DataDivision dataDivision) {
 		for (; !umaSecao.getInstrucaoAtualLeitura().equals("TO")
 				&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING"); umaSecao.avancaPosicaoLeitura()) {
@@ -115,11 +113,6 @@ public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 		}
 
 		return imprimirSomarEm;
-	}
-
-	@Override
-	public Set<String> getImports() {
-		return imports;
 	}
 
 }
