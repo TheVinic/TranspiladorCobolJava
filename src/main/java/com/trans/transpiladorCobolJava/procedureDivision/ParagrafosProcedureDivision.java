@@ -24,7 +24,7 @@ public enum ParagrafosProcedureDivision {
 	INVOKE("INVOKE", false),
 	MERGE("MERGE", false),
 	MOVE("MOVE", true),
-	MULTIPLY("MULTIPLY", false), 
+	MULTIPLY("MULTIPLY", true), 
 	OPEN("OPEN", false),
 	PERFORM("PERFORM", false),
 	READ("READ", false),

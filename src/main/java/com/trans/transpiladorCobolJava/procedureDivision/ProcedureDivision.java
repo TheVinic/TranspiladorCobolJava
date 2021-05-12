@@ -13,6 +13,7 @@ import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ComputeParag
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.DisplayParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.DivideParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.MoveParagrafo;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.MultiplyParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.Paragrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ParagrafoImpl;
 
@@ -100,6 +101,8 @@ public class ProcedureDivision {
 							paragrafos.add(new MoveParagrafo(porPalavra, dataDivision));
 							break;
 						case MULTIPLY:
+							porPalavra.avancaPosicaoLeitura();
+							paragrafos.add(new MultiplyParagrafo(porPalavra, dataDivision));
 							break;
 						case OPEN:
 							break;

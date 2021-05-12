@@ -11,25 +11,23 @@ import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoEleme
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
-public class DivideParagrafo extends Paragrafo implements ParagrafoImpl {
+public class DivideParagrafo extends Paragrafo {
 
 	ArrayList<Atributo> dividendo = new ArrayList<Atributo>();
 
-	ArrayList<Atributo> divisor = new ArrayList<Atributo>();
+	Atributo divisor;
 
 	ArrayList<Atributo> quociente = new ArrayList<Atributo>();
 
 	ArrayList<Atributo> resto = new ArrayList<Atributo>();
 
 	public DivideParagrafo(Codigo umaSecao, DataDivision dataDivision) {
-		for (; !umaSecao.getInstrucaoAtualLeitura().equals("INTO")
-				&& !umaSecao.getInstrucaoAtualLeitura().equals("BY"); umaSecao.avancaPosicaoLeitura()) {
-			Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
-			divisor.add(atributo);
-			if (atributo.getClasses() != null) {
-				imports.add(atributo.getClasses().get(0));
-			}
+
+		divisor = encontraCriaAtributo(umaSecao, dataDivision);
+		if (divisor.getClasses() != null) {
+			imports.add(divisor.getClasses().get(0));
 		}
+		umaSecao.avancaPosicaoLeitura();
 
 		if (umaSecao.getInstrucaoAtualLeitura().equals("INTO")) {
 			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
@@ -45,19 +43,13 @@ public class DivideParagrafo extends Paragrafo implements ParagrafoImpl {
 				}
 			}
 		} else {
-			dividendo.addAll(divisor);
-			divisor = new ArrayList<Atributo>();
-			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-					&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING")
-					&& !umaSecao.getInstrucaoAtualLeitura().equals("REMAINDER")
-					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-							.avancaPosicaoLeitura()) {
-				Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
-				divisor.add(atributo);
-				if (atributo.getClasses() != null) {
-					imports.add(atributo.getClasses().get(0));
-				}
+			umaSecao.avancaPosicaoLeitura();
+			dividendo.add(divisor);
+			divisor = encontraCriaAtributo(umaSecao, dataDivision);
+			if (divisor.getClasses() != null) {
+				imports.add(divisor.getClasses().get(0));
 			}
+			umaSecao.avancaPosicaoLeitura();
 		}
 
 		if (!umaSecao.isOver() && umaSecao.getInstrucaoAtualLeitura().equals("GIVING")) {
@@ -74,16 +66,13 @@ public class DivideParagrafo extends Paragrafo implements ParagrafoImpl {
 		}
 
 		if (!umaSecao.isOver() && umaSecao.getInstrucaoAtualLeitura().equals("REMAINDER")) {
-			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-					&& !umaSecao.getInstrucaoAtualLeitura().equals("REMAINDER")
-					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-							.avancaPosicaoLeitura()) {
-				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
-				resto.add(atributo);
-				if (atributo.getClasses() != null) {
-					imports.add(atributo.getClasses().get(0));
-				}
+			umaSecao.avancaPosicaoLeitura();
+			Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
+			resto.add(atributo);
+			if (atributo.getClasses() != null) {
+				imports.add(atributo.getClasses().get(0));
 			}
+
 		}
 	}
 
@@ -91,66 +80,63 @@ public class DivideParagrafo extends Paragrafo implements ParagrafoImpl {
 	public String escreveArquivo() {
 		String imprimirDividento = new String();
 		String imprimirDivisor = new String();
-		String imprimirQuociente = new String ();
+		String imprimirQuociente = new String();
 		String imprimirResto = new String();
 		for (Atributo elemento : dividendo) {
 			if (elemento instanceof AtributoElementar) {
 				if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
-					imprimirDividento += ((AtributoElementar) elemento).getValor().toString() + " + ";
+					imprimirDividento += ((AtributoElementar) elemento).getValor().toString();
 				} else {
 					if (elemento instanceof AtributoElementar) {
 						switch (((AtributoElementar) elemento).getTipoAtributo()) {
 						case CARACTERE:
 							imprimirDividento += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
-									+ elemento.getSentencaGet() + ") + ";
+									+ elemento.getSentencaGet() + ")";
 							break;
 						case DECIMAL:
 						case NUMERO:
 							imprimirDividento += toLowerFistCase(elemento.getClassesSucessoras())
-									+ elemento.getSentencaGet() + " + ";
+									+ elemento.getSentencaGet();
 							break;
 						}
 					}
 				}
 			} else if (elemento instanceof AtributoGrupo) {
 				imprimirDividento += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaGet() + ".toTrancode()) + ";
+						+ elemento.getSentencaGet() + ".toTrancode())";
 			}
 		}
-		imprimirDividento = imprimirDividento.substring(0, imprimirDividento.length()-3);
-		for (Atributo elemento : divisor) {
-			if (elemento instanceof AtributoElementar) {
-				if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
-					imprimirDivisor += ((AtributoElementar) elemento).getValor().toString() + " + ";
-				} else {
-					if (elemento instanceof AtributoElementar) {
-						switch (((AtributoElementar) elemento).getTipoAtributo()) {
-						case CARACTERE:
-							imprimirDivisor += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
-									+ elemento.getSentencaGet() + ") + ";
-							break;
-						case DECIMAL:
-						case NUMERO:
-							imprimirDivisor += toLowerFistCase(elemento.getClassesSucessoras())
-									+ elemento.getSentencaGet() + " + ";
-							break;
-						}
+
+		if (divisor instanceof AtributoElementar) {
+			if (divisor.getNome() == null || divisor.getNome().isEmpty()) {
+				imprimirDivisor += ((AtributoElementar) divisor).getValor().toString();
+			} else {
+				if (divisor instanceof AtributoElementar) {
+					switch (((AtributoElementar) divisor).getTipoAtributo()) {
+					case CARACTERE:
+						imprimirDivisor += "Integer.parseInt(" + toLowerFistCase(divisor.getClassesSucessoras())
+								+ divisor.getSentencaGet() + ")";
+						break;
+					case DECIMAL:
+					case NUMERO:
+						imprimirDivisor += toLowerFistCase(divisor.getClassesSucessoras()) + divisor.getSentencaGet();
+						break;
 					}
 				}
-			} else if (elemento instanceof AtributoGrupo) {
-				imprimirDivisor += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaGet() + ".toTrancode()) + ";
 			}
+		} else if (divisor instanceof AtributoGrupo) {
+			imprimirDivisor += "Integer.parseInt(" + toLowerFistCase(divisor.getClassesSucessoras())
+					+ divisor.getSentencaGet() + ".toTrancode())";
 		}
-		imprimirDivisor = imprimirDivisor.substring(0, imprimirDivisor.length()-3);
-		for(Atributo elemento : quociente) {
-			imprimirQuociente += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
-			+ elemento.getSentencaSet(imprimirDividento +  " / " + imprimirDivisor) + ";\n");
-			}
 
-		for(Atributo elemento : resto) {
+		for (Atributo elemento : quociente) {
+			imprimirQuociente += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+					+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";\n");
+		}
+
+		for (Atributo elemento : resto) {
 			imprimirResto += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
-					+ elemento.getSentencaSet(imprimirDividento +  " % " + imprimirDivisor) + ";\n");
+					+ elemento.getSentencaSet(imprimirDividento + " % " + imprimirDivisor) + ";\n");
 		}
 		return imprimirQuociente + imprimirResto;
 	}
@@ -163,11 +149,11 @@ public class DivideParagrafo extends Paragrafo implements ParagrafoImpl {
 				imprimir.addAll(escreveImportsParagrago(imports));
 			}
 		}
-		for (Atributo elemento : divisor) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
+
+		if (divisor.getNome() != null && !divisor.getNome().isEmpty()) {
+			imprimir.addAll(escreveImportsParagrago(imports));
 		}
+
 		for (Atributo elemento : quociente) {
 			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
 				imprimir.addAll(escreveImportsParagrago(imports));
