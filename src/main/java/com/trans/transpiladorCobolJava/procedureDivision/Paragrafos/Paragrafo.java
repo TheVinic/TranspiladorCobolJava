@@ -38,6 +38,9 @@ public abstract class Paragrafo implements ParagrafoImpl {
 	}
 
 	protected Atributo encontraCriaAtributo(Codigo umaSecao, DataDivision dataDivision) {
+		if(umaSecao.getInstrucaoAtualLeitura().isEmpty()) {
+			umaSecao.getProximaInstrucaoLeitura();
+		}
 		String elemento = umaSecao.getInstrucaoAtualLeitura();
 		if (elemento.matches("[0-9]+")) {
 			// Tipo númerico
@@ -46,6 +49,9 @@ public abstract class Paragrafo implements ParagrafoImpl {
 		} else if (elemento.matches("[0-9]+\\,[0-9]+")) {
 			// Tipo decimal
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.DECIMAL, elemento, null,
+					null));
+		} else if (elemento.matches("\\+|\\-|\\*|\\*\\*|\\/")) {
+			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.CARACTERE, elemento, null,
 					null));
 		} else {
 			// Identificador

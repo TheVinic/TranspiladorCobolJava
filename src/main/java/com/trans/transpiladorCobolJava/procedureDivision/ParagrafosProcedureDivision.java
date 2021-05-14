@@ -7,7 +7,7 @@ public enum ParagrafosProcedureDivision {
 	CALL("CALL", false),
 	CANCEL("CANCEL", false),
 	CLOSE("CLOSE", false),
-	COMPUTE("COMPUTE", false),
+	COMPUTE("COMPUTE", true),
 	CONTINUE("CONTINUE", false),
 	DELETE("DELETE", false),
 	DISPLAY("DISPLAY", true),
