@@ -9,7 +9,7 @@ import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
-public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
+public class AddParagrafo extends Paragrafo {
 
 	ArrayList<Atributo> somar = new ArrayList<>();
 

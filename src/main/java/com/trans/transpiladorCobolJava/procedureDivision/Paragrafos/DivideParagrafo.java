@@ -76,7 +76,7 @@ public class DivideParagrafo extends Paragrafo {
 	@Override
 	public String escreveArquivo() {
 		String imprimirDividento = new String();
-		String imprimirDivisor = new String();
+		String imprimirDivisor;
 		String imprimirQuociente = new String();
 		String imprimirResto = new String();
 

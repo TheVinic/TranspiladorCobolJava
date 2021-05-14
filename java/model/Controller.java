@@ -17,6 +17,8 @@ public class Controller {
 
 		dadosprincipal.setSuma(dadosprincipal.getNumtmp() / dadosprincipal.getNumb());
 
+		dadosprincipal.setNuma((dadosprincipal.getNumb() + 10) - dadosprincipal.getNumtmp());
+
 		System.out.println("SUM OF NUMBERS : "  + dadosprincipal.getSuma());
 
 	}
