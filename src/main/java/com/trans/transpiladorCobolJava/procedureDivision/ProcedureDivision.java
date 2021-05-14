@@ -16,6 +16,7 @@ import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.MoveParagraf
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.MultiplyParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.Paragrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ParagrafoImpl;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.SubtractParagrafo;
 
 public class ProcedureDivision {
 
@@ -129,6 +130,8 @@ public class ProcedureDivision {
 						case STRING:
 							break;
 						case SUBTRACT:
+							porPalavra.avancaPosicaoLeitura();
+							paragrafos.add(new SubtractParagrafo(porPalavra, dataDivision));
 							break;
 						case UNSTRING:
 							break;

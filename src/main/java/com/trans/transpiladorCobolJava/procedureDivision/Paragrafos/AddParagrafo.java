@@ -7,8 +7,6 @@ import java.util.Set;
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
 public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
@@ -75,36 +73,18 @@ public class AddParagrafo extends Paragrafo implements ParagrafoImpl {
 		String imprimirSomarEm = new String();
 
 		for (Atributo elemento : somar) {
-			if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
-				imprimirSomar += ((AtributoElementar) elemento).getValor().toString() + " + ";
-			} else {
-				if (elemento instanceof AtributoElementar) {
-					switch (((AtributoElementar) elemento).getTipoAtributo()) {
-					case CARACTERE:
-						imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
-								+ elemento.getSentencaGet() + ") + ";
-						break;
-					case DECIMAL:
-					case NUMERO:
-						imprimirSomar += toLowerFistCase(elemento.getClassesSucessoras()) + elemento.getSentencaGet()
-								+ " + ";
-						break;
-					}
-				} else if (elemento instanceof AtributoGrupo) {
-					imprimirSomar += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
-							+ elemento.getSentencaGet() + ".toTrancode()) + ";
-				}
+			imprimirSomar += elemento.getStringEscritaPorTipo() + " + ";
+		}
+
+		if (gravarEm.isEmpty()) {
+			for (Atributo elemento : somarCom) {
+				imprimirSomarLocal = imprimirSomar + toLowerFistCase(elemento.getClassesSucessoras())
+						+ elemento.getSentencaGet();
+				imprimirSomarEm += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+						+ elemento.getSentencaSet(imprimirSomarLocal) + ";\n");
 			}
-		}
-
-		for (Atributo elemento : somarCom) {
-			imprimirSomarLocal = imprimirSomar + toLowerFistCase(elemento.getClassesSucessoras())
-					+ elemento.getSentencaGet();
-			imprimirSomarEm += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
-					+ elemento.getSentencaSet(imprimirSomarLocal) + ";\n");
-		}
-
-		if (!gravarEm.isEmpty()) {
+		} else {
+			imprimirSomarLocal = somarCom.get(0).getStringEscritaPorTipo();
 			for (Atributo elemento : gravarEm) {
 				imprimirSomarEm += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaSet((somarCom.isEmpty()) ? imprimirSomar : imprimirSomarLocal) + ";\n");

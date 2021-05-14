@@ -7,8 +7,6 @@ import java.util.Set;
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 
 public class MoveParagrafo extends Paragrafo implements ParagrafoImpl {
 
@@ -38,26 +36,7 @@ public class MoveParagrafo extends Paragrafo implements ParagrafoImpl {
 		String imprimirDe = new String();
 		String imprimirMove = new String();
 
-		if (de instanceof AtributoElementar) {
-			if (de.getNome() == null || de.getNome().isEmpty()) {
-				imprimirDe += ((AtributoElementar) de).getValor().toString();
-			} else {
-				if (de instanceof AtributoElementar) {
-					//TODO validação da movimentação de um tipo para outro
-					switch (((AtributoElementar) de).getTipoAtributo()) {
-					case CARACTERE:
-						imprimirDe += toLowerFistCase(de.getClassesSucessoras()) + de.getSentencaGet();
-						break;
-					case DECIMAL:
-					case NUMERO:
-						imprimirDe += toLowerFistCase(de.getClassesSucessoras()) + de.getSentencaGet();
-						break;
-					}
-				}
-			}
-		} else if (de instanceof AtributoGrupo) {
-			imprimirDe += toLowerFistCase(de.getClassesSucessoras()) + de.getSentencaGet() + ".toTrancode()";
-		}
+		imprimirDe = de.getStringEscritaPorTipo();
 
 		for (Atributo elemento : para) {
 			imprimirMove += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())

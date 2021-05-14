@@ -73,7 +73,11 @@ public class WorkingStorageSection {
 
 		Integer occurs = null;
 		if (instrucaoAtual.getInstrucaoAtualLeitura().equals("OCCURS")) {
-			occurs = Integer.parseInt(instrucaoAtual.getProximaInstrucaoLeitura());
+			String qtdOccurs = instrucaoAtual.getProximaInstrucaoLeitura();
+			if (qtdOccurs.matches("[0-9]+")) {
+				occurs = Integer.parseInt(qtdOccurs);
+			}
+			//TODO colocar occurs com valor de outra variavel
 		}
 
 		codigoCobol.setVoltaPosicaoLeitura();
@@ -82,7 +86,7 @@ public class WorkingStorageSection {
 
 	private AtributoElementar criaElemento(Integer nivel, String nomeAtributo, Codigo instrucao, List<String> classe) {
 
-		if (nivel.equals(1)) {
+		if (nivel.equals(1) || classe.isEmpty()) {
 			classe = new ArrayList<String>();
 			classe.add(classeMain);
 		}

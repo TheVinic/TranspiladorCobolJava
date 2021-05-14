@@ -13,7 +13,7 @@ public abstract class Atributo {
 	protected List<String> classes;
 
 	protected Integer occurs;
-	
+
 	protected boolean filler;
 
 	@Deprecated
@@ -104,10 +104,35 @@ public abstract class Atributo {
 				: nome.substring(0, 1).toUpperCase() + nome.toLowerCase().substring(1);
 	}
 
+	protected static String toLowerFistCase(String nome) {
+		return nome.substring(0, 1).toLowerCase() + nome.substring(1);
+	}
+
+	public String getStringEscritaPorTipo() {
+		if (this instanceof AtributoElementar) {
+			if (getNome() == null || getNome().isEmpty()) {
+				return ((AtributoElementar) this).getValor().toString();
+			} else {
+				if (this instanceof AtributoElementar) {
+					switch (((AtributoElementar) this).getTipoAtributo()) {
+					case CARACTERE:
+						return "Integer.parseInt(" + toLowerFistCase(getClassesSucessoras()) + getSentencaGet() + ")";
+					case DECIMAL:
+					case NUMERO:
+						return toLowerFistCase(getClassesSucessoras()) + getSentencaGet();
+					}
+				}
+			}
+		} else if (this instanceof AtributoGrupo) {
+			return "Integer.parseInt(" + toLowerFistCase(getClassesSucessoras()) + getSentencaGet() + ".toTrancode())";
+		}
+		return null;
+	}
+
 	public abstract String escreveVariaveis() throws IOException;
 
 	public abstract String tipoObjeto();
-	
+
 	public abstract Integer getComprimento();
 
 }

@@ -1,11 +1,14 @@
 package com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo;
 
-public class ValorAtributoTexto implements ValorAtributo{
+public class ValorAtributoTexto implements ValorAtributo {
 
 	private String valor;
-	
+
 	public ValorAtributoTexto(String valorAtributo) {
-		valor = valorAtributo;
+		if (valorAtributo.equals("SPACE") || valorAtributo.equals("SPACES"))
+			valor = new String();
+		else
+			valor = valorAtributo;
 	}
 
 	@Override

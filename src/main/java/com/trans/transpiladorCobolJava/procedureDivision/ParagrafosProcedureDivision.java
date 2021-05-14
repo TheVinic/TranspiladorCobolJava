@@ -37,7 +37,7 @@ public enum ParagrafosProcedureDivision {
 	START("START", false),
 	STOP("STOP", false),
 	STRING("STRING", false),
-	SUBTRACT("SUBTRACT", false),
+	SUBTRACT("SUBTRACT", true),
 	UNSTRING("UNSTRING", false),
 	WRITE("WRITE", false),
 	XMLGENERATE("XML", false),

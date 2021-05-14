@@ -7,8 +7,6 @@ import java.util.Set;
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
 public class DivideParagrafo extends Paragrafo {
@@ -37,7 +35,6 @@ public class DivideParagrafo extends Paragrafo {
 							.avancaPosicaoLeitura()) {
 				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
 				dividendo.add(atributo);
-				quociente.add(atributo);
 				if (atributo.getClasses() != null) {
 					imports.add(atributo.getClasses().get(0));
 				}
@@ -82,56 +79,22 @@ public class DivideParagrafo extends Paragrafo {
 		String imprimirDivisor = new String();
 		String imprimirQuociente = new String();
 		String imprimirResto = new String();
-		for (Atributo elemento : dividendo) {
-			if (elemento instanceof AtributoElementar) {
-				if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
-					imprimirDividento += ((AtributoElementar) elemento).getValor().toString();
-				} else {
-					if (elemento instanceof AtributoElementar) {
-						switch (((AtributoElementar) elemento).getTipoAtributo()) {
-						case CARACTERE:
-							imprimirDividento += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
-									+ elemento.getSentencaGet() + ")";
-							break;
-						case DECIMAL:
-						case NUMERO:
-							imprimirDividento += toLowerFistCase(elemento.getClassesSucessoras())
-									+ elemento.getSentencaGet();
-							break;
-						}
-					}
-				}
-			} else if (elemento instanceof AtributoGrupo) {
-				imprimirDividento += "Integer.parseInt(" + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaGet() + ".toTrancode())";
-			}
-		}
 
-		if (divisor instanceof AtributoElementar) {
-			if (divisor.getNome() == null || divisor.getNome().isEmpty()) {
-				imprimirDivisor += ((AtributoElementar) divisor).getValor().toString();
-			} else {
-				if (divisor instanceof AtributoElementar) {
-					switch (((AtributoElementar) divisor).getTipoAtributo()) {
-					case CARACTERE:
-						imprimirDivisor += "Integer.parseInt(" + toLowerFistCase(divisor.getClassesSucessoras())
-								+ divisor.getSentencaGet() + ")";
-						break;
-					case DECIMAL:
-					case NUMERO:
-						imprimirDivisor += toLowerFistCase(divisor.getClassesSucessoras()) + divisor.getSentencaGet();
-						break;
-					}
-				}
-			}
-		} else if (divisor instanceof AtributoGrupo) {
-			imprimirDivisor += "Integer.parseInt(" + toLowerFistCase(divisor.getClassesSucessoras())
-					+ divisor.getSentencaGet() + ".toTrancode())";
-		}
+		imprimirDivisor = divisor.getStringEscritaPorTipo();
 
-		for (Atributo elemento : quociente) {
-			imprimirQuociente += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
-					+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";\n");
+		if (quociente.isEmpty()) {
+			for (Atributo elemento : dividendo) {
+				imprimirDividento = elemento.getStringEscritaPorTipo();
+				imprimirQuociente += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+						+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";\n");
+
+			}
+		} else {
+			imprimirDividento = dividendo.get(0).getStringEscritaPorTipo();
+			for (Atributo elemento : quociente) {
+				imprimirQuociente += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+						+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";\n");
+			}
 		}
 
 		for (Atributo elemento : resto) {

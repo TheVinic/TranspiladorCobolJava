@@ -60,7 +60,7 @@ public class ArquivoLeitura {
 	}
 	
 	public String trataComentario(String linha) {
-		return (linha.length() >= fimLeitura) ? linha.substring(comecaLeitura, fimLeitura) : linha.substring(comecaLeitura);
+		return (linha.length() == 0) ? linha : (linha.length() >= fimLeitura) ? linha.substring(comecaLeitura, fimLeitura) : linha.substring(comecaLeitura);
 	}
 
 	public String[] lerTodoSeparaDivisao(OrdemExecucaoDivisao ordemExecucao) throws IOException {
