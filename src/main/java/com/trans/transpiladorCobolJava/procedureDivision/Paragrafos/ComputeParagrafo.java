@@ -1,6 +1,7 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
@@ -10,13 +11,13 @@ import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivi
 
 public class ComputeParagrafo extends Paragrafo {
 
+	ArrayList<Atributo> resultado = new ArrayList<>();
+
+	ArrayList<Atributo> calculo = new ArrayList<>();
+
+	Codigo stringDividadiPelasOperacoes = null;
+
 	public ComputeParagrafo(Codigo umaSecao, DataDivision dataDivision) {
-
-		ArrayList<Atributo> resultado = new ArrayList<>();
-
-		ArrayList<Atributo> calculo = new ArrayList<>();
-
-		Codigo stringDividadiPelasOperacoes = null;
 
 		boolean encontrouIgual = false;
 
@@ -24,7 +25,9 @@ public class ComputeParagrafo extends Paragrafo {
 			Atributo atributo;
 			if (umaSecao.getInstrucaoAtualLeitura().contains("=")) {
 				stringDividadiPelasOperacoes = new Codigo(umaSecao.getInstrucaoAtualLeitura().split("="));
-				resultado.add(encontraIdentificador(stringDividadiPelasOperacoes, dataDivision));
+				if (!stringDividadiPelasOperacoes.getInstrucaoAtualLeitura().isEmpty()) {
+					resultado.add(encontraIdentificador(stringDividadiPelasOperacoes, dataDivision));
+				}
 				encontrouIgual = true;
 			} else {
 				atributo = encontraIdentificador(umaSecao, dataDivision);
@@ -36,18 +39,21 @@ public class ComputeParagrafo extends Paragrafo {
 		}
 
 		if (encontrouIgual) {
-			stringDividadiPelasOperacoes.avancaPosicaoLeitura();
-			stringDividadiPelasOperacoes = new Codigo(stringDividadiPelasOperacoes.getInstrucaoAtualLeitura()
-					.replaceAll("\\+", " + ").replaceAll("\\-", " - ").replaceAll("\\*", " * ").replaceAll("\\/", " / ")
-					.replaceAll("\s\\*\s\s\\*\s", " ** ").split("\s"));
-			for (; !stringDividadiPelasOperacoes.isOver(); stringDividadiPelasOperacoes.avancaPosicaoLeitura()) {
-				Atributo atributo = encontraCriaAtributo(stringDividadiPelasOperacoes, dataDivision);
-				calculo.add(atributo);
-				if (atributo.getClasses() != null) {
-					imports.add(atributo.getClasses().get(0));
+			umaSecao.setVoltaPosicaoLeitura();
+			if (!stringDividadiPelasOperacoes.getProximaInstrucaoLeitura().isEmpty()) {
+
+				stringDividadiPelasOperacoes = new Codigo(stringDividadiPelasOperacoes.getInstrucaoAtualLeitura()
+						.replaceAll("\\+", " + ").replaceAll("\\-", " - ").replaceAll("\\*", " * ")
+						.replaceAll("\\/", " / ").replaceAll("\\(", " ( ").replaceAll("\\)", " ) ")
+						.replaceAll("\s\\*\s\s\\*\s", " ** ").split("\s"));
+				for (; !stringDividadiPelasOperacoes.isOver(); stringDividadiPelasOperacoes.avancaPosicaoLeitura()) {
+					Atributo atributo = encontraCriaAtributo(stringDividadiPelasOperacoes, dataDivision);
+					calculo.add(atributo);
+					if (atributo.getClasses() != null) {
+						imports.add(atributo.getClasses().get(0));
+					}
 				}
 			}
-			umaSecao.setVoltaPosicaoLeitura();
 		}
 
 		for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver() && !umaSecao.getInstrucaoAtualLeitura().equals("=")
@@ -55,10 +61,13 @@ public class ComputeParagrafo extends Paragrafo {
 						.avancaPosicaoLeitura()) {
 			if (umaSecao.getInstrucaoAtualLeitura().contains("+") || umaSecao.getInstrucaoAtualLeitura().contains("-")
 					|| umaSecao.getInstrucaoAtualLeitura().contains("*")
-					|| umaSecao.getInstrucaoAtualLeitura().contains("/")) {
-				stringDividadiPelasOperacoes = new Codigo(umaSecao.getInstrucaoAtualLeitura().replaceAll("\\+", " + ")
-						.replaceAll("\\-", " - ").replaceAll("\\*", " * ").replaceAll("\\/", " / ")
-						.replaceAll("\s\\*\s\s\\*\s", " ** ").split("\s"));
+					|| umaSecao.getInstrucaoAtualLeitura().contains("/")
+					|| umaSecao.getInstrucaoAtualLeitura().contains("(")
+					|| umaSecao.getInstrucaoAtualLeitura().contains(")")) {
+				stringDividadiPelasOperacoes = new Codigo(
+						umaSecao.getInstrucaoAtualLeitura().replaceAll("\\+", " + ").replaceAll("\\-", " - ")
+								.replaceAll("\\*", " * ").replaceAll("\\/", " / ").replaceAll("\\(", " ( ")
+								.replaceAll("\\)", " ) ").replaceAll("\s\\*\s\s\\*\s", " ** ").split("\s"));
 				for (; !stringDividadiPelasOperacoes.isOver(); stringDividadiPelasOperacoes.avancaPosicaoLeitura()) {
 					Atributo atributo = encontraCriaAtributo(stringDividadiPelasOperacoes, dataDivision);
 					calculo.add(atributo);
@@ -79,14 +88,41 @@ public class ComputeParagrafo extends Paragrafo {
 
 	@Override
 	public String escreveArquivo() {
-		// TODO Auto-generated method stub
-		return null;
+		String imprimirResultado = new String();
+		String imprimirCalculo = new String();
+
+		for (Atributo elemento : calculo) {
+			String elementoParaImprimir = elemento.getStringEscritaPorTipo();
+			if (elementoParaImprimir.equals("**")) {
+				// TODO incluir trato para exponencial
+				imprimirCalculo += "/*Exponencial não implementado*/*";
+			} else {
+				imprimirCalculo += elemento.getStringEscritaPorTipo();
+			}
+		}
+
+		for (Atributo elemento : resultado) {
+			imprimirResultado += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+					+ elemento.getSentencaSet(imprimirCalculo) + ";\n");
+		}
+
+		return imprimirResultado;
 	}
 
 	@Override
 	public Set<String> escreveImports() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<String> imprimir = new HashSet<>();
+		for (Atributo elemento : resultado) {
+			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
+				imprimir.addAll(escreveImportsParagrago(imports));
+			}
+		}
+		for (Atributo elemento : calculo) {
+			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
+				imprimir.addAll(escreveImportsParagrago(imports));
+			}
+		}
+		return imprimir;
 	}
 
 }

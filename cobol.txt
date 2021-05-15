@@ -14,7 +14,7 @@
              ACCEPT NUMA.
  	       DISPLAY "Enter NUmber b" WITH NO ADVANCING.
  	       ACCEPT NUMB.
-	       COMPUTE SUMA = 0 + 1 - 5 / 9 * 6 ** 5
+	       COMPUTE SUMA= 0 + 1 - (5 / 9) *6**5
 	       COMPUTE NUMTMP=0
 	       ADD 100 TO NUMTMP NUMB
 	       ADD NUMB TO NUMTMP

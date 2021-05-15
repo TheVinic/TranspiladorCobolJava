@@ -50,7 +50,7 @@ public abstract class Paragrafo implements ParagrafoImpl {
 			// Tipo decimal
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.DECIMAL, elemento, null,
 					null));
-		} else if (elemento.matches("\\+|\\-|\\*|\\*\\*|\\/")) {
+		} else if (elemento.matches("\\+|\\-|\\*|\\*\\*|\\/|\\(|\\)")) {
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.CARACTERE, elemento, null,
 					null));
 		} else {
