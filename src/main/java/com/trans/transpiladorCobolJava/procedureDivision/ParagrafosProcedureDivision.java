@@ -12,13 +12,15 @@ public enum ParagrafosProcedureDivision {
 	DELETE("DELETE", false),
 	DISPLAY("DISPLAY", true),
 	DIVIDE("DIVIDE", true),
+	ENDIF("END-IF", true),
+	ELSE("ELSE", true),
 	ENTRY("ENTRY", false),
 	EVALUATE("EVALUATE", false),
 	EXIT("EXIT", false),
 	EXITMETHOD("EXIT", false),
 	EXITPROGRAM("EXIT", false),
 	GOBACK("GOBACK", false),
-	IF("IF", false),
+	IF("IF", true),
 	INITIALIZE("INITIALIZE", false),
 	INSPECT("INSPECT", false),
 	INVOKE("INVOKE", false),
@@ -41,7 +43,8 @@ public enum ParagrafosProcedureDivision {
 	UNSTRING("UNSTRING", false),
 	WRITE("WRITE", false),
 	XMLGENERATE("XML", false),
-	XMLPARSE("XML", false);
+	XMLPARSE("XML", false),
+	OUTRO("", true);
 
 	String descricao;
 	boolean construido;
@@ -66,5 +69,14 @@ public enum ParagrafosProcedureDivision {
 			}
 		}
 		return false;
+	}
+
+	public static ParagrafosProcedureDivision encontraParagrafo(String instrucaoAtualLeitura) {
+		for(ParagrafosProcedureDivision paragrafo : ParagrafosProcedureDivision.values()) {
+			if (paragrafo.getDescricao().equals(instrucaoAtualLeitura)) {
+				return paragrafo;
+			}
+		}
+		return ParagrafosProcedureDivision.OUTRO;
 	}
 }

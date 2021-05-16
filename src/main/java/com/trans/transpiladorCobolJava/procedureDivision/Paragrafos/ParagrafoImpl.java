@@ -4,7 +4,7 @@ import java.util.Set;
 
 public interface ParagrafoImpl {
 
-	public String escreveArquivo();
+	public String escreveArquivo(Integer nivel);
 
 	public Set<String> escreveImports();
 	

@@ -16,9 +16,12 @@
              DISPLAY "Enter NUmber a" WITH NO ADVANCING.
              ACCEPT NUMA.
  	       DISPLAY "Enter NUmber b" WITH NO ADVANCING.
- 	       ACCEPT NUMB.
+ 	       IF 5 = 10 OR 5 > 8
+				ACCEPT NUMB.
 	       COMPUTE SUMA= 0 + 1 - (5 / 9) *6**5
-	       COMPUTE NUMTMP=0
+	       ELSE
+	           COMPUTE NUMTMP=0
+	       END-IF
 	       ADD 100 TO NUMTMP NUMB
 	       ADD NUMB TO NUMTMP
 	       DIVIDE NUMB INTO NUMTMP GIVING SUMA

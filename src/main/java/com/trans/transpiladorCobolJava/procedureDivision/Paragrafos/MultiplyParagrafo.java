@@ -49,7 +49,7 @@ public class MultiplyParagrafo extends Paragrafo {
 	}
 
 	@Override
-	public String escreveArquivo() {
+	public String escreveArquivo(Integer nivel) {
 		String imprimirMultiplicar = new String();
 		String imprimirPor;
 		String imprimirResultado = new String();
@@ -59,14 +59,14 @@ public class MultiplyParagrafo extends Paragrafo {
 		if (resultado.isEmpty()) {
 			for (Atributo elemento : por) {
 				imprimirPor = elemento.getStringEscritaPorTipo();
-				imprimirResultado += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+				imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaSet(imprimirMultiplicar + " * " + imprimirPor) + ";\n");
 
 			}
 		} else {
 			imprimirPor = por.get(0).getStringEscritaPorTipo();
 			for (Atributo elemento : resultado) {
-				imprimirResultado += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+				imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaSet(imprimirMultiplicar + " * " + imprimirPor) + ";\n");
 			}
 		}

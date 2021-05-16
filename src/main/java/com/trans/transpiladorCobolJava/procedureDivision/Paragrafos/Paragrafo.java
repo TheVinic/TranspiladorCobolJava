@@ -37,7 +37,7 @@ public abstract class Paragrafo implements ParagrafoImpl {
 	}
 
 	protected Atributo encontraCriaAtributo(Codigo umaSecao, DataDivision dataDivision) {
-		if(umaSecao.getInstrucaoAtualLeitura().isEmpty()) {
+		if (umaSecao.getInstrucaoAtualLeitura().isEmpty()) {
 			umaSecao.getProximaInstrucaoLeitura();
 		}
 		String elemento = umaSecao.getInstrucaoAtualLeitura();
@@ -49,9 +49,26 @@ public abstract class Paragrafo implements ParagrafoImpl {
 			// Tipo decimal
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.DECIMAL, elemento, null,
 					null, null));
-		} else if (elemento.matches("\\+|\\-|\\*|\\*\\*|\\/|\\(|\\)")) {
+		} else if (elemento.matches("\\+|\\-|\\*|\\*\\*|\\/|\\(|\\)|\\|\\<|\\>|=|\\<\\=|\\>=")) {
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.CARACTERE, elemento, null,
 					null, null));
+		} else if (elemento.equals("LESS") || elemento.equals("GREATER") || elemento.equals("OR")) {
+			String valor = null;
+			switch (elemento) {
+			case "OR":
+				valor = "||";
+				break;
+			case "GRATER":
+				umaSecao.getProximaInstrucaoLeitura();
+				valor = ">";
+				break;
+			case "LESS":
+				umaSecao.getProximaInstrucaoLeitura();
+				valor = "<";
+				break;
+			}
+			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.CARACTERE,
+					valor, null, null, null));
 		} else {
 			// Identificador
 			return encontraIdentificador(umaSecao, dataDivision);
@@ -60,6 +77,15 @@ public abstract class Paragrafo implements ParagrafoImpl {
 
 	public Set<String> getImports() {
 		return imports;
+	}
+	
+	protected String fazTabulacao(Integer nivel) {
+		String tabulacao = new String();
+		for(int i = 0; i<nivel; i++) {
+			tabulacao += "\t";
+		}
+		
+		return tabulacao;
 	}
 
 }

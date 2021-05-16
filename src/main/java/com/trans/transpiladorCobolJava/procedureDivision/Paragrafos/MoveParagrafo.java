@@ -32,14 +32,14 @@ public class MoveParagrafo extends Paragrafo implements ParagrafoImpl {
 	}
 
 	@Override
-	public String escreveArquivo() {
+	public String escreveArquivo(Integer nivel) {
 		String imprimirDe = new String();
 		String imprimirMove = new String();
 
 		imprimirDe = de.getStringEscritaPorTipo();
 
 		for (Atributo elemento : para) {
-			imprimirMove += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+			imprimirMove += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 					+ elemento.getSentencaSet(imprimirDe) + ";\n");
 		}
 		return imprimirMove;

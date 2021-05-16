@@ -43,7 +43,7 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 	}
 
 	@Override
-	public String escreveArquivo() {
+	public String escreveArquivo(Integer nivel) {
 		String imprimir = new String();
 		for (Atributo elemento : texto) {
 			if (elemento.getNome() == null || elemento.getNome().isEmpty()) {
@@ -54,7 +54,7 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 			}
 		}
 		imprimir = imprimir.substring(0, imprimir.length() - 3);
-		return "\t\tSystem.out.println(" + imprimir + ");";
+		return fazTabulacao(nivel) + "System.out.println(" + imprimir + ");";
 	}
 
 	public ArrayList<Atributo> getTexto() {

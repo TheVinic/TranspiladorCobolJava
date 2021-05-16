@@ -74,7 +74,7 @@ public class DivideParagrafo extends Paragrafo {
 	}
 
 	@Override
-	public String escreveArquivo() {
+	public String escreveArquivo(Integer nivel) {
 		String imprimirDividento = new String();
 		String imprimirDivisor;
 		String imprimirQuociente = new String();
@@ -85,20 +85,20 @@ public class DivideParagrafo extends Paragrafo {
 		if (quociente.isEmpty()) {
 			for (Atributo elemento : dividendo) {
 				imprimirDividento = elemento.getStringEscritaPorTipo();
-				imprimirQuociente += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+				imprimirQuociente += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";\n");
 
 			}
 		} else {
 			imprimirDividento = dividendo.get(0).getStringEscritaPorTipo();
 			for (Atributo elemento : quociente) {
-				imprimirQuociente += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+				imprimirQuociente += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";\n");
 			}
 		}
 
 		for (Atributo elemento : resto) {
-			imprimirResto += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+			imprimirResto += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 					+ elemento.getSentencaSet(imprimirDividento + " % " + imprimirDivisor) + ";\n");
 		}
 		return imprimirQuociente + imprimirResto;

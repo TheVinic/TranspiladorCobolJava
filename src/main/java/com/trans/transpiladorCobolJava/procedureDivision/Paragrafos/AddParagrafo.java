@@ -67,7 +67,7 @@ public class AddParagrafo extends Paragrafo {
 	}
 
 	@Override
-	public String escreveArquivo() {
+	public String escreveArquivo(Integer nivel) {
 		String imprimirSomar = new String();
 		String imprimirSomarLocal = new String();
 		String imprimirSomarEm = new String();
@@ -80,13 +80,13 @@ public class AddParagrafo extends Paragrafo {
 			for (Atributo elemento : somarCom) {
 				imprimirSomarLocal = imprimirSomar + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaGet();
-				imprimirSomarEm += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+				imprimirSomarEm += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaSet(imprimirSomarLocal) + ";\n");
 			}
 		} else {
 			imprimirSomarLocal = somarCom.get(0).getStringEscritaPorTipo();
 			for (Atributo elemento : gravarEm) {
-				imprimirSomarEm += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+				imprimirSomarEm += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaSet((somarCom.isEmpty()) ? imprimirSomar : imprimirSomarLocal) + ";\n");
 			}
 			imprimirSomarEm = imprimirSomarEm.replaceAll("\s\\+\s\\)", ")");

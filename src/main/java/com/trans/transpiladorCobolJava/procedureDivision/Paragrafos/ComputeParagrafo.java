@@ -11,13 +11,13 @@ import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivi
 
 public class ComputeParagrafo extends Paragrafo {
 
-	ArrayList<Atributo> resultado = new ArrayList<>();
+	ArrayList<Atributo> resultado = new ArrayList<Atributo>();
 
-	ArrayList<Atributo> calculo = new ArrayList<>();
-
-	Codigo stringDividadiPelasOperacoes = null;
+	ArrayList<Atributo> calculo = new ArrayList<Atributo>();
 
 	public ComputeParagrafo(Codigo umaSecao, DataDivision dataDivision) {
+
+		Codigo stringDividadiPelasOperacoes = null;
 
 		boolean encontrouIgual = false;
 
@@ -87,7 +87,7 @@ public class ComputeParagrafo extends Paragrafo {
 	}
 
 	@Override
-	public String escreveArquivo() {
+	public String escreveArquivo(Integer nivel) {
 		String imprimirResultado = new String();
 		String imprimirCalculo = new String();
 
@@ -102,7 +102,7 @@ public class ComputeParagrafo extends Paragrafo {
 		}
 
 		for (Atributo elemento : resultado) {
-			imprimirResultado += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+			imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 					+ elemento.getSentencaSet(imprimirCalculo) + ";\n");
 		}
 

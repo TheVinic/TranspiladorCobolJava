@@ -51,7 +51,7 @@ public class SubtractParagrafo extends Paragrafo {
 	}
 
 	@Override
-	public String escreveArquivo() {
+	public String escreveArquivo(Integer nivel) {
 		String imprimirSubtrair = "(";
 		String imprimirDe = new String();
 		String imprimirResultado = new String();
@@ -64,13 +64,13 @@ public class SubtractParagrafo extends Paragrafo {
 		if (resultado.isEmpty()) {
 			for (Atributo elemento : de) {
 				imprimirDe = elemento.getStringEscritaPorTipo();
-				imprimirResultado += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+				imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaSet(imprimirSubtrair + " - " + imprimirDe) + ";\n");
 			}
 		} else {
 			imprimirDe = de.get(0).getStringEscritaPorTipo();
 			for (Atributo elemento : resultado) {
-				imprimirResultado += ("\t\t" + toLowerFistCase(elemento.getClassesSucessoras())
+				imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaSet(imprimirSubtrair + " - " + imprimirDe) + ";\n");
 			}
 		}

@@ -14,6 +14,7 @@ import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.AddParagrafo
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ComputeParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.DisplayParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.DivideParagrafo;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.IfParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.MoveParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.MultiplyParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.Paragrafo;
@@ -25,136 +26,139 @@ public class ProcedureDivision {
 
 	ArrayList<Paragrafo> paragrafos = new ArrayList<Paragrafo>();
 
-	public void popula(String codigoCobol, DataDivision dataDivision) {
+	public ArrayList<Paragrafo> analiseSemantica(Codigo codigo, DataDivision dataDivision) {
 		System.out.println("Inicio leitura da PROCEDURE DIVISION");
 
-		if (codigoCobol.isEmpty()) {
+		if (codigo == null) {
 			System.out.println("PROCEDURE DIVISION vazia.");
-			return;
+			return null;
 		}
 
-		Codigo codigoEmSecoes = new Codigo(codigoCobol.split("SECTION"));
+		for (; !codigo.isOver();) {
 
-		for (String secao : codigoEmSecoes.getCodigoCobol()) {
-			Codigo umParagrafo = new Codigo(secao.split("\\.\\s+"));
+			ParagrafosProcedureDivision paragrafo = ParagrafosProcedureDivision
+					.encontraParagrafo(codigo.getInstrucaoAtualLeitura());
 
-			for (String porPalavraString : umParagrafo.getCodigoCobol()) {
-				Codigo porPalavra = new Codigo(porPalavraString.split("\\s+"));
-				while (!porPalavra.isOver()
-						&& ParagrafosProcedureDivision.acabouParagrafoAtual(porPalavra.getInstrucaoAtualLeitura())) {
-
-					ParagrafosProcedureDivision paragrafo = ParagrafosProcedureDivision
-							.valueOf(porPalavra.getInstrucaoAtualLeitura());
-
-					if (paragrafo.isConstruido()) {
-						// Eh uma paragrafo a ser construido
-						switch (paragrafo) {
-						case ACCEPT:
-							// paragrafos.add(new AcceptParagrafo(umaSecao, dataDivision));
-							break;
-						case ADD:
-							porPalavra.avancaPosicaoLeitura();
-							paragrafos.add(new AddParagrafo(porPalavra, dataDivision));
-							break;
-						case ALTER:
-							break;
-						case CALL:
-							break;
-						case CANCEL:
-							break;
-						case CLOSE:
-							break;
-						case COMPUTE:
-							porPalavra.avancaPosicaoLeitura();
-							paragrafos.add(new ComputeParagrafo(porPalavra, dataDivision));
-							break;
-						case CONTINUE:
-							break;
-						case DELETE:
-							break;
-						case DISPLAY:
-							porPalavra.avancaPosicaoLeitura();
-							paragrafos.add(new DisplayParagrafo(porPalavra, dataDivision));
-							break;
-						case DIVIDE:
-							porPalavra.avancaPosicaoLeitura();
-							paragrafos.add(new DivideParagrafo(porPalavra, dataDivision));
-							break;
-						case ENTRY:
-							break;
-						case EVALUATE:
-							break;
-						case EXIT:
-						case EXITMETHOD:
-						case EXITPROGRAM:
-							break;
-						case GOBACK:
-							break;
-						case IF:
-							break;
-						case INITIALIZE:
-							break;
-						case INSPECT:
-							break;
-						case INVOKE:
-							break;
-						case MERGE:
-							break;
-						case MOVE:
-							porPalavra.avancaPosicaoLeitura();
-							paragrafos.add(new MoveParagrafo(porPalavra, dataDivision));
-							break;
-						case MULTIPLY:
-							porPalavra.avancaPosicaoLeitura();
-							paragrafos.add(new MultiplyParagrafo(porPalavra, dataDivision));
-							break;
-						case OPEN:
-							break;
-						case PERFORM:
-							break;
-						case READ:
-							break;
-						case RELEASE:
-							break;
-						case RETURN:
-							break;
-						case REWRITE:
-							break;
-						case SEARCH:
-							break;
-						case SET:
-							break;
-						case SORT:
-							break;
-						case START:
-							break;
-						case STOP:
-							break;
-						case STRING:
-							break;
-						case SUBTRACT:
-							porPalavra.avancaPosicaoLeitura();
-							paragrafos.add(new SubtractParagrafo(porPalavra, dataDivision));
-							break;
-						case UNSTRING:
-							break;
-						case WRITE:
-							break;
-						case XMLGENERATE:
-							break;
-						case XMLPARSE:
-							break;
-						}
-					} else {
-						porPalavra.avancaPosicaoLeitura();
-					}
-					for (; !porPalavra.getInstrucaoAtualLeitura().isEmpty() && !ParagrafosProcedureDivision
-							.acabouParagrafoAtual(porPalavra.getInstrucaoAtualLeitura()); porPalavra
-									.avancaPosicaoLeitura()) {
-					}
+			if (paragrafo.isConstruido()) {
+				// Eh uma paragrafo a ser construido
+				switch (paragrafo) {
+				case ACCEPT:
+					// paragrafos.add(new AcceptParagrafo(umaSecao, dataDivision));
+					break;
+				case ADD:
+					codigo.avancaPosicaoLeitura();
+					paragrafos.add(new AddParagrafo(codigo, dataDivision));
+					break;
+				case ALTER:
+					break;
+				case CALL:
+					break;
+				case CANCEL:
+					break;
+				case CLOSE:
+					break;
+				case COMPUTE:
+					codigo.avancaPosicaoLeitura();
+					paragrafos.add(new ComputeParagrafo(codigo, dataDivision));
+					break;
+				case CONTINUE:
+					break;
+				case DELETE:
+					break;
+				case DISPLAY:
+					codigo.avancaPosicaoLeitura();
+					paragrafos.add(new DisplayParagrafo(codigo, dataDivision));
+					break;
+				case DIVIDE:
+					codigo.avancaPosicaoLeitura();
+					paragrafos.add(new DivideParagrafo(codigo, dataDivision));
+					break;
+				case ELSE:
+					return paragrafos;
+				case ENDIF:
+					//TODO validar o if inicial
+					return paragrafos;
+				case ENTRY:
+					break;
+				case EVALUATE:
+					break;
+				case EXIT:
+				case EXITMETHOD:
+				case EXITPROGRAM:
+					break;
+				case GOBACK:
+					break;
+				case IF:
+					codigo.avancaPosicaoLeitura();
+					paragrafos.add(new IfParagrafo(codigo, dataDivision));
+					break;
+				case INITIALIZE:
+					break;
+				case INSPECT:
+					break;
+				case INVOKE:
+					break;
+				case MERGE:
+					break;
+				case MOVE:
+					codigo.avancaPosicaoLeitura();
+					paragrafos.add(new MoveParagrafo(codigo, dataDivision));
+					break;
+				case MULTIPLY:
+					codigo.avancaPosicaoLeitura();
+					paragrafos.add(new MultiplyParagrafo(codigo, dataDivision));
+					break;
+				case OPEN:
+					break;
+				case PERFORM:
+					break;
+				case READ:
+					break;
+				case RELEASE:
+					break;
+				case RETURN:
+					break;
+				case REWRITE:
+					break;
+				case SEARCH:
+					break;
+				case SET:
+					break;
+				case SORT:
+					break;
+				case START:
+					break;
+				case STOP:
+					break;
+				case STRING:
+					break;
+				case SUBTRACT:
+					codigo.avancaPosicaoLeitura();
+					paragrafos.add(new SubtractParagrafo(codigo, dataDivision));
+					break;
+				case UNSTRING:
+					break;
+				case WRITE:
+					break;
+				case XMLGENERATE:
+					break;
+				case XMLPARSE:
+					break;
+				case OUTRO:
+					break;
+				default:
+					break;
 				}
+			} else {
+				codigo.avancaPosicaoLeitura();
 			}
+			for (; !codigo.getInstrucaoAtualLeitura().isEmpty()
+					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(codigo.getInstrucaoAtualLeitura()); codigo
+							.avancaPosicaoLeitura()) {
+			}
+
 		}
+		return paragrafos;
 	}
 
 	ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
@@ -191,7 +195,7 @@ public class ProcedureDivision {
 
 		// For para escrever
 		for (ParagrafoImpl paragrafo : paragrafos) {
-			arquivoEscrita.escreveLinha(paragrafo.escreveArquivo());
+			arquivoEscrita.escreveLinha(paragrafo.escreveArquivo(2));
 		}
 		arquivoEscrita.escreveLinha("\n\t}\n}");
 		arquivoEscrita.fechaArquivo();
