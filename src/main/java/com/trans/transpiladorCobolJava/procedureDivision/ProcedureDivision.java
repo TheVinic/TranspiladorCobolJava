@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
 import com.trans.transpiladorCobolJava.arquivo.ArquivoEscrita;
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
@@ -18,6 +20,7 @@ import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.Paragrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ParagrafoImpl;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.SubtractParagrafo;
 
+@Component
 public class ProcedureDivision {
 
 	ArrayList<Paragrafo> paragrafos = new ArrayList<Paragrafo>();
@@ -156,12 +159,13 @@ public class ProcedureDivision {
 
 	ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
 	String nomeClasse = "Controller";
+	String path = "Controller";
 
 	public void escreve() throws IOException {
 		System.out.println("Inicio escrita da PROCEDURE DIVISION");
 
-		arquivoEscrita.abreArquivo("model\\" + nomeClasse + ".java");
-		arquivoEscrita.escreveLinha("package com.trans.transpiladorCobolJava.model." + nomeClasse + ";\n");
+		arquivoEscrita.abreArquivo(path + "\\" + nomeClasse + ".java");
+		arquivoEscrita.escreveLinha("package com.trans.transpiladorCobolJava." + path + "." + nomeClasse + ";\n");
 
 		// For para escrever atributos
 		Set<String> imports = new HashSet<String>();

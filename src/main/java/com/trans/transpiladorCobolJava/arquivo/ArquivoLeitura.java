@@ -13,11 +13,11 @@ public class ArquivoLeitura {
 	private Integer fimLeitura = 72;
 
 	// Realiza a abertura do arquivo com o código cobol
-	public void abreArquivo() {
+	public void abreArquivo(String path) {
 		
 		System.out.println("Iniciando leitura\n\n");
 		try {
-			arquivoCobol = new FileReader("cobol.txt");
+			arquivoCobol = new FileReader(path);
 			textoCobol = new BufferedReader(arquivoCobol);
 		} catch (IOException e) {
 			System.out.printf("\nErro na abertura do arquivo %s.\n", e.getMessage());
@@ -60,7 +60,7 @@ public class ArquivoLeitura {
 	}
 	
 	public String trataComentario(String linha) {
-		return (linha.length() == 0) ? linha : (linha.length() >= fimLeitura) ? linha.substring(comecaLeitura, fimLeitura) : linha.substring(comecaLeitura);
+		return (linha.length() == 0) ? linha : (linha.length() >= fimLeitura) ? linha.substring(comecaLeitura, fimLeitura) : linha.replaceAll("\t", "    ").substring(comecaLeitura);
 	}
 
 	public String[] lerTodoSeparaDivisao(OrdemExecucaoDivisao ordemExecucao) throws IOException {

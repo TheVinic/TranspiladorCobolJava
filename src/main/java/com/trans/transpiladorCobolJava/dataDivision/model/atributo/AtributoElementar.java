@@ -3,6 +3,7 @@ package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.trans.transpiladorCobolJava.dataDivision.SecoesDataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo.ValorAtributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.valorAtributo.ValorAtributoDecimal;
@@ -20,8 +21,8 @@ public class AtributoElementar extends Atributo {
 	private ValorAtributo valor;
 
 	public AtributoElementar(String nomeAtributo, Integer nivel, Integer comprimento, Integer comprimentoDecimal,
-			TipoAtributo tipoAtributo, String valorAtributo, List<String> classe, Integer occurs) {
-		super((nomeAtributo == null) ? null : nomeAtributo.toLowerCase(), nivel, classe, occurs);
+			TipoAtributo tipoAtributo, String valorAtributo, List<String> classe, Integer occurs, SecoesDataDivision local) {
+		super((nomeAtributo == null) ? null : nomeAtributo.toLowerCase(), nivel, classe, occurs, local);
 		this.comprimento = comprimento;
 		this.comprimentoDecimal = comprimentoDecimal;
 		this.tipoAtributo = tipoAtributo;

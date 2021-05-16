@@ -1,8 +1,11 @@
-package com.trans.transpiladorCobolJava.model.Controller;
+package com.trans.transpiladorCobolJava.Controller.Controller;
 
 import com.trans.transpiladorCobolJava.model.Dadosprincipal;
+ import com.trans.transpiladorCobolJava.Dadosprincipal;
 
 public class Controller {
+
+	model.Dadosprincipal model.Dadosprincipal = new model.Dadosprincipal();
 
 	Dadosprincipal dadosprincipal = new Dadosprincipal();
 

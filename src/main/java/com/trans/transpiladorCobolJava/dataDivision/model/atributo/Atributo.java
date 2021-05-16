@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+import com.trans.transpiladorCobolJava.dataDivision.SecoesDataDivision;
+
+@Component
 public abstract class Atributo {
 
 	protected String nome;
@@ -15,12 +20,14 @@ public abstract class Atributo {
 	protected Integer occurs;
 
 	protected boolean filler;
+	
+	protected SecoesDataDivision local;
 
 	@Deprecated
 	public Atributo() {
 	}
 
-	protected Atributo(String nomeAtributo, Integer nivel, List<String> classes, Integer occurs) {
+	protected Atributo(String nomeAtributo, Integer nivel, List<String> classes, Integer occurs, SecoesDataDivision local) {
 		this.nome = (nomeAtributo != null) ? toUpperFistCase(nomeAtributo.replaceAll("-", "_")) : null;
 		this.nivel = nivel;
 		if (classes != null) {
@@ -33,6 +40,7 @@ public abstract class Atributo {
 		}
 		this.occurs = occurs;
 		this.filler = (nomeAtributo != null && nomeAtributo.startsWith("filler")) ? true : false;
+		this.local = local;
 	}
 
 	public String getNome() {
@@ -134,5 +142,17 @@ public abstract class Atributo {
 	public abstract String tipoObjeto();
 
 	public abstract Integer getComprimento();
+
+	public boolean isFiller() {
+		return filler;
+	}
+
+	public SecoesDataDivision getLocal() {
+		return local;
+	}
+
+	public String getImport() {
+		return (local==null) ? classes.get(0) : local.getLocal() + "." + classes.get(0);
+	}
 
 }

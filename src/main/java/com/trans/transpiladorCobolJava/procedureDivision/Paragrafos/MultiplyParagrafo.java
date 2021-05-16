@@ -20,7 +20,7 @@ public class MultiplyParagrafo extends Paragrafo {
 	public MultiplyParagrafo(Codigo umaSecao, DataDivision dataDivision) {
 		multiplica = encontraCriaAtributo(umaSecao, dataDivision);
 		if (multiplica.getClasses() != null) {
-			imports.add(multiplica.getClasses().get(0));
+			imports.add(multiplica.getImport());
 		}
 		umaSecao.avancaPosicaoLeitura();
 		Atributo atributo = null;
@@ -31,7 +31,7 @@ public class MultiplyParagrafo extends Paragrafo {
 			atributo = encontraCriaAtributo(umaSecao, dataDivision);
 			por.add(atributo);
 			if (atributo.getClasses() != null) {
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 		}
 
@@ -42,7 +42,7 @@ public class MultiplyParagrafo extends Paragrafo {
 				atributo = encontraIdentificador(umaSecao, dataDivision);
 				resultado.add(atributo);
 				if (atributo.getClasses() != null) {
-					imports.add(atributo.getClasses().get(0));
+					imports.add(atributo.getImport());
 				}
 			}
 		}

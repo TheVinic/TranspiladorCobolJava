@@ -22,7 +22,7 @@ public class SubtractParagrafo extends Paragrafo {
 			Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
 			subtrair.add(atributo);
 			if (atributo.getClasses() != null) {
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 		}
 
@@ -33,7 +33,7 @@ public class SubtractParagrafo extends Paragrafo {
 			Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
 			de.add(atributo);
 			if (atributo.getClasses() != null) {
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 		}
 
@@ -43,7 +43,7 @@ public class SubtractParagrafo extends Paragrafo {
 							.avancaPosicaoLeitura()) {
 				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
 				resultado.add(atributo);
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 
 		}

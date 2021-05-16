@@ -8,6 +8,9 @@
        77  NUMB PIC 9(12).   
        77  NUMTMP PIC 9(12).    
 000870 Linkage section.
+	   01 NUMBER.
+		02 VARIAVEL1 PIC X.
+	   		02 VARIAVEL2 PIC 9(5).
 000920 Procedure division.
        Mainline.
              DISPLAY "Enter NUmber a" WITH NO ADVANCING.

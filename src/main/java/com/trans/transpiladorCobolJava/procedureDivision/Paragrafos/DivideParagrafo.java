@@ -36,7 +36,7 @@ public class DivideParagrafo extends Paragrafo {
 				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
 				dividendo.add(atributo);
 				if (atributo.getClasses() != null) {
-					imports.add(atributo.getClasses().get(0));
+					imports.add(atributo.getImport());
 				}
 			}
 		} else {
@@ -44,7 +44,7 @@ public class DivideParagrafo extends Paragrafo {
 			dividendo.add(divisor);
 			divisor = encontraCriaAtributo(umaSecao, dataDivision);
 			if (divisor.getClasses() != null) {
-				imports.add(divisor.getClasses().get(0));
+				imports.add(divisor.getImport());
 			}
 			umaSecao.avancaPosicaoLeitura();
 		}
@@ -57,7 +57,7 @@ public class DivideParagrafo extends Paragrafo {
 				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
 				quociente.add(atributo);
 				if (atributo.getClasses() != null) {
-					imports.add(atributo.getClasses().get(0));
+					imports.add(atributo.getImport());
 				}
 			}
 		}
@@ -67,7 +67,7 @@ public class DivideParagrafo extends Paragrafo {
 			Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
 			resto.add(atributo);
 			if (atributo.getClasses() != null) {
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 
 		}

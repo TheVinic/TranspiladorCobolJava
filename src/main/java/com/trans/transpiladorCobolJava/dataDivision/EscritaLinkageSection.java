@@ -7,9 +7,8 @@ import org.springframework.stereotype.Component;
 import com.trans.transpiladorCobolJava.arquivo.ArquivoEscrita;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 
-
 @Component
-public class EscritaWorkingStorageSection {
+public class EscritaLinkageSection {
 
 	public String getNomeClasse() {
 		return nomeClasse;
@@ -20,30 +19,24 @@ public class EscritaWorkingStorageSection {
 	}
 
 	ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
-	String nomeClasse = "DadosPrincipais";
-	String localArquivo = "model";
+	String nomeClasse = "DadosPrincipaisDTO";
+	String localArquivo = "DTO";
 
-	public void escreve(AtributoGrupo atributosWorkingStorage) throws IOException {
+	public void escreve(AtributoGrupo atributosLinkiageSection) throws IOException {
 
 		// escrever atributos
-		atributosWorkingStorage.escreveImportDataDivision(localArquivo);
+		atributosLinkiageSection.escreveImportDataDivision(localArquivo);
 
 		// escrever declaração variaveis
-		atributosWorkingStorage.escreveVariaveis();
+		atributosLinkiageSection.escreveVariaveis();
 		
 		// escrever Get e Set
-		atributosWorkingStorage.escreveGetSet();
+		atributosLinkiageSection.escreveGetSet();
 
 		// escrever toTrancode
-		atributosWorkingStorage.escreveToString();
+		atributosLinkiageSection.escreveToString();
 
 		// escrever toObjeto
-		atributosWorkingStorage.escreveToObject();
+		atributosLinkiageSection.escreveToObject();
 	}
-
-	@Override
-	public String toString() {
-		return "EscritaWorkingStorageSection [arquivoEscrita=" + arquivoEscrita + ", nomeClasse=" + nomeClasse + "]";
-	}
-
 }

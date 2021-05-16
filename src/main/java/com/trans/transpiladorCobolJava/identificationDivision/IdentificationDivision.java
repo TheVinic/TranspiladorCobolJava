@@ -1,7 +1,12 @@
 package com.trans.transpiladorCobolJava.identificationDivision;
 
+import org.springframework.stereotype.Component;
+
+import com.trans.transpiladorCobolJava.DTO.IdentificationDivisionResponse;
+
 import lombok.Getter;
 
+@Component
 public class IdentificationDivision {
 	@Getter private String programId;
 	@Getter private String author;
@@ -44,5 +49,9 @@ public class IdentificationDivision {
 			}
 		}
 		System.out.println("Fim da IDENTIFICATION DIVISION");
+	}
+
+	public IdentificationDivisionResponse toResponse() {
+		return new IdentificationDivisionResponse(programId, author, installation, dataWritten, dateCompiled, security);
 	}
 }

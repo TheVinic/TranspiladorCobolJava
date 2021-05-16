@@ -19,14 +19,14 @@ public class MoveParagrafo extends Paragrafo implements ParagrafoImpl {
 		Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
 		de = atributo;
 		if (atributo.getClasses() != null) {
-			imports.add(atributo.getClasses().get(0));
+			imports.add(atributo.getImport());
 		}
 		umaSecao.avancaPosicaoLeitura();
 		for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver(); umaSecao.avancaPosicaoLeitura()) {
 			atributo = encontraIdentificador(umaSecao, dataDivision);
 			para.add(atributo);
 			if (atributo.getClasses() != null) {
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 		}
 	}

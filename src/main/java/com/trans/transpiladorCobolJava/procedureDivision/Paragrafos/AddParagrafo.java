@@ -23,7 +23,7 @@ public class AddParagrafo extends Paragrafo {
 			Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
 			somar.add(atributo);
 			if (atributo.getClasses() != null) {
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 		}
 
@@ -33,7 +33,7 @@ public class AddParagrafo extends Paragrafo {
 					&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING"); umaSecao.avancaPosicaoLeitura()) {
 				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
 				somarCom.add(atributo);
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 		}
 
@@ -43,7 +43,7 @@ public class AddParagrafo extends Paragrafo {
 							.avancaPosicaoLeitura()) {
 				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
 				gravarEm.add(atributo);
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 
 		}

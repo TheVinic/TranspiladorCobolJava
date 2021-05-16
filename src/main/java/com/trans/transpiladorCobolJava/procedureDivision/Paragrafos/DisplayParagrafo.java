@@ -1,7 +1,6 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
@@ -27,12 +26,12 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 					frase += umaSecao.getProximaInstrucaoLeitura() + " ";
 				}
 				texto.add(new AtributoElementar(new String(), null, frase.length(), null, TipoAtributo.CARACTERE, frase,
-						null, null));
+						null, null, null));
 			} else if (!PalavrasReservadasDisplayParagrafo.isPresent(umaSecao.getInstrucaoAtualLeitura())) {
 				// Identificador
 				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
 				texto.add(atributo);
-				imports.add(atributo.getClasses().get(0));
+				imports.add(atributo.getImport());
 			}
 
 		}

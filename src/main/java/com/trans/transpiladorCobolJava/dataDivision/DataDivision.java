@@ -3,19 +3,31 @@ package com.trans.transpiladorCobolJava.dataDivision;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.trans.transpiladorCobolJava.DTO.DataDivisionResponse;
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 
+@Component
 public class DataDivision {
 
 	@Autowired
 	WorkingStorageSection workingStorageSection;
-
-	EscritaWorkingStorageSection escritaWorkingStorageSection = new EscritaWorkingStorageSection();
+	
+	@Autowired
+	LinkageSection linkageSection;
 
 	AtributoGrupo atributosWorkingStorage;
+	
+	@Autowired
+	EscritaWorkingStorageSection escritaWorkingStorageSection;
+
+	AtributoGrupo atributosLinkageSection;
+
+	@Autowired
+	EscritaLinkageSection escritaLinkageSection;
 
 	public void popula(String codigoCobol) {
 
@@ -35,8 +47,8 @@ public class DataDivision {
 				codigo.getProximaInstrucaoLeitura();
 				break;
 			case LINKAGESECTION:
-				System.out.println(codigo.getInstrucaoAtualLeitura() + " não implementado.");
-				codigo.getProximaInstrucaoLeitura();
+				linkageSection = new LinkageSection();
+				atributosLinkageSection = linkageSection.popula(codigo);
 				break;
 			case LOCALSTORAGESECTION:
 				System.out.println(codigo.getInstrucaoAtualLeitura() + " não implementado.");
@@ -52,13 +64,22 @@ public class DataDivision {
 
 	public void escreve() throws IOException {
 		if (atributosWorkingStorage != null ) {
+			escritaWorkingStorageSection = new EscritaWorkingStorageSection();
 			escritaWorkingStorageSection.escreve(atributosWorkingStorage);
+		}
+		if (atributosLinkageSection != null) {
+			escritaLinkageSection = new EscritaLinkageSection();
+			escritaLinkageSection.escreve(atributosLinkageSection);
 		}
 	}
 
 	public Atributo localizaAtributo(String nomeVariavel) {
 		nomeVariavel = nomeVariavel.replace(".", "").replaceAll("-", "_");
-		return atributosWorkingStorage.getLocalizaAtributo(nomeVariavel);
+		Atributo atributo = atributosWorkingStorage.getLocalizaAtributo(nomeVariavel);
+		if(atributo == null) {
+			atributo = atributosLinkageSection.getLocalizaAtributo(nomeVariavel);
+		}
+		return atributo;
 	}
 
 	public Atributo localizaAtributo(String nomeVariavel, String proximaInstrucaoLeitura) {
@@ -68,7 +89,15 @@ public class DataDivision {
 		if (grupo instanceof AtributoGrupo) {
 			return ((AtributoGrupo) grupo).getLocalizaAtributo(nomeVariavel);
 		}
+		grupo = atributosLinkageSection.getLocalizaAtributo(proximaInstrucaoLeitura);
+		if (grupo instanceof AtributoGrupo) {
+			return ((AtributoGrupo) grupo).getLocalizaAtributo(nomeVariavel);
+		}
 		return null;
+	}
+
+	public DataDivisionResponse toResponse() {
+		return new DataDivisionResponse(atributosWorkingStorage, atributosLinkageSection);
 	}
 
 }

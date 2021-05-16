@@ -3,7 +3,9 @@ package com.trans.transpiladorCobolJava.dataDivision.model.atributo;
 import java.io.IOException;
 import java.util.List;
 
+import com.trans.transpiladorCobolJava.DTO.AtributoGrupoResponse;
 import com.trans.transpiladorCobolJava.arquivo.ArquivoEscrita;
+import com.trans.transpiladorCobolJava.dataDivision.SecoesDataDivision;
 
 public class AtributoGrupo extends Atributo {
 
@@ -14,8 +16,8 @@ public class AtributoGrupo extends Atributo {
 	private Integer comprimento;
 
 	public AtributoGrupo(String nomeAtributo, Integer nivel, List<Atributo> atributos, List<String> classe,
-			Integer occurs) {
-		super(nomeAtributo, nivel, classe, occurs);
+			Integer occurs, SecoesDataDivision local) {
+		super(nomeAtributo, nivel, classe, occurs, local);
 		this.atributos = atributos;
 		this.comprimento = 0;
 		for (Atributo atributo : this.atributos) {
@@ -37,16 +39,16 @@ public class AtributoGrupo extends Atributo {
 		return comprimento;
 	}
 
-	public String escreveImportWorkingStorage() throws IOException {
-		arquivoEscrita.abreArquivo("model\\" + getNome() + ".java");
-		arquivoEscrita.escreveLinha("package com.trans.transpiladorCobolJava.model." + getNome() + ";\n");
+	public String escreveImportDataDivision(String local) throws IOException {
+		arquivoEscrita.abreArquivo(local + "\\" + getNome() + ".java");
+		arquivoEscrita.escreveLinha("package com.trans.transpiladorCobolJava." + local + "." + getNome() + ";\n");
 		for (Atributo atributoUnitario : atributos) {
 			if (atributoUnitario instanceof AtributoGrupo) {
-				arquivoEscrita.escreveLinha(((AtributoGrupo) atributoUnitario).escreveImportWorkingStorage());
+				arquivoEscrita.escreveLinha(((AtributoGrupo) atributoUnitario).escreveImportDataDivision(local));
 			}
 		}
 		arquivoEscrita.escreveLinha("import java.math.BigDecimal;\n");
-		return "import com.trans.transpiladorCobolJava.model." + getNome() + ";\n";
+		return "import com.trans.transpiladorCobolJava." + local + "." + getNome() + ";\n";
 	}
 
 	public String escreveVariaveis() throws IOException {
@@ -122,5 +124,9 @@ public class AtributoGrupo extends Atributo {
 			}
 		}
 		return null;
+	}
+
+	public AtributoGrupoResponse toResponse() {
+		return new AtributoGrupoResponse(getNome(), getNivel(), getOccurs(), atributos);
 	}
 }

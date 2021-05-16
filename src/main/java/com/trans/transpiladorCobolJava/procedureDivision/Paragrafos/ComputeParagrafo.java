@@ -33,7 +33,7 @@ public class ComputeParagrafo extends Paragrafo {
 				atributo = encontraIdentificador(umaSecao, dataDivision);
 				resultado.add(atributo);
 				if (atributo.getClasses() != null) {
-					imports.add(atributo.getClasses().get(0));
+					imports.add(atributo.getImport());
 				}
 			}
 		}
@@ -50,7 +50,7 @@ public class ComputeParagrafo extends Paragrafo {
 					Atributo atributo = encontraCriaAtributo(stringDividadiPelasOperacoes, dataDivision);
 					calculo.add(atributo);
 					if (atributo.getClasses() != null) {
-						imports.add(atributo.getClasses().get(0));
+						imports.add(atributo.getImport());
 					}
 				}
 			}
@@ -72,7 +72,7 @@ public class ComputeParagrafo extends Paragrafo {
 					Atributo atributo = encontraCriaAtributo(stringDividadiPelasOperacoes, dataDivision);
 					calculo.add(atributo);
 					if (atributo.getClasses() != null) {
-						imports.add(atributo.getClasses().get(0));
+						imports.add(atributo.getImport());
 					}
 				}
 			} else {

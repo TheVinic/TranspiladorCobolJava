@@ -11,7 +11,7 @@ import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo
 import com.trans.transpiladorCobolJava.main.Divisoes;
 
 @Component
-public class WorkingStorageSection extends DataDivisionCriaVariaveis {
+public class LinkageSection extends DataDivisionCriaVariaveis {
 
 	ArrayList<Atributo> atributos = new ArrayList<Atributo>();
 
@@ -25,10 +25,10 @@ public class WorkingStorageSection extends DataDivisionCriaVariaveis {
 				&& !SecoesDataDivision.acabouParagrafoAtual(codigoCobol.getInstrucaoAtualLeitura())
 				&& !Divisoes.acabouDivisaoAtual(codigoCobol.getInstrucaoAtualLeitura())) {
 			atributos.add(criaItem(new Codigo(codigoCobol.getInstrucaoAtualLeitura().split("\\s")), codigoCobol,
-					classes, SecoesDataDivision.WORKINGSTORAGESECTION));
+					classes, SecoesDataDivision.LINKAGESECTION));
 		}
-		DadosPrincipais = new AtributoGrupo("DadosPrincipais", 0, atributos, null, null,
-				SecoesDataDivision.WORKINGSTORAGESECTION);
+		DadosPrincipais = new AtributoGrupo("DadosPrincipaisDTO", 0, atributos, null, null,
+				SecoesDataDivision.LINKAGESECTION);
 		return DadosPrincipais;
 	}
 }
