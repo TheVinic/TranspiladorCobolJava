@@ -2,7 +2,6 @@ package com.trans.transpiladorCobolJava.main;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trans.transpiladorCobolJava.DTO.VariaveisResponse;
@@ -16,12 +15,11 @@ import com.trans.transpiladorCobolJava.procedureDivision.ProcedureDivision;
 @Service
 public class GeraDataDivisionService {
 
-	@Autowired
 	IdentificationDivision identificationDivision = new IdentificationDivision();
-	@Autowired
+	
 	DataDivision dataDivision = new DataDivision();
-	@Autowired
-	ProcedureDivision procedureDivision = new ProcedureDivision();
+	
+	ProcedureDivision procedureDivision = new ProcedureDivision("Controller");
 
 	public VariaveisResponse processa(String path) throws IOException {
 		// Lê código cobol

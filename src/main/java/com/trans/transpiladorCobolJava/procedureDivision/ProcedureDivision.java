@@ -18,16 +18,30 @@ import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.IfParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.MoveParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.MultiplyParagrafo;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.Paragrafo;
-import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ParagrafoImpl;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.PerformParagrafo;
+import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.ProcedureDivisionIf;
 import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.SubtractParagrafo;
 
 @Component
 public class ProcedureDivision {
 
 	ArrayList<Paragrafo> paragrafos = new ArrayList<Paragrafo>();
+	ArrayList<ProcedureDivisionSection> secoes = new ArrayList<ProcedureDivisionSection>();
+
+	ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
+	String nomeClasse;
+	String path = "Controller";
+
+	public ProcedureDivision() {
+		super();
+	}
+
+	public ProcedureDivision(String nomeClasse) {
+		super();
+		this.nomeClasse = nomeClasse;
+	}
 
 	public ArrayList<Paragrafo> analiseSemantica(Codigo codigo, DataDivision dataDivision) {
-		boolean inicio = (codigo.getPosicaoLeitura() == 0) ? true : false;
 		System.out.println("Inicio leitura da PROCEDURE DIVISION");
 
 		for (; !codigo.isOver();) {
@@ -72,9 +86,8 @@ public class ProcedureDivision {
 				case ELSE:
 					return paragrafos;
 				case ENDIF:
-					// TODO validar o if inicial
-					if (inicio) {
-						codigo.avancaPosicaoLeitura();
+					codigo.avancaPosicaoLeitura();
+					if (!(this instanceof ProcedureDivisionIf)) {
 						break;
 					} else {
 						return paragrafos;
@@ -112,6 +125,8 @@ public class ProcedureDivision {
 				case OPEN:
 					break;
 				case PERFORM:
+					codigo.avancaPosicaoLeitura();
+					paragrafos.add(new PerformParagrafo(codigo, dataDivision));
 					break;
 				case READ:
 					break;
@@ -146,28 +161,39 @@ public class ProcedureDivision {
 				case XMLPARSE:
 					break;
 				case OUTRO:
-					break;
-				default:
+					if (this instanceof ProcedureDivisionSection) {
+						return paragrafos;
+					}
+					String name = codigo.getInstrucaoAtualLeitura();
+					String proximo = codigo.getProximaInstrucaoLeitura();
+					if (ParagrafosProcedureDivision.acabouParagrafoAtual(proximo) || proximo.equals("SECTION")) {
+						if (proximo.equals("SECTION")) {
+							codigo.avancaPosicaoLeitura();
+						}
+						ProcedureDivisionSection secao = new ProcedureDivisionSection(name);
+						secao.analiseSemantica(codigo, dataDivision);
+						secoes.add(secao);
+					}
 					break;
 				}
 			} else {
-				codigo.avancaPosicaoLeitura();
-			}
-			for (; !codigo.getInstrucaoAtualLeitura().isEmpty()
-					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(codigo.getInstrucaoAtualLeitura()); codigo
-							.avancaPosicaoLeitura()) {
+				for (codigo.avancaPosicaoLeitura(); !codigo.getInstrucaoAtualLeitura().isEmpty()
+						&& !ParagrafosProcedureDivision.acabouParagrafoAtual(codigo.getInstrucaoAtualLeitura()); codigo
+								.avancaPosicaoLeitura()) {
+				}
 			}
 
 		}
 		return paragrafos;
 	}
 
-	ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
-	String nomeClasse = "Controller";
-	String path = "Controller";
-
-	public void escreve() throws IOException {
+	public Set<String> escreve() throws IOException {
 		System.out.println("Inicio escrita da PROCEDURE DIVISION");
+		Set<String> todosImports = new HashSet<String>();
+
+		for (ProcedureDivisionSection secao : secoes) {
+			todosImports.addAll(secao.escreve());
+		}
 
 		arquivoEscrita.abreArquivo(path + "\\" + nomeClasse + ".java");
 		arquivoEscrita.escreveLinha("package com.trans.transpiladorCobolJava." + path + "." + nomeClasse + ";\n");
@@ -175,31 +201,60 @@ public class ProcedureDivision {
 		// For para escrever atributos
 		Set<String> imports = new HashSet<String>();
 		Set<String> declaracao = new HashSet<String>();
+		String textoDoMetodo = new String();
+
 		for (Paragrafo paragrafo : paragrafos) {
 			Set<String> texto = paragrafo.escreveImports();
 			if (texto != null && !texto.isEmpty()) {
 				imports.addAll(texto);
 				declaracao.addAll(paragrafo.getImports());
 			}
+			textoDoMetodo += paragrafo.escreveArquivo(2);
 		}
-		arquivoEscrita.escreveLinha(imports.toString().replaceAll("\\[|\\]|\\,", ""));
 
 		arquivoEscrita.escreveLinha("public class " + nomeClasse + " {");
 
+		arquivoEscrita.escreveLinha(imports.toString().replaceAll("\\[|\\]|\\,", ""));
+		for (String elemento : todosImports) {
+			if (elemento != null && !elemento.isEmpty()) {
+				arquivoEscrita.escreveLinha(elemento.replaceAll("\\\n", ""));
+			}
+		}
+
 		// For para inicializar variaveis
-		for (String elemento : declaracao) {
-			arquivoEscrita
-					.escreveLinha("\n\t" + elemento + " " + toLowerFistCase(elemento) + " = new " + elemento + "();");
+		if (!declaracao.isEmpty()) {
+			if (this instanceof ProcedureDivisionSection) {
+				String parametros = new String();
+				for (String elemento : declaracao) {
+					parametros += elemento + " " + toLowerFistCase(elemento) + ", ";
+					todosImports
+							.add("\n\t" + elemento + " " + toLowerFistCase(elemento) + " = new " + elemento + "();\n");
+				}
+				parametros = parametros.substring(0, parametros.length() - 2);
+				arquivoEscrita
+						.escreveLinha("\n\tpublic void " + toLowerFistCase(nomeClasse) + "(" + parametros + "){\n");
+			} else {
+				for (String elemento : declaracao) {
+					arquivoEscrita.escreveLinha(
+							"\n\t" + elemento + " " + toLowerFistCase(elemento) + " = new " + elemento + "();");
+				}
+				arquivoEscrita.escreveLinha("\n\tpublic void " + toLowerFistCase(nomeClasse) + "(){\n");
+			}
+		} else {
+			arquivoEscrita.escreveLinha("\n\tpublic void " + toLowerFistCase(nomeClasse) + "(){\n");
 		}
 
-		arquivoEscrita.escreveLinha("\n\tpublic void home(){\n");
-
-		// For para escrever
-		for (ParagrafoImpl paragrafo : paragrafos) {
-			arquivoEscrita.escreveLinha(paragrafo.escreveArquivo(2));
+		if (paragrafos.isEmpty()) {
+			// TODO colocar caso q já começa com seção
+		} else {
+			arquivoEscrita.escreveLinha(textoDoMetodo);
 		}
+
 		arquivoEscrita.escreveLinha("\n\t}\n}");
 		arquivoEscrita.fechaArquivo();
+
+		return todosImports;
+
 	}
 
 	private static String toLowerFistCase(String nome) {

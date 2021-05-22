@@ -1,12 +1,14 @@
 package com.trans.transpiladorCobolJava.model.Dadosprincipais;
 
+import com.trans.transpiladorCobolJava.model.Teste;
+
 import java.math.BigDecimal;
 
 public class Dadosprincipais{
 	private Integer suma;
 	private Integer numa;
 	private Integer numb;
-	private Integer numtmp;
+	private Teste teste = new Teste();
 
 	public Integer getSuma() {
 		return suma;
@@ -32,22 +34,22 @@ public class Dadosprincipais{
 		this.numb = numb;
 	}
 
-	public Integer getNumtmp() {
-		return numtmp;
+	public Teste getTeste() {
+		return teste;
 	}
 
-	public void setNumtmp(Integer numtmp) {
-		this.numtmp = numtmp;
+	public void setTeste(Teste teste) {
+		this.teste = teste;
 	}
 
 	public String toTrancode() { 
-		return String.format("|0%12d|", suma) + String.format("|0%12d|", numa) + String.format("|0%12d|", numb) + String.format("|0%12d|", numtmp);
+		return String.format("|0%12d|", suma) + String.format("|0%12d|", numa) + String.format("|0%12d|", numb) + teste.toTrancode();
 	}
 
 	public void toObject(String trancode) { 
 		this.suma = trancode.substring(0, 12);
 		this.numa = trancode.substring(12, 24);
 		this.numb = trancode.substring(24, 36);
-		this.numtmp = trancode.substring(36, 48);
+		this.teste.toObject(trancode.substring(36, 48));
 	}
 }

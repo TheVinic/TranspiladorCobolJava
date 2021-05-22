@@ -28,7 +28,7 @@ public enum ParagrafosProcedureDivision {
 	MOVE("MOVE", true),
 	MULTIPLY("MULTIPLY", true), 
 	OPEN("OPEN", false),
-	PERFORM("PERFORM", false),
+	PERFORM("PERFORM", true),
 	READ("READ", false),
 	RELEASE("RELEASE", false),
 	RETURN("RETURN", false),

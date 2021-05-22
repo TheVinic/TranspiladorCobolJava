@@ -26,7 +26,11 @@ public class ComputeParagrafo extends Paragrafo {
 			if (umaSecao.getInstrucaoAtualLeitura().contains("=")) {
 				stringDividadiPelasOperacoes = new Codigo(umaSecao.getInstrucaoAtualLeitura().split("="));
 				if (!stringDividadiPelasOperacoes.getInstrucaoAtualLeitura().isEmpty()) {
-					resultado.add(encontraIdentificador(stringDividadiPelasOperacoes, dataDivision));
+					atributo = encontraIdentificador(stringDividadiPelasOperacoes, dataDivision);
+					resultado.add(atributo);
+					if (atributo.getClasses() != null) {
+						imports.add(atributo.getImport());
+					}
 				}
 				encontrouIgual = true;
 			} else {

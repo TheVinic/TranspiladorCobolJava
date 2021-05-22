@@ -6,7 +6,9 @@
        77  SUMA PIC 9(12).    
        77  NUMA PIC 9(12).    
        77  NUMB PIC 9(12).   
-       77  NUMTMP PIC 9(12).    
+       01  TESTE.
+       02 TESTE2.
+       03  NUMTMP PIC 9(12).    
 000870 Linkage section.
 	   01 NUMBER.
 		02 VARIAVEL1 PIC X.
@@ -22,6 +24,7 @@
 	       ELSE
 	           COMPUTE NUMTMP=0
 	       END-IF
+	    secondline.
 	       ADD 100 TO NUMTMP NUMB
 	       ADD NUMB TO NUMTMP
 	       DIVIDE NUMB INTO NUMTMP GIVING SUMA

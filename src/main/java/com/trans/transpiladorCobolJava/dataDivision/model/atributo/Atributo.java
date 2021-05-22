@@ -152,6 +152,10 @@ public abstract class Atributo {
 	}
 
 	public String getImport() {
+		return classes.get(0);
+	}
+
+	public String getImport2() {
 		return (local==null) ? classes.get(0) : local.getLocal() + "." + classes.get(0);
 	}
 

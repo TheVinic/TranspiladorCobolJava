@@ -8,7 +8,6 @@ import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
-import com.trans.transpiladorCobolJava.procedureDivision.ProcedureDivision;
 
 public class IfParagrafo extends Paragrafo {
 
@@ -31,10 +30,10 @@ public class IfParagrafo extends Paragrafo {
 				}
 			}
 		}
-		entao = new ProcedureDivision().analiseSemantica(umaSecao, dataDivision);
+		entao = new ProcedureDivisionIf().analiseSemantica(umaSecao, dataDivision);
 		if (umaSecao.getInstrucaoAtualLeitura().equals("ELSE")) {
 			umaSecao.getProximaInstrucaoLeitura();
-			seNao = new ProcedureDivision().analiseSemantica(umaSecao, dataDivision);
+			seNao = new ProcedureDivisionIf().analiseSemantica(umaSecao, dataDivision);
 		} else {
 			umaSecao.getProximaInstrucaoLeitura();
 		}
@@ -86,6 +85,22 @@ public class IfParagrafo extends Paragrafo {
 			}
 		}
 		return imprimir;
+	}
+	
+	@Override
+	public Set<String> getImports() {
+		Set<String> importsDosParagrafos = new HashSet<String>();
+
+		importsDosParagrafos.addAll(imports);
+		
+		for(Paragrafo elemento : entao) {
+			importsDosParagrafos.addAll(elemento.getImports());
+		}
+		for(Paragrafo elemento : seNao) {
+			importsDosParagrafos.addAll(elemento.getImports());
+		}
+		
+		return importsDosParagrafos;
 	}
 
 }

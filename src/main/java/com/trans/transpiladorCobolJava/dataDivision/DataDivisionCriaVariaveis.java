@@ -44,7 +44,8 @@ public abstract class DataDivisionCriaVariaveis {
 		List<Atributo> filhos = new ArrayList<Atributo>();
 		Codigo instrucao = new Codigo(codigoCobol.getProximaInstrucaoLeitura().split("\\s"));
 
-		while (instrucao.getCodigoCobol().length > 1 && nivel < Integer.parseInt(instrucao.getInstrucaoLeitura(0))) {
+		while (instrucao.getInstrucaoLeitura(0).matches("[0-9]+") && instrucao.getCodigoCobol().length > 1
+				&& nivel < Integer.parseInt(instrucao.getInstrucaoLeitura(0))) {
 			filhos.add(criaItem(instrucao, codigoCobol, (novaClasse == null) ? classe : novaClasse, local));
 			instrucao = new Codigo(codigoCobol.getProximaInstrucaoLeitura().split("\\s"));
 		}
