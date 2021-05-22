@@ -27,12 +27,8 @@ public class ProcedureDivision {
 	ArrayList<Paragrafo> paragrafos = new ArrayList<Paragrafo>();
 
 	public ArrayList<Paragrafo> analiseSemantica(Codigo codigo, DataDivision dataDivision) {
+		boolean inicio = (codigo.getPosicaoLeitura() == 0) ? true : false;
 		System.out.println("Inicio leitura da PROCEDURE DIVISION");
-
-		if (codigo == null) {
-			System.out.println("PROCEDURE DIVISION vazia.");
-			return null;
-		}
 
 		for (; !codigo.isOver();) {
 
@@ -76,8 +72,13 @@ public class ProcedureDivision {
 				case ELSE:
 					return paragrafos;
 				case ENDIF:
-					//TODO validar o if inicial
-					return paragrafos;
+					// TODO validar o if inicial
+					if (inicio) {
+						codigo.avancaPosicaoLeitura();
+						break;
+					} else {
+						return paragrafos;
+					}
 				case ENTRY:
 					break;
 				case EVALUATE:
