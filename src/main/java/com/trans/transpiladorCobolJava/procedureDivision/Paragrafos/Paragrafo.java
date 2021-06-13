@@ -28,10 +28,10 @@ public abstract class Paragrafo implements ParagrafoImpl {
 		}
 	}
 
-	protected Set<String> escreveImportsParagrago(Set<String> imports) {
+	public Set<String> escreveImportsParagrago(Set<String> imports) {
 		Set<String> imprimir = new HashSet<String>();
 		for (String elemento : imports) {
-			imprimir.add("import com.trans.transpiladorCobolJava." + elemento + ";\n");
+			imprimir.add("import com.trans.transpiladorCobolJava." + elemento + ";");
 		}
 		return imprimir;
 	}
@@ -40,7 +40,7 @@ public abstract class Paragrafo implements ParagrafoImpl {
 		if (umaSecao.getInstrucaoAtualLeitura().isEmpty()) {
 			umaSecao.getProximaInstrucaoLeitura();
 		}
-		String elemento = umaSecao.getInstrucaoAtualLeitura();
+		String elemento = umaSecao.getInstrucaoAtualLeitura().replace(".", "");
 		if (elemento.matches("[0-9]+")) {
 			// Tipo númerico
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.NUMERO, elemento, null,
@@ -49,7 +49,7 @@ public abstract class Paragrafo implements ParagrafoImpl {
 			// Tipo decimal
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.DECIMAL, elemento, null,
 					null, null));
-		} else if (elemento.matches("\\+|\\-|\\*|\\*\\*|\\/|\\(|\\)|\\|\\<|\\>|=|\\<\\=|\\>=")) {
+		} else if (validaCondicao(elemento)){
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.CARACTERE, elemento, null,
 					null, null));
 		} else if (elemento.equals("LESS") || elemento.equals("GREATER") || elemento.equals("OR")) {
@@ -75,17 +75,30 @@ public abstract class Paragrafo implements ParagrafoImpl {
 		}
 	}
 
+	private boolean validaCondicao(String elemento) {
+		if (elemento.equals("+") || elemento.equals("-") || elemento.equals("*") || elemento.equals("**")
+				|| elemento.equals("/") || elemento.equals("(") || elemento.equals(")") || elemento.equals("<") || elemento.equals(">")
+				|| elemento.equals("=") || elemento.equals("<=") || elemento.equals(">=")) {
+			return true;
+		}
+		return false;
+	}
+
 	public Set<String> getImports() {
 		return imports;
 	}
-	
+
 	protected String fazTabulacao(Integer nivel) {
 		String tabulacao = new String();
-		for(int i = 0; i<nivel; i++) {
+		for (int i = 0; i < nivel; i++) {
 			tabulacao += "\t";
 		}
-		
+
 		return tabulacao;
+	}
+
+	public Set<String> escreveImports() {
+		return escreveImportsParagrago(imports);
 	}
 
 }

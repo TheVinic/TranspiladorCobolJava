@@ -1,10 +1,10 @@
-package com.trans.transpiladorCobolJava.model.Teste;
+package com.trans.transpiladorCobolJava.model.Teste1;
 
 import com.trans.transpiladorCobolJava.model.Teste2;
 
 import java.math.BigDecimal;
 
-public class Teste{
+public class Teste1{
 	private Teste2 teste2 = new Teste2();
 
 	public Teste2 getTeste2() {

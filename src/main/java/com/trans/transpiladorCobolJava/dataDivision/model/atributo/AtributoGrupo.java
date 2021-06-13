@@ -16,7 +16,7 @@ public class AtributoGrupo extends Atributo {
 	private Integer comprimento;
 
 	public AtributoGrupo(String nomeAtributo, Integer nivel, List<Atributo> atributos, List<String> classe,
-			Integer occurs, SecoesDataDivision local) {
+			String occurs, SecoesDataDivision local) {
 		super(nomeAtributo, nivel, classe, occurs, local);
 		this.atributos = atributos;
 		this.comprimento = 0;

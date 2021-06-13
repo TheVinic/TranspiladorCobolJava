@@ -8,7 +8,7 @@ import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 
-public class MoveParagrafo extends Paragrafo implements ParagrafoImpl {
+public class MoveParagrafo extends Paragrafo  {
 
 	Atributo de;
 
@@ -43,20 +43,6 @@ public class MoveParagrafo extends Paragrafo implements ParagrafoImpl {
 					+ elemento.getSentencaSet(imprimirDe) + ";\n");
 		}
 		return imprimirMove;
-	}
-
-	@Override
-	public Set<String> escreveImports() {
-		Set<String> imprimir = new HashSet<String>();
-		if (de.getNome() != null && !de.getNome().isEmpty()) {
-			imprimir.addAll(escreveImportsParagrago(imports));
-		}
-		for (Atributo elemento : para) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-		return imprimir;
 	}
 
 }

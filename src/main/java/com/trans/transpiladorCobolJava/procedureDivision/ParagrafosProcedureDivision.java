@@ -13,12 +13,13 @@ public enum ParagrafosProcedureDivision {
 	DISPLAY("DISPLAY", true),
 	DIVIDE("DIVIDE", true),
 	ENDIF("END-IF", true),
+	ENDPERFORM("END-PERFORM", true),
 	ELSE("ELSE", true),
 	ENTRY("ENTRY", false),
 	EVALUATE("EVALUATE", false),
-	EXIT("EXIT", false),
-	EXITMETHOD("EXIT", false),
-	EXITPROGRAM("EXIT", false),
+	EXIT("EXIT", true),
+	EXITMETHOD("EXIT-METHOD", false),
+	EXITPROGRAM("EXIT-PROGRAM", false),
 	GOBACK("GOBACK", false),
 	IF("IF", true),
 	INITIALIZE("INITIALIZE", false),
@@ -63,6 +64,7 @@ public enum ParagrafosProcedureDivision {
 	}
 
 	public static boolean acabouParagrafoAtual(String instrucaoAtualLeitura) {
+		instrucaoAtualLeitura = instrucaoAtualLeitura.replace(".", "");
 		for (ParagrafosProcedureDivision paragrafo : ParagrafosProcedureDivision.values()) {
 			if (paragrafo.getDescricao().equals(instrucaoAtualLeitura)) {
 				return true;
@@ -72,6 +74,7 @@ public enum ParagrafosProcedureDivision {
 	}
 
 	public static ParagrafosProcedureDivision encontraParagrafo(String instrucaoAtualLeitura) {
+		instrucaoAtualLeitura = instrucaoAtualLeitura.replace(".", "");
 		for(ParagrafosProcedureDivision paragrafo : ParagrafosProcedureDivision.values()) {
 			if (paragrafo.getDescricao().equals(instrucaoAtualLeitura)) {
 				return paragrafo;

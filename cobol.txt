@@ -1,33 +1,23 @@
 000800 Identification division.
 000810*>=============================
 000820 Program-id. Addition is initial.
+       AUTHOR. VINICIUS.
 000840 Data division.
        WORKING-STORAGE SECTION.    
-       77  SUMA PIC 9(12).    
-       77  NUMA PIC 9(12).    
-       77  NUMB PIC 9(12).   
-       01  TESTE.
-       02 TESTE2.
-       03  NUMTMP PIC 9(12).    
+       77  SUMA PICTURE X VALUE IS 56.86 occurs 5 times. 
+       01 teste1.
+       02 teste2. 
+       03  NUMTMP PIC 9(12).  
+       01 teste3 pic 9.  
 000870 Linkage section.
-	   01 NUMBER.
-		02 VARIAVEL1 PIC X.
-	   		02 VARIAVEL2 PIC 9(5).
 000920 Procedure division.
        Mainline.
              DISPLAY "Enter NUmber a" WITH NO ADVANCING.
-             ACCEPT NUMA.
  	       DISPLAY "Enter NUmber b" WITH NO ADVANCING.
- 	       IF 5 = 10 OR 5 > 8
-				ACCEPT NUMB.
-	       COMPUTE SUMA= 0 + 1 - (5 / 9) *6**5
-	       ELSE
-	           COMPUTE NUMTMP=0
-	       END-IF
-	    secondline.
-	       ADD 100 TO NUMTMP NUMB
+	       COMPUTE SUMA=1+8*10
+	       COMPUTE NUMTMP=0
+	       ADD 100 TO NUMTMP
 	       ADD NUMB TO NUMTMP
-	       DIVIDE NUMB INTO NUMTMP GIVING SUMA
-	       SUBTRACT NUMB 10 FROM NUMTMP GIVING NUMA
 	       COMPUTE SUMA=NUMTMP
 	       DISPLAY "SUM OF NUMBERS : " SUMA.
+	       move teste1 to NUMB.

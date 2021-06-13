@@ -8,14 +8,14 @@ public class ArquivoLeitura {
 
 	private FileReader arquivoCobol;
 	private BufferedReader textoCobol;
-	
+
 	private Integer comecaLeitura = 6;
 	private Integer fimLeitura = 72;
 
 	// Realiza a abertura do arquivo com o código cobol
 	public void abreArquivo(String path) {
-		
-		System.out.println("Iniciando leitura\n\n");
+
+		System.out.println("Abertura do arquivo");
 		try {
 			arquivoCobol = new FileReader(path);
 			textoCobol = new BufferedReader(arquivoCobol);
@@ -34,6 +34,7 @@ public class ArquivoLeitura {
 			System.out.printf("Erro no fechamento do arquivo %s.\n", e.getMessage());
 			e.printStackTrace();
 		}
+		System.out.println("Arquivo fechado");
 	}
 
 	public String lerLinha() throws IOException {
@@ -47,51 +48,62 @@ public class ArquivoLeitura {
 		return (linha != null) ? linha.toUpperCase() : null;
 	}
 
-	public String[] lerLinhaComInstrucao() throws IOException {
-		String linhaCompleta = new String();
-		// TODO controle de mais de uma instruçao por linha
-		do {
-			linhaCompleta += lerLinha();
-		} while (!linhaCompleta.contains("."));
-
-		String[] linhaComInstrucao = linhaCompleta.trim().split("\\s+|\\.");
-
-		return linhaComInstrucao;
-	}
-	
 	public String trataComentario(String linha) {
-		return (linha.length() == 0) ? linha : (linha.length() >= fimLeitura) ? linha.substring(comecaLeitura, fimLeitura) : linha.replaceAll("\t", "    ").substring(comecaLeitura);
+		return (linha.length() == 0) ? linha
+				: (linha.length() >= fimLeitura) ? linha.substring(comecaLeitura, fimLeitura)
+						: linha.replaceAll("\t", "    ").substring(comecaLeitura);
 	}
 
-	public String[] lerTodoSeparaDivisao(OrdemExecucaoDivisao ordemExecucao) throws IOException {
-		String codigoCompleto = new String();
-		Integer contador = 1;
+	public String[] lerTodoSeparaDivisao() throws IOException {
+		System.out.println("Iniciando leitura do arquivo");
+		Integer contador = 0;
+		
+		String[] codigoPorDivisao = new String[8];
 
-		String codigoLido = lerLinha();
-		if(codigoLido.substring(0, 5).contains("I")){
-			comecaLeitura = 0;
-			fimLeitura = 66;
+		for(int i=0; i<8; i++) {
+			codigoPorDivisao[i] = new String();
 		}
 		
-		while (codigoLido != null) {
-			if (ordemExecucao.naoPassouIdentification() && codigoLido.contains("IDENTIFICATION")) {
-				ordemExecucao.setIdentificationDivision(contador++);
-			} else if (ordemExecucao.naoPassouEnvironment() && codigoLido.contains("ENVIRONMENT")) {
-				ordemExecucao.setEnvironmentDivision(contador++);
-			} else if (ordemExecucao.naoPassouData() && codigoLido.contains("DATA")) {
-				ordemExecucao.setDataDivision(contador++);
-			} else if (ordemExecucao.naoPassouProcedure() && codigoLido.contains("PROCEDURE")) {
-				ordemExecucao.setProcedureDivision(contador++);
-			}
-			codigoLido = trataComentario(codigoLido);
-			codigoCompleto += (codigoLido.startsWith("*") ? "" : codigoLido);
-			codigoLido = lerLinha();
+		String codigoLido = lerLinha();
+		if (codigoLido.substring(0, 5).contains("I")) {
+			comecaLeitura = 0;
+			fimLeitura = 66;
+			System.out.println("Arquivo começa na posição 0");
+		} else {
+			System.out.println("Arquivo possui espaço para sequencial");
 		}
 
-		String[] codigoDividido = codigoCompleto.trim().replaceAll("\\s+", " ").replace("'", "\"").replaceAll("“|”", "\"")
-				.split("IDENTIFICATION DIVISION. |DATA DIVISION. |ENVIRONMENT DIVISION. |PROCEDURE DIVISION. |"
-						+ "IDENTIFICATION DIVISION\\s+\\. |DATA DIVISION\\s+\\. |ENVIRONMENT DIVISION\\s+\\. |PROCEDURE DIVISION\\s+\\. ");
-
-		return codigoDividido;
+		while (codigoLido != null) {
+			codigoLido = trataComentario(codigoLido);
+			if (codigoLido.matches("(?i)\\s*IDENTIFICATION\\s+DIVISION\\s*\\.\\s*")) {
+				contador=0;
+				System.out.println("Iniciando Identification Division");
+			} else if (codigoLido.matches("(?i)\\s*ENVIRONMENT\\s+DIVISION\\s*\\.\\s*")) {
+				contador=1;
+				System.out.println("Iniciando Environment Division");
+			} else if (codigoLido.matches("(?i)\\s*DATA\\s+DIVISION\\s*\\.\\s*")) {
+				contador=2;
+				System.out.println("Iniciando Data Division");
+			} else if (codigoLido.matches("(?i)\\s*FILE\\s+SECTION\\s*\\.\\s*")) {
+				contador=3;
+				System.out.println("Iniciando File Section");
+			} else if (codigoLido.matches("(?i)\\s*WORKING[-]STORAGE\\s+SECTION\\s*\\.\\s*")) {
+				contador=4;
+				System.out.println("Iniciando Working-storage Section");
+			} else if (codigoLido.matches("(?i)\\s*LOCAL[-]STORAGE\\s+SECTION\\s*\\.\\s*")) {
+				contador=5;
+				System.out.println("Iniciando local-storage section");
+			} else if (codigoLido.matches("(?i)\\s*LINKAGE\\s+SECTION\\s*\\.\\s*")) {
+				contador=6;
+				System.out.println("Iniciando linkage section");
+			} else if (codigoLido.matches("(?i)\\s*PROCEDURE\\s+DIVISION\\s*\\.\\s*")) {
+				contador=7;
+				System.out.println("Iniciando Procedure Division");
+			}
+			codigoPorDivisao[contador] += (codigoLido.startsWith("*") ? "" : codigoLido);
+			codigoLido = lerLinha();
+		}
+		return codigoPorDivisao;
 	}
+		
 }

@@ -57,5 +57,13 @@ public class Codigo {
 	public void avancaPosicaoLeitura() {
 		posicaoLeitura++;
 	}
+
+	public boolean isLastLine() {
+		if(posicaoLeitura >= codigoCobol.length) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 }

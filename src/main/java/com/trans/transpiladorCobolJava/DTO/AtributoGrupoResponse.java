@@ -8,7 +8,7 @@ public class AtributoGrupoResponse extends AtributoResponse {
 
 	private List<AtributoResponse> atributos;
 
-	public AtributoGrupoResponse(String nome, Integer nivel, Integer occurs, List<Atributo> atributos) {
+	public AtributoGrupoResponse(String nome, Integer nivel, String occurs, List<Atributo> atributos) {
 		super(nome, nivel, occurs);
 		/*for (Atributo elemento : atributos) {
 			if (elemento instanceof AtributoGrupo) {

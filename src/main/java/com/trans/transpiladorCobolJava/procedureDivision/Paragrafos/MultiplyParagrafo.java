@@ -74,27 +74,4 @@ public class MultiplyParagrafo extends Paragrafo {
 		return imprimirResultado;
 	}
 
-	@Override
-	public Set<String> escreveImports() {
-		Set<String> imprimir = new HashSet<String>();
-
-		if (multiplica.getNome() != null && !multiplica.getNome().isEmpty()) {
-			imprimir.addAll(escreveImportsParagrago(imports));
-		}
-
-		for (Atributo elemento : por) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-
-		for (Atributo elemento : resultado) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-
-		return imprimir;
-	}
-
 }

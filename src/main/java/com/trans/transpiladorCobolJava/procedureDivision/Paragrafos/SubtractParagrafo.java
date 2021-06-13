@@ -78,27 +78,4 @@ public class SubtractParagrafo extends Paragrafo {
 		return imprimirResultado;
 	}
 
-	@Override
-	public Set<String> escreveImports() {
-		Set<String> imprimir = new HashSet<String>();
-		for (Atributo elemento : subtrair) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-
-		for (Atributo elemento : de) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-
-		for (Atributo elemento : resultado) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-		return imprimir;
-	}
-
 }

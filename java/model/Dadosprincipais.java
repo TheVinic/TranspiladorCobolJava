@@ -1,55 +1,45 @@
 package com.trans.transpiladorCobolJava.model.Dadosprincipais;
 
-import com.trans.transpiladorCobolJava.model.Teste;
+import com.trans.transpiladorCobolJava.model.Times;
 
 import java.math.BigDecimal;
 
 public class Dadosprincipais{
-	private Integer suma;
-	private Integer numa;
-	private Integer numb;
-	private Teste teste = new Teste();
+	private String suma = 56;
+	private Times times = new Times();
+	private Integer teste3;
 
-	public Integer getSuma() {
+	public String getSuma() {
 		return suma;
 	}
 
-	public void setSuma(Integer suma) {
+	public void setSuma(String suma) {
 		this.suma = suma;
 	}
 
-	public Integer getNuma() {
-		return numa;
+	public Times getTimes() {
+		return times;
 	}
 
-	public void setNuma(Integer numa) {
-		this.numa = numa;
+	public void setTimes(Times times) {
+		this.times = times;
 	}
 
-	public Integer getNumb() {
-		return numb;
+	public Integer getTeste3() {
+		return teste3;
 	}
 
-	public void setNumb(Integer numb) {
-		this.numb = numb;
-	}
-
-	public Teste getTeste() {
-		return teste;
-	}
-
-	public void setTeste(Teste teste) {
-		this.teste = teste;
+	public void setTeste3(Integer teste3) {
+		this.teste3 = teste3;
 	}
 
 	public String toTrancode() { 
-		return String.format("|0%12d|", suma) + String.format("|0%12d|", numa) + String.format("|0%12d|", numb) + teste.toTrancode();
+		return String.format("|%1d|", suma) + times.toTrancode() + String.format("|0%1d|", teste3);
 	}
 
 	public void toObject(String trancode) { 
-		this.suma = trancode.substring(0, 12);
-		this.numa = trancode.substring(12, 24);
-		this.numb = trancode.substring(24, 36);
-		this.teste.toObject(trancode.substring(36, 48));
+		this.suma = trancode.substring(0, 1);
+		this.times.toObject(trancode.substring(1, 13));
+		this.teste3 = trancode.substring(13, 14);
 	}
 }

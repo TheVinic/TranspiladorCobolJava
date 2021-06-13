@@ -7,7 +7,7 @@ public enum ParagrafosIdentificationDivision {
 	DATAWRITTEN("DATA-WRITTEN"), 
 	DATACOMPILED("DATE-COMPILED"), 
 	SECURITY("SECURTIY"),
-	OUTRO("Outro");
+	OUTRO("Outros");
 	
 	String descricao;
 	

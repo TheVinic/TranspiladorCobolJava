@@ -103,30 +103,4 @@ public class DivideParagrafo extends Paragrafo {
 		}
 		return imprimirQuociente + imprimirResto;
 	}
-
-	@Override
-	public Set<String> escreveImports() {
-		Set<String> imprimir = new HashSet<String>();
-		for (Atributo elemento : dividendo) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-
-		if (divisor.getNome() != null && !divisor.getNome().isEmpty()) {
-			imprimir.addAll(escreveImportsParagrago(imports));
-		}
-
-		for (Atributo elemento : quociente) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-		for (Atributo elemento : resto) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-		return imprimir;
-	}
 }

@@ -16,7 +16,7 @@ public class IfParagrafo extends Paragrafo {
 	ArrayList<Paragrafo> entao;
 	ArrayList<Paragrafo> seNao;
 
-	public IfParagrafo(Codigo umaSecao, DataDivision dataDivision) {
+	public IfParagrafo(Codigo umaSecao, DataDivision dataDivision, ArrayList<ProcedureDivisionSection> secoes) {
 		for (; !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
 				.avancaPosicaoLeitura()) {
 			Atributo atributo;
@@ -30,10 +30,10 @@ public class IfParagrafo extends Paragrafo {
 				}
 			}
 		}
-		entao = new ProcedureDivisionIf().analiseSemantica(umaSecao, dataDivision);
+		entao = new ProcedureDivisionIf().leitura(umaSecao, dataDivision, secoes);
 		if (umaSecao.getInstrucaoAtualLeitura().equals("ELSE")) {
 			umaSecao.getProximaInstrucaoLeitura();
-			seNao = new ProcedureDivisionIf().analiseSemantica(umaSecao, dataDivision);
+			seNao = new ProcedureDivisionIf().leitura(umaSecao, dataDivision, secoes);
 		} else {
 			umaSecao.getProximaInstrucaoLeitura();
 		}
@@ -49,21 +49,19 @@ public class IfParagrafo extends Paragrafo {
 		imprimirCondicao += ") {\n";
 
 		for (Paragrafo paragrafo : entao) {
-			imprimirCondicao += paragrafo.escreveArquivo(nivel+1);
+			imprimirCondicao += paragrafo.escreveArquivo(nivel + 1);
 		}
 		imprimirCondicao += fazTabulacao(nivel) + "}";
 
 		if (seNao != null) {
 			imprimirCondicao += " else {\n";
 			for (Paragrafo paragrafo : seNao) {
-				imprimirCondicao +=  paragrafo.escreveArquivo(nivel+1);
+				imprimirCondicao += paragrafo.escreveArquivo(nivel + 1);
 			}
 			imprimirCondicao += fazTabulacao(nivel) + "}";
 		} else {
 			imprimirCondicao += "\n";
 		}
-		
-
 
 		return imprimirCondicao;
 	}
@@ -71,11 +69,7 @@ public class IfParagrafo extends Paragrafo {
 	@Override
 	public Set<String> escreveImports() {
 		Set<String> imprimir = new HashSet<>();
-		for (Atributo elemento : condicao) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
+		imprimir.addAll(escreveImportsParagrago(imports));
 		for (Paragrafo paragrafo : entao) {
 			imprimir.addAll(paragrafo.escreveImports());
 		}
@@ -86,20 +80,20 @@ public class IfParagrafo extends Paragrafo {
 		}
 		return imprimir;
 	}
-	
+
 	@Override
 	public Set<String> getImports() {
 		Set<String> importsDosParagrafos = new HashSet<String>();
 
-		importsDosParagrafos.addAll(imports);
-		
-		for(Paragrafo elemento : entao) {
+		importsDosParagrafos = escreveImports();
+
+		for (Paragrafo elemento : entao) {
 			importsDosParagrafos.addAll(elemento.getImports());
 		}
-		for(Paragrafo elemento : seNao) {
+		for (Paragrafo elemento : seNao) {
 			importsDosParagrafos.addAll(elemento.getImports());
 		}
-		
+
 		return importsDosParagrafos;
 	}
 

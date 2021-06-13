@@ -6,9 +6,9 @@ public class AtributoResponse {
 
 	protected Integer nivel;
 
-	protected Integer occurs;
+	protected String occurs;
 
-	public AtributoResponse(String nome, Integer nivel, Integer occurs) {
+	public AtributoResponse(String nome, Integer nivel, String occurs) {
 		this.nome = nome;
 		this.nivel = nivel;
 		this.occurs = occurs;
@@ -22,7 +22,7 @@ public class AtributoResponse {
 		return nivel;
 	}
 
-	public Integer getOccurs() {
+	public String getOccurs() {
 		return occurs;
 	}
 	

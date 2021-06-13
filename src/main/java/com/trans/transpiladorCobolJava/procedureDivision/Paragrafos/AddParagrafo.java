@@ -47,23 +47,6 @@ public class AddParagrafo extends Paragrafo {
 			}
 
 		}
-
-	}
-
-	@Override
-	public Set<String> escreveImports() {
-		Set<String> imprimir = new HashSet<>();
-		for (Atributo elemento : somar) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-		for (Atributo elemento : somarCom) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-		return imprimir;
 	}
 
 	@Override

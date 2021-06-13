@@ -1,8 +1,6 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
@@ -44,6 +42,7 @@ public class ComputeParagrafo extends Paragrafo {
 
 		if (encontrouIgual) {
 			umaSecao.setVoltaPosicaoLeitura();
+			umaSecao.isOver();
 			if (!stringDividadiPelasOperacoes.getProximaInstrucaoLeitura().isEmpty()) {
 
 				stringDividadiPelasOperacoes = new Codigo(stringDividadiPelasOperacoes.getInstrucaoAtualLeitura()
@@ -112,21 +111,4 @@ public class ComputeParagrafo extends Paragrafo {
 
 		return imprimirResultado;
 	}
-
-	@Override
-	public Set<String> escreveImports() {
-		Set<String> imprimir = new HashSet<>();
-		for (Atributo elemento : resultado) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-		for (Atributo elemento : calculo) {
-			if (elemento.getNome() != null && !elemento.getNome().isEmpty()) {
-				imprimir.addAll(escreveImportsParagrago(imports));
-			}
-		}
-		return imprimir;
-	}
-
 }

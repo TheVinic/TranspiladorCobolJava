@@ -1,7 +1,6 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
@@ -16,14 +15,18 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 	ArrayList<Atributo> texto = new ArrayList<Atributo>();
 
 	public DisplayParagrafo(Codigo umaSecao, DataDivision dataDivision) {
-		for (; !umaSecao.isOver()
-				&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-						.avancaPosicaoLeitura()) {
+		boolean acabou = false;
+		for (; !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura())
+				&& !acabou; umaSecao.avancaPosicaoLeitura()) {
 			if (umaSecao.getInstrucaoAtualLeitura().substring(0, 1).equals("\"")) {
 				String frase = new String();
 				frase += umaSecao.getInstrucaoAtualLeitura() + " ";
 				while (!frase.endsWith("\" ") && !frase.endsWith("\". ")) {
 					frase += umaSecao.getProximaInstrucaoLeitura() + " ";
+				}
+				if (frase.endsWith("\". ")) {
+					frase = frase.substring(0, frase.length() - 2);
+					acabou = true;
 				}
 				texto.add(new AtributoElementar(new String(), null, frase.length(), null, TipoAtributo.CARACTERE, frase,
 						null, null, null));
@@ -33,13 +36,8 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 				texto.add(atributo);
 				imports.add(atributo.getImport());
 			}
-
 		}
-	}
-
-	@Override
-	public Set<String> escreveImports() {
-		return escreveImportsParagrago(imports);
+		umaSecao.isOver();
 	}
 
 	@Override
@@ -54,7 +52,7 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 			}
 		}
 		imprimir = imprimir.substring(0, imprimir.length() - 3);
-		return fazTabulacao(nivel) + "System.out.println(" + imprimir + ");";
+		return fazTabulacao(nivel) + "System.out.println(" + imprimir + ");\n";
 	}
 
 	public ArrayList<Atributo> getTexto() {

@@ -17,7 +17,7 @@ public abstract class Atributo {
 
 	protected List<String> classes;
 
-	protected Integer occurs;
+	protected String occurs;
 
 	protected boolean filler;
 	
@@ -27,7 +27,7 @@ public abstract class Atributo {
 	public Atributo() {
 	}
 
-	protected Atributo(String nomeAtributo, Integer nivel, List<String> classes, Integer occurs, SecoesDataDivision local) {
+	protected Atributo(String nomeAtributo, Integer nivel, List<String> classes, String occurs, SecoesDataDivision local) {
 		this.nome = (nomeAtributo != null) ? toUpperFistCase(nomeAtributo.replaceAll("-", "_")) : null;
 		this.nivel = nivel;
 		if (classes != null) {
@@ -55,7 +55,7 @@ public abstract class Atributo {
 		return classes;
 	}
 
-	public Integer getOccurs() {
+	public String getOccurs() {
 		return occurs;
 	}
 

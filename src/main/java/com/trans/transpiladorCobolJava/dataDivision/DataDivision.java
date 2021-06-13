@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.trans.transpiladorCobolJava.DTO.DataDivisionResponse;
-import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
 
@@ -15,12 +14,12 @@ public class DataDivision {
 
 	@Autowired
 	WorkingStorageSection workingStorageSection;
-	
+
 	@Autowired
 	LinkageSection linkageSection;
 
 	AtributoGrupo atributosWorkingStorage;
-	
+
 	@Autowired
 	EscritaWorkingStorageSection escritaWorkingStorageSection;
 
@@ -29,41 +28,39 @@ public class DataDivision {
 	@Autowired
 	EscritaLinkageSection escritaLinkageSection;
 
-	public void popula(String codigoCobol) {
+	public void leitura(String file, String working, String local, String linkage) {
 
 		System.out.println("Iniciando DATA DIVISION");
 
-		if (codigoCobol.isEmpty()) {
-			System.out.println("DATA DIVISION vazia.");
-			return;
+		// File Section
+		if (file != null && !file.isEmpty()) {
+			System.out.println("File Section não implementado.");
 		}
 
-		Codigo codigo = new Codigo(codigoCobol.split("\\.\\s+"));
+		// Linkage Section
+		if (linkage != null && !linkage.isEmpty()) {
+			System.out.println("Iniciando Linkage Section");
+			linkageSection = new LinkageSection();
+			atributosLinkageSection = linkageSection.popula(linkage);
+			System.out.println("Fim Linkage Section");
+		}
 
-		for (; codigo.getPosicaoLeitura() < codigo.getCodigoCobol().length;) {
-			switch (SecoesDataDivision.valueOf(codigo.getInstrucaoAtualLeitura().replaceAll("\\s|-", ""))) {
-			case FILESECTION:
-				System.out.println(codigo.getInstrucaoAtualLeitura() + " não implementado.");
-				codigo.getProximaInstrucaoLeitura();
-				break;
-			case LINKAGESECTION:
-				linkageSection = new LinkageSection();
-				atributosLinkageSection = linkageSection.popula(codigo);
-				break;
-			case LOCALSTORAGESECTION:
-				System.out.println(codigo.getInstrucaoAtualLeitura() + " não implementado.");
-				codigo.getProximaInstrucaoLeitura();
-				break;
-			case WORKINGSTORAGESECTION:
-				workingStorageSection = new WorkingStorageSection();
-				atributosWorkingStorage = workingStorageSection.popula(codigo);
-				break;
-			}
+		// Local-storage Section
+		if (local != null && !local.isEmpty()) {
+			System.out.println("Local-storage Section não implementado.");
+		}
+
+		// WORKING-STOREAGE
+		if (working != null && !working.isEmpty()) {
+			System.out.println("Iniciando WORKING-STOREAGE");
+			workingStorageSection = new WorkingStorageSection();
+			atributosWorkingStorage = workingStorageSection.popula(working);
+			System.out.println("Fim WORKING-STOREAGE");
 		}
 	}
 
 	public void escreve() throws IOException {
-		if (atributosWorkingStorage != null ) {
+		if (atributosWorkingStorage != null) {
 			escritaWorkingStorageSection = new EscritaWorkingStorageSection();
 			escritaWorkingStorageSection.escreve(atributosWorkingStorage);
 		}
@@ -75,11 +72,15 @@ public class DataDivision {
 
 	public Atributo localizaAtributo(String nomeVariavel) {
 		nomeVariavel = nomeVariavel.replace(".", "").replaceAll("-", "_");
-		Atributo atributo = atributosWorkingStorage.getLocalizaAtributo(nomeVariavel);
-		if(atributo == null) {
-			atributo = atributosLinkageSection.getLocalizaAtributo(nomeVariavel);
+		if (atributosWorkingStorage != null) {
+			Atributo atributo = atributosWorkingStorage.getLocalizaAtributo(nomeVariavel);
+			if (atributo == null) {
+				atributo = atributosLinkageSection.getLocalizaAtributo(nomeVariavel);
+			}
+			return atributo;
+		} else {
+			return null;
 		}
-		return atributo;
 	}
 
 	public Atributo localizaAtributo(String nomeVariavel, String proximaInstrucaoLeitura) {

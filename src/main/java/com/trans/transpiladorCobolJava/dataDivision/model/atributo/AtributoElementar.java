@@ -21,7 +21,7 @@ public class AtributoElementar extends Atributo {
 	private ValorAtributo valor;
 
 	public AtributoElementar(String nomeAtributo, Integer nivel, Integer comprimento, Integer comprimentoDecimal,
-			TipoAtributo tipoAtributo, String valorAtributo, List<String> classe, Integer occurs, SecoesDataDivision local) {
+			TipoAtributo tipoAtributo, String valorAtributo, List<String> classe, String occurs, SecoesDataDivision local) {
 		super((nomeAtributo == null) ? null : nomeAtributo.toLowerCase(), nivel, classe, occurs, local);
 		this.comprimento = comprimento;
 		this.comprimentoDecimal = comprimentoDecimal;

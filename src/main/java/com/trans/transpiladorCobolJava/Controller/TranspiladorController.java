@@ -18,14 +18,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.trans.transpiladorCobolJava.DTO.VariaveisResponse;
-import com.trans.transpiladorCobolJava.main.GeraDataDivisionService;
+import com.trans.transpiladorCobolJava.main.TranspiladorService;
 
 @RestController
 @Valid
 public class TranspiladorController {
 
 	@Autowired
-	private GeraDataDivisionService transpilador;
+	private TranspiladorService transpilador;
 
 	@Autowired
 	private ServletContext servletContext;
@@ -38,7 +38,7 @@ public class TranspiladorController {
 			saveFile(path, file);
 		}
 
-		transpilador = new GeraDataDivisionService();
+		transpilador = new TranspiladorService();
 
 		VariaveisResponse variaveisReponse = transpilador.processa(path);
 
