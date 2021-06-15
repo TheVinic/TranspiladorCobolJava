@@ -3,6 +3,8 @@ package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
@@ -25,104 +27,88 @@ public class PerformParagrafo extends Paragrafo {
 	Atributo by;
 	ArrayList<Atributo> until;
 
-	public PerformParagrafo(Codigo codigo, DataDivision dataDivision, ArrayList<ProcedureDivisionSection> secoes) {
+	public PerformParagrafo(String instrucao, Matcher matcherGeral, DataDivision dataDivision,
+			ArrayList<ProcedureDivisionSection> secoes) {
 
-		Atributo atributo = (codigo.getInstrucaoAtualLeitura().matches("[0-9]+"))
-				? encontraCriaAtributo(codigo, dataDivision)
-				: encontraIdentificador(codigo, dataDivision);
+		instrucao = instrucao.trim().replaceAll("(?i)\\sEND-PERFORM\\s", "  END-PERFORM ")
+				.replaceAll("(?i)\\sTHROUGHT\\s", "  THROUGHT ").replaceAll("(?i)\\sTHRU\\s", "  THRU ")
+				.replaceAll("(?i)\\sTIMES\\s", "  TIMES ").replaceAll("(?i)\\sTIMES\\.", "  TIMES.")
+				.replaceAll("(?i)\\sUNTIL\\s", "  UNTIL ").replaceAll("(?i)\\sVARYING\\s", "  VARYING ")
+				.replaceAll("(?i)(\\sWITH\\sTEST\\s)|(\\sTEST\\s)", "  TEST ");
 
-		if (ParagrafosProcedureDivision
-				.encontraParagrafo(codigo.getInstrucaoAtualLeitura()) != ParagrafosProcedureDivision.OUTRO) {
-			// Basic PERFORM para imperative-statement
-			instrucoes = new ProcedureDivisionPerforming().leitura(codigo, dataDivision, secoes);
-		} else if (atributo == null && (!codigo.getInstrucaoAtualLeitura().equals("WITH")
-				&& !codigo.getInstrucaoAtualLeitura().equals("TEST")
-				&& !codigo.getInstrucaoAtualLeitura().equals("UNTIL")
-				&& !codigo.getInstrucaoAtualLeitura().equals("VARYING"))) {
-			nomeSecao = codigo.getInstrucaoAtualLeitura().replace(".", "");
-			if (ParagrafosProcedureDivision
-					.encontraParagrafo(codigo.getProximaInstrucaoLeitura()) == ParagrafosProcedureDivision.OUTRO) {
-				if (codigo.getInstrucaoAtualLeitura().equals("THROUGHT")
-						|| codigo.getInstrucaoAtualLeitura().equals("THRU")) {
-					nomeSecaoFinaliza = codigo.getProximaInstrucaoLeitura();
-					codigo.avancaPosicaoLeitura();
-				}
-			}
-			percorrePerform(codigo, dataDivision);
-		} else if (atributo == null) {
-			// PERFORM para UNTIL ou VARYING
-			percorrePerform(codigo, dataDivision);
-			instrucoes = new ProcedureDivisionPerforming().leitura(codigo, dataDivision, secoes);
-		} else if (atributo != null) {
-			// PERFORM with TIME
-			String validar = codigo.getProximaInstrucaoLeitura();
-			if (validar.equals("TIMES")) {
-				times = atributo;
-			}
-			if (times.getClasses() != null) {
-				imports.add(times.getImport());
-			}
-			codigo.avancaPosicaoLeitura();
-			instrucoes = new ProcedureDivisionPerforming().leitura(codigo, dataDivision, secoes);
-		}
-	}
+		String regex1 = "(?i)PERFORM\\s";
+		String regexProcedureName = "(?<procedureName1>(\\w)+)(\\s\\s(THROUGH|THRU)\\s(?<procedureName2>))?(\\s(?<times1>(\\w)+)\\s\\sTIMES)?"
+				+ "(\\s\\sTEST\\s(?<order1>(BEFORE)|(AFTER)))?"
+				+ "(\\s\\sVARYING\\s(?<varying1>(\\w)+)\\sFROM\\s(?<from1>(\\w)+)\\sBY\\s(?<by1>(\\w)+))?(\\s\\sUNTIL\\s(?<until1>))?"
+				+ "(\\s(?<phrase2>(AFTER\\s(\\w)+\\sFROM\\s(\\w)+\\sBY\\s(\\w)+\\sUNTIL\\s(\\w)+)*))?";
+		String regexImperativeStatement = "((?<times2>(\\w)+)\\s\\sTIMES)?(\\s\\sTEST\\s(?<order2>(BEFORE)|(AFTER)))?"
+				+ "(\\s\\sVARYING\\s(?<varying2>(\\w)+)\\sFROM\\s(?<from2>(\\w)+)\\sBY\\s(?<by2>(\\w)+))?(\\s\\sUNTIL\\s(?<until2>))?";
 
-	private void percorrePerform(Codigo codigo, DataDivision dataDivision) {
-		Atributo atributo;
-		// PERFORM para seção
-		if (codigo.getInstrucaoAtualLeitura().equals("WITH") || codigo.getInstrucaoAtualLeitura().equals("TEST")) {
-			if (codigo.getInstrucaoAtualLeitura().equals("WITH")) {
-				codigo.avancaPosicaoLeitura();
-			}
-			test = codigo.getProximaInstrucaoLeitura();
-			codigo.avancaPosicaoLeitura();
-		}
-		if (codigo.getInstrucaoAtualLeitura().matches("[0-9]+")) {
-			times = encontraCriaAtributo(codigo, dataDivision);
-			if (times.getClasses() != null) {
-				imports.add(times.getImport());
-			}
-			if (!codigo.getProximaInstrucaoLeitura().equals("TIMES")) {
-				System.out.println("Erro no times");
-			}
-		} else if (codigo.getInstrucaoAtualLeitura().equals("VARYING")) {
-			codigo.avancaPosicaoLeitura();
-			varying = encontraIdentificador(codigo, dataDivision);
-			if (varying.getClasses() != null) {
-				imports.add(varying.getImport());
-			}
-			if (!codigo.getProximaInstrucaoLeitura().equals("FROM")) {
-				System.out.println("Erro no Varying no FROM");
-			}
-			codigo.avancaPosicaoLeitura();
-			from = encontraCriaAtributo(codigo, dataDivision);
-			if (from.getClasses() != null) {
-				imports.add(from.getImport());
-			}
-			if (!codigo.getProximaInstrucaoLeitura().equals("BY")) {
-				System.out.println("Erro no Varying no BY");
-			}
-			codigo.avancaPosicaoLeitura();
-			by = encontraCriaAtributo(codigo, dataDivision);
-			if (by.getClasses() != null) {
-				imports.add(by.getImport());
-			}
-			codigo.avancaPosicaoLeitura();
+		Pattern pattern = Pattern.compile(regex1 + "((?<procedureName>" + regexProcedureName
+				+ ")|(?<imperativeStatement>" + regexImperativeStatement + "))");
+		Matcher matcher = pattern.matcher(instrucao);
 
-		}
-		if (codigo.getInstrucaoAtualLeitura().equals("UNTIL")) {
-			until = new ArrayList<Atributo>();
-			for (codigo.avancaPosicaoLeitura(); !ParagrafosProcedureDivision
-					.acabouParagrafoAtual(codigo.getInstrucaoAtualLeitura()); codigo.avancaPosicaoLeitura()) {
-				if (false) {
-					// TODO colocar validação se não houver espaço
-				} else {
-					atributo = encontraCriaAtributo(codigo, dataDivision);
-					until.add(atributo);
-					if (atributo.getClasses() != null) {
-						imports.add(atributo.getImport());
+		if (matcher.find()) {
+			matcher.group();
+			matcher.group("imperativeStatement");
+			matcher.group("procedureName");
+			matcher.group("procedureName2");
+			matcher.group("order1");
+			matcher.group("varying1");
+			matcher.group("from1");
+			matcher.group("by1");
+			matcher.group("until1");
+			matcher.group("phrase2");
+
+			if (matcher.group("procedureName") != null) {
+				nomeSecao = matcher.group("procedureName1");
+				nomeSecaoFinaliza = matcher.group("procedureName2");
+				test = matcher.group("order1");
+
+				// VARYING
+				if (matcher.group("varying1") != null) {
+					matcherOf = patternOf.matcher(matcher.group("varying1"));
+					if (matcherOf.find()) {
+						Atributo atributo = validaAtributo(dataDivision);
+						varying = atributo;
+						if (atributo.getClasses() != null) {
+							imports.add(atributo.getImport());
+						}
+					}
+					if (matcher.group("from1") != null) {
+						matcherOf = patternOf.matcher(matcher.group("from1"));
+						if (matcherOf.find()) {
+							Atributo atributo = validaAtributo(dataDivision);
+							from = atributo;
+							if (atributo.getClasses() != null) {
+								imports.add(atributo.getImport());
+							}
+						}
+					}
+					if (matcher.group("by1") != null) {
+						matcherOf = patternOf.matcher(matcher.group("by1"));
+						if (matcherOf.find()) {
+							Atributo atributo = validaAtributo(dataDivision);
+							by = atributo;
+							if (atributo.getClasses() != null) {
+								imports.add(atributo.getImport());
+							}
+						}
 					}
 				}
+
+				// TIMES
+				if (matcher.group("times1") != null) {
+					matcherOf = patternOf.matcher(matcher.group("times1"));
+					if (matcherOf.find()) {
+						Atributo atributo = validaAtributo(dataDivision);
+						times = atributo;
+						if (atributo.getClasses() != null) {
+							imports.add(atributo.getImport());
+						}
+					}
+				}
+			} else {
 			}
 		}
 	}
@@ -199,7 +185,7 @@ public class PerformParagrafo extends Paragrafo {
 		if (nomeSecao != null) {
 			importsDosParagrafos.add(nomeSecao);
 		}
-		
+
 		return importsDosParagrafos;
 	}
 

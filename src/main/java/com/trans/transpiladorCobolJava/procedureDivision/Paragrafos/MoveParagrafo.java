@@ -1,32 +1,40 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 
-public class MoveParagrafo extends Paragrafo  {
+public class MoveParagrafo extends Paragrafo {
 
 	Atributo de;
 
 	ArrayList<Atributo> para = new ArrayList<Atributo>();
 
-	public MoveParagrafo(Codigo umaSecao, DataDivision dataDivision) {
+	public MoveParagrafo(String instrucao, DataDivision dataDivision) {
 
-		Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
-		de = atributo;
-		if (atributo.getClasses() != null) {
-			imports.add(atributo.getImport());
-		}
-		umaSecao.avancaPosicaoLeitura();
-		for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver(); umaSecao.avancaPosicaoLeitura()) {
-			atributo = encontraIdentificador(umaSecao, dataDivision);
-			para.add(atributo);
-			if (atributo.getClasses() != null) {
-				imports.add(atributo.getImport());
+		Pattern pattern = Pattern.compile("(?i)MOVE\\s(?<identifier1>\\w+)\\sTO\\s(?<identifier2>(\\w+\\s?)+)");
+		Matcher matcher = pattern.matcher(instrucao);
+
+		if (matcher.find()) {
+			matcherOf = patternOf.matcher(matcher.group("identifier1"));
+			if (matcherOf.find()) {
+				Atributo atributo = validaAtributo(dataDivision);
+				de = atributo;
+				if (atributo.getClasses() != null) {
+					imports.add(atributo.getImport());
+				}
+			}
+
+			matcherOf = patternOf.matcher(matcher.group("identifier2"));
+			while (matcherOf.find()) {
+				Atributo atributo = validaAtributo(dataDivision);
+				para.add(atributo);
+				if (atributo.getClasses() != null) {
+					imports.add(atributo.getImport());
+				}
 			}
 		}
 	}

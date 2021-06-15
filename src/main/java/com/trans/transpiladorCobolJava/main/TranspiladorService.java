@@ -29,12 +29,14 @@ public class TranspiladorService {
 
 		identificationDivision.leitura(codigoCobol[0]);
 		dataDivision.leitura(codigoCobol[3], codigoCobol[4], codigoCobol[5], codigoCobol[6]);
-		//procedureDivision.leitura(codigoCobol[7], dataDivision);
+		procedureDivision.preparaLeitura(codigoCobol[7], dataDivision);
 
 		dataDivision.escreve();
-		//procedureDivision.escreve();
+		procedureDivision.escreve();
 
 		return new VariaveisResponse(identificationDivision, dataDivision);
 	}
+	
+	
 
 }

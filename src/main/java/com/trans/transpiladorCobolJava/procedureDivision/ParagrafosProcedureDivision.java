@@ -8,15 +8,17 @@ public enum ParagrafosProcedureDivision {
 	CANCEL("CANCEL", false),
 	CLOSE("CLOSE", false),
 	COMPUTE("COMPUTE", true),
-	CONTINUE("CONTINUE", false),
+	CONTINUE("CONTINUE", true),
 	DELETE("DELETE", false),
 	DISPLAY("DISPLAY", true),
 	DIVIDE("DIVIDE", true),
+	ENDEXEC("END-EXEC", true),
 	ENDIF("END-IF", true),
 	ENDPERFORM("END-PERFORM", true),
 	ELSE("ELSE", true),
 	ENTRY("ENTRY", false),
 	EVALUATE("EVALUATE", false),
+	EXECSQL("EXEC SQL", true),
 	EXIT("EXIT", true),
 	EXITMETHOD("EXIT-METHOD", false),
 	EXITPROGRAM("EXIT-PROGRAM", false),
@@ -28,6 +30,7 @@ public enum ParagrafosProcedureDivision {
 	MERGE("MERGE", false),
 	MOVE("MOVE", true),
 	MULTIPLY("MULTIPLY", true), 
+	NEXTSENTENSE("NEXT SENTENSE", false),
 	OPEN("OPEN", false),
 	PERFORM("PERFORM", true),
 	READ("READ", false),
@@ -45,7 +48,7 @@ public enum ParagrafosProcedureDivision {
 	WRITE("WRITE", false),
 	XMLGENERATE("XML", false),
 	XMLPARSE("XML", false),
-	OUTRO("", true);
+	SECTION("", true);
 
 	String descricao;
 	boolean construido;
@@ -63,16 +66,6 @@ public enum ParagrafosProcedureDivision {
 		return construido;
 	}
 
-	public static boolean acabouParagrafoAtual(String instrucaoAtualLeitura) {
-		instrucaoAtualLeitura = instrucaoAtualLeitura.replace(".", "");
-		for (ParagrafosProcedureDivision paragrafo : ParagrafosProcedureDivision.values()) {
-			if (paragrafo.getDescricao().equals(instrucaoAtualLeitura)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public static ParagrafosProcedureDivision encontraParagrafo(String instrucaoAtualLeitura) {
 		instrucaoAtualLeitura = instrucaoAtualLeitura.replace(".", "");
 		for(ParagrafosProcedureDivision paragrafo : ParagrafosProcedureDivision.values()) {
@@ -80,6 +73,6 @@ public enum ParagrafosProcedureDivision {
 				return paragrafo;
 			}
 		}
-		return ParagrafosProcedureDivision.OUTRO;
+		return ParagrafosProcedureDivision.SECTION;
 	}
 }

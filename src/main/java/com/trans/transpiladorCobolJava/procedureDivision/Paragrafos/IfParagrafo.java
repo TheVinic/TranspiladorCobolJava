@@ -3,11 +3,11 @@ package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
 public class IfParagrafo extends Paragrafo {
 
@@ -16,26 +16,31 @@ public class IfParagrafo extends Paragrafo {
 	ArrayList<Paragrafo> entao;
 	ArrayList<Paragrafo> seNao;
 
-	public IfParagrafo(Codigo umaSecao, DataDivision dataDivision, ArrayList<ProcedureDivisionSection> secoes) {
-		for (; !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-				.avancaPosicaoLeitura()) {
-			Atributo atributo;
-			if (false) {
-				// TODO colocar validação se não houver espaço
-			} else {
-				atributo = encontraCriaAtributo(umaSecao, dataDivision);
+	public IfParagrafo(String instrucao, Matcher matcherGeral, DataDivision dataDivision,
+			ArrayList<ProcedureDivisionSection> secoes) {
+
+		String regex = "(?i)IF\\s(?<condition>[a-zA-Z0-9+-/()* <>=]+)";
+
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcherInterno = pattern.matcher(instrucao);
+
+		if (matcherInterno.find()) {
+			Pattern patternInterno = Pattern
+					.compile("(?i)(?<variavel>((\\w+)|[+-/()<>=]|[*]+))|(?<variavelOf>(\\w+)\\sOF\\s(?<of>\\w+))");
+			matcherOf = patternInterno.matcher(matcherInterno.group("condition"));
+			while (matcherOf.find()) {
+				Atributo atributo = validaAtributo(dataDivision);
 				condicao.add(atributo);
 				if (atributo.getClasses() != null) {
 					imports.add(atributo.getImport());
 				}
 			}
 		}
-		entao = new ProcedureDivisionIf().leitura(umaSecao, dataDivision, secoes);
-		if (umaSecao.getInstrucaoAtualLeitura().equals("ELSE")) {
-			umaSecao.getProximaInstrucaoLeitura();
-			seNao = new ProcedureDivisionIf().leitura(umaSecao, dataDivision, secoes);
-		} else {
-			umaSecao.getProximaInstrucaoLeitura();
+
+		entao = new ProcedureDivisionIf().leitura(matcherGeral, dataDivision, secoes);
+
+		if (matcherGeral.group().toUpperCase().startsWith("ELSE")) {
+			seNao = new ProcedureDivisionIf().leitura(matcherGeral, dataDivision, secoes);
 		}
 	}
 
@@ -85,13 +90,15 @@ public class IfParagrafo extends Paragrafo {
 	public Set<String> getImports() {
 		Set<String> importsDosParagrafos = new HashSet<String>();
 
-		importsDosParagrafos = escreveImports();
+		importsDosParagrafos = imports;
 
 		for (Paragrafo elemento : entao) {
 			importsDosParagrafos.addAll(elemento.getImports());
 		}
-		for (Paragrafo elemento : seNao) {
-			importsDosParagrafos.addAll(elemento.getImports());
+		if (seNao != null) {
+			for (Paragrafo elemento : seNao) {
+				importsDosParagrafos.addAll(elemento.getImports());
+			}
 		}
 
 		return importsDosParagrafos;

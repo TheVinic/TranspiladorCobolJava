@@ -4,20 +4,20 @@
        AUTHOR. VINICIUS.
 000840 Data division.
        WORKING-STORAGE SECTION.    
-       77  SUMA PICTURE X VALUE IS 56.86 occurs 5 times. 
+       77  SUMA PICTURE 9(12).    
+       77  NUMA PIC 9(12).    
+       77  NUMB PIC 9(12).  
        01 teste1.
        02 teste2. 
-       03  NUMTMP PIC 9(12).  
-       01 teste3 pic 9.  
+       03  NUMTMP PIC 9(12).     
+       01  NUMC PIC 9(12).   
 000870 Linkage section.
 000920 Procedure division.
        Mainline.
-             DISPLAY "Enter NUmber a" WITH NO ADVANCING.
- 	       DISPLAY "Enter NUmber b" WITH NO ADVANCING.
-	       COMPUTE SUMA=1+8*10
-	       COMPUTE NUMTMP=0
-	       ADD 100 TO NUMTMP
-	       ADD NUMB TO NUMTMP
-	       COMPUTE SUMA=NUMTMP
-	       DISPLAY "SUM OF NUMBERS : " SUMA.
-	       move teste1 to NUMB.
+       perform mainline 5 times.
+           if 10>5
+              subtract 100.0 from NUMA GIVING NUMB
+           else
+              DISPLAY "Enter NUmber a".
+           end-if
+           DISPLAY "Enter NUmber a".

@@ -74,9 +74,7 @@ public abstract class DataDivisionCriaVariaveis {
 		matcher.find();
 		do {
 			filhos.add(criaItem(matcher, (novaClasse == null) ? classe : novaClasse, local));
-		} while (((filhos.get(filhos.size() - 1) instanceof AtributoGrupo)
-				? ((matcher.group("nivel") == null) ? false : true)
-				: matcher.find())
+		} while (((filhos.get(filhos.size() - 1) instanceof AtributoGrupo) ? ((matcher.group("nivel") == null) ? false : true) : matcher.find())
 				&& ((matcher.group("nivel") == null) ? false : Integer.parseInt(matcher.group("nivel")) > nivel));
 
 		return new AtributoGrupo(nomeAtributo, nivel, filhos, (novaClasse == null) ? classe : novaClasse, occurs,

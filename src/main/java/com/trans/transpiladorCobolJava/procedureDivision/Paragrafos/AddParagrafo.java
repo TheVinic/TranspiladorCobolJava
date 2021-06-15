@@ -1,13 +1,11 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
 public class AddParagrafo extends Paragrafo {
 
@@ -17,35 +15,43 @@ public class AddParagrafo extends Paragrafo {
 
 	ArrayList<Atributo> gravarEm = new ArrayList<>();
 
-	public AddParagrafo(Codigo umaSecao, DataDivision dataDivision) {
-		for (; !umaSecao.getInstrucaoAtualLeitura().equals("TO")
-				&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING"); umaSecao.avancaPosicaoLeitura()) {
-			Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
-			somar.add(atributo);
-			if (atributo.getClasses() != null) {
-				imports.add(atributo.getImport());
-			}
-		}
+	public AddParagrafo(String instrucao, DataDivision dataDivision) {
 
-		if (!umaSecao.getInstrucaoAtualLeitura().equals("GIVING")) {
-			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura())
-					&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING"); umaSecao.avancaPosicaoLeitura()) {
-				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
-				somarCom.add(atributo);
-				imports.add(atributo.getImport());
-			}
-		}
+		instrucao = instrucao.trim().replaceAll("(?i)\\sTO\\s", "  TO ").replaceAll("(?i)\\sGIVING\\s", "  GIVING ");
 
-		if (!umaSecao.isOver() && umaSecao.getInstrucaoAtualLeitura().equals("GIVING")) {
-			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-							.avancaPosicaoLeitura()) {
-				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
-				gravarEm.add(atributo);
-				imports.add(atributo.getImport());
+		Pattern pattern = Pattern.compile(
+				"(?i)ADD\\s(?<identifier1>((\\w+\\s))+)(\\sTO\\s(?<identifier2>(\\w+\\s?)+))?(\\sGIVING\\s(?<giving>(\\w+\\s?)+))?");
+		Matcher matcher = pattern.matcher(instrucao);
+
+		if (matcher.find()) {
+			matcherOf = patternOf.matcher(matcher.group("identifier1"));
+			while (matcherOf.find()) {
+				Atributo atributo = validaAtributo(dataDivision);
+				somar.add(atributo);
+				if (atributo.getClasses() != null) {
+					imports.add(atributo.getImport());
+				}
 			}
 
+			if (matcher.group("identifier2") != null) {
+				matcherOf = patternOf.matcher(matcher.group("identifier2"));
+				while (matcherOf.find()) {
+					Atributo atributo = validaAtributo(dataDivision);
+					somarCom.add(atributo);
+					imports.add(atributo.getImport());
+				}
+			}
+
+			if (matcher.group("giving") != null) {
+				matcherOf = patternOf.matcher(matcher.group("giving"));
+				while (matcherOf.find()) {
+					Atributo atributo = validaAtributo(dataDivision);
+					gravarEm.add(atributo);
+					imports.add(atributo.getImport());
+				}
+			}
+		} else {
+			System.out.println("Erro no matcher do ADD: " + instrucao);
 		}
 	}
 

@@ -1,13 +1,11 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
 public class SubtractParagrafo extends Paragrafo {
 
@@ -17,37 +15,45 @@ public class SubtractParagrafo extends Paragrafo {
 
 	ArrayList<Atributo> resultado = new ArrayList<>();
 
-	public SubtractParagrafo(Codigo umaSecao, DataDivision dataDivision) {
-		for (; !umaSecao.getInstrucaoAtualLeitura().equals("FROM"); umaSecao.avancaPosicaoLeitura()) {
-			Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
-			subtrair.add(atributo);
-			if (atributo.getClasses() != null) {
-				imports.add(atributo.getImport());
+	public SubtractParagrafo(String instrucao, DataDivision dataDivision) {
+
+		instrucao = instrucao.trim().replaceAll("(?i)\\sFROM\\s", "  FROM ").replaceAll("(?i)\\sGIVING\\s",
+				"  GIVING ");
+
+		String regex = "(?i)SUBTRACT\\s(?<identifier1>(\\w+\\s?)+)\\sFROM\\s(?<identifier2>(\\w+\\s?)+)(\\sGIVING\\s(?<giving>(\\w+\\s?)+))?";
+
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(instrucao);
+
+		if (matcher.find()) {
+			matcher.group();
+			matcherOf = patternOf.matcher(matcher.group("identifier1"));
+			while (matcherOf.find()) {
+				Atributo atributo = validaAtributo(dataDivision);
+				subtrair.add(atributo);
+				if (atributo.getClasses() != null) {
+					imports.add(atributo.getImport());
+				}
+			}
+			matcherOf = patternOf.matcher(matcher.group("identifier2"));
+			while (matcherOf.find()) {
+				Atributo atributo = validaAtributo(dataDivision);
+				de.add(atributo);
+				if (atributo.getClasses() != null) {
+					imports.add(atributo.getImport());
+				}
+			}
+			if (matcher.group("giving") != null) {
+				matcherOf = patternOf.matcher(matcher.group("giving"));
+				while (matcherOf.find()) {
+					Atributo atributo = validaAtributo(dataDivision);
+					resultado.add(atributo);
+					if (atributo.getClasses() != null) {
+						imports.add(atributo.getImport());
+					}
+				}
 			}
 		}
-
-		for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-				&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING")
-				&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-						.avancaPosicaoLeitura()) {
-			Atributo atributo = encontraCriaAtributo(umaSecao, dataDivision);
-			de.add(atributo);
-			if (atributo.getClasses() != null) {
-				imports.add(atributo.getImport());
-			}
-		}
-
-		if (!umaSecao.isOver() && umaSecao.getInstrucaoAtualLeitura().equals("GIVING")) {
-			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-							.avancaPosicaoLeitura()) {
-				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
-				resultado.add(atributo);
-				imports.add(atributo.getImport());
-			}
-
-		}
-
 	}
 
 	@Override

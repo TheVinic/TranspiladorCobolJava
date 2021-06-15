@@ -45,7 +45,7 @@ public class ArquivoLeitura {
 			e.printStackTrace();
 			throw new IOException("Erro na leitura da linha");
 		}
-		return (linha != null) ? linha.toUpperCase() : null;
+		return linha;
 	}
 
 	public String trataComentario(String linha) {

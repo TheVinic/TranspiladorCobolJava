@@ -1,13 +1,11 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
 public class DivideParagrafo extends Paragrafo {
 
@@ -19,57 +17,70 @@ public class DivideParagrafo extends Paragrafo {
 
 	ArrayList<Atributo> resto = new ArrayList<Atributo>();
 
-	public DivideParagrafo(Codigo umaSecao, DataDivision dataDivision) {
+	public DivideParagrafo(String instrucao, DataDivision dataDivision) {
 
-		divisor = encontraCriaAtributo(umaSecao, dataDivision);
-		if (divisor.getClasses() != null) {
-			imports.add(divisor.getClasses().get(0));
-		}
-		umaSecao.avancaPosicaoLeitura();
+		instrucao = instrucao.trim().replaceAll("(?i)\\sINTO\\s", "  INTO ").replaceAll("(?i)\\sBY\\s", "  BY ")
+				.replaceAll("(?i)\\sGIVING\\s", "  GIVING ").replaceAll("(?i)\\sREMAINDER\\s", "  REMAINDER ");
 
-		if (umaSecao.getInstrucaoAtualLeitura().equals("INTO")) {
-			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-					&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING")
-					&& !umaSecao.getInstrucaoAtualLeitura().equals("REMAINDER")
-					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-							.avancaPosicaoLeitura()) {
-				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
-				dividendo.add(atributo);
+		String regex1 = "(?i)DIVIDE\\s(?<identifier1>\\w+)";
+		String regex2 = "(\\s\\sINTO\\s(?<into>(\\w+\\s?)+))";
+		String regex3 = "(\\s\\sBY\\s(?<by>(\\w+)))";
+		String regex4 = "(\\s?\\sGIVING\\s(?<giving>(\\w+\\s?)+))?";
+		String regex5 = "(\\s?\\sREMAINDER\\s(?<remainder>(\\w+\\s?)))?";
+
+		Pattern pattern = Pattern.compile(regex1 + "(" + regex2 + "|" + regex3 + ")" + regex4 + regex5);
+		Matcher matcher = pattern.matcher(instrucao);
+
+		if (matcher.find()) {
+			matcher.group();
+			matcherOf = patternOf.matcher(matcher.group("identifier1"));
+			if (matcherOf.find()) {
+				Atributo atributo = validaAtributo(dataDivision);
+				divisor = atributo;
 				if (atributo.getClasses() != null) {
 					imports.add(atributo.getImport());
 				}
 			}
-		} else {
-			umaSecao.avancaPosicaoLeitura();
-			dividendo.add(divisor);
-			divisor = encontraCriaAtributo(umaSecao, dataDivision);
-			if (divisor.getClasses() != null) {
-				imports.add(divisor.getImport());
-			}
-			umaSecao.avancaPosicaoLeitura();
-		}
-
-		if (!umaSecao.isOver() && umaSecao.getInstrucaoAtualLeitura().equals("GIVING")) {
-			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-					&& !umaSecao.getInstrucaoAtualLeitura().equals("REMAINDER")
-					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-							.avancaPosicaoLeitura()) {
-				Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
-				quociente.add(atributo);
-				if (atributo.getClasses() != null) {
-					imports.add(atributo.getImport());
+			if (matcher.group("into") != null) {
+				matcherOf = patternOf.matcher(matcher.group("into"));
+				while (matcherOf.find()) {
+					Atributo atributo = validaAtributo(dataDivision);
+					dividendo.add(atributo);
+					if (atributo.getClasses() != null) {
+						imports.add(atributo.getImport());
+					}
+				}
+			} else {
+				dividendo.add(divisor);
+				matcherOf = patternOf.matcher(matcher.group("by"));
+				if (matcherOf.find()) {
+					Atributo atributo = validaAtributo(dataDivision);
+					divisor = atributo;
+					if (atributo.getClasses() != null) {
+						imports.add(atributo.getImport());
+					}
 				}
 			}
-		}
-
-		if (!umaSecao.isOver() && umaSecao.getInstrucaoAtualLeitura().equals("REMAINDER")) {
-			umaSecao.avancaPosicaoLeitura();
-			Atributo atributo = encontraIdentificador(umaSecao, dataDivision);
-			resto.add(atributo);
-			if (atributo.getClasses() != null) {
-				imports.add(atributo.getImport());
+			if (matcher.group("giving") != null) {
+				matcherOf = patternOf.matcher(matcher.group("giving"));
+				while (matcherOf.find()) {
+					Atributo atributo = validaAtributo(dataDivision);
+					quociente.add(atributo);
+					if (atributo.getClasses() != null) {
+						imports.add(atributo.getImport());
+					}
+				}
 			}
-
+			if (matcher.group("remainder") != null) {
+				matcherOf = patternOf.matcher(matcher.group("remainder"));
+				while (matcherOf.find()) {
+					Atributo atributo = validaAtributo(dataDivision);
+					resto.add(atributo);
+					if (atributo.getClasses() != null) {
+						imports.add(atributo.getImport());
+					}
+				}
+			}
 		}
 	}
 

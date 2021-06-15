@@ -1,13 +1,11 @@
 package com.trans.transpiladorCobolJava.procedureDivision.Paragrafos;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.procedureDivision.ParagrafosProcedureDivision;
 
 public class MultiplyParagrafo extends Paragrafo {
 
@@ -17,32 +15,41 @@ public class MultiplyParagrafo extends Paragrafo {
 
 	ArrayList<Atributo> resultado = new ArrayList<Atributo>();
 
-	public MultiplyParagrafo(Codigo umaSecao, DataDivision dataDivision) {
-		multiplica = encontraCriaAtributo(umaSecao, dataDivision);
-		if (multiplica.getClasses() != null) {
-			imports.add(multiplica.getImport());
-		}
-		umaSecao.avancaPosicaoLeitura();
-		Atributo atributo = null;
-		for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-				&& !umaSecao.getInstrucaoAtualLeitura().equals("GIVING")
-				&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-						.avancaPosicaoLeitura()) {
-			atributo = encontraCriaAtributo(umaSecao, dataDivision);
-			por.add(atributo);
-			if (atributo.getClasses() != null) {
-				imports.add(atributo.getImport());
-			}
-		}
+	public MultiplyParagrafo(String instrucao, DataDivision dataDivision) {
 
-		if (!umaSecao.isOver() && umaSecao.getInstrucaoAtualLeitura().equals("GIVING")) {
-			for (umaSecao.avancaPosicaoLeitura(); !umaSecao.isOver()
-					&& !ParagrafosProcedureDivision.acabouParagrafoAtual(umaSecao.getInstrucaoAtualLeitura()); umaSecao
-							.avancaPosicaoLeitura()) {
-				atributo = encontraIdentificador(umaSecao, dataDivision);
-				resultado.add(atributo);
+		instrucao = instrucao.trim().replaceAll("(?i)\\sGIVING\\s", "  GIVING ");
+
+		String regex = "(?i)MULTIPLY\\s(?<identifier1>\\w+)\\sBY\\s(?<identifier2>(\\w+\\s?)+)(\\sGIVING\\s(?<giving>(\\w+\\s?)+))?";
+
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(instrucao);
+		
+		if (matcher.find()) {
+			matcher.group();
+			matcherOf = patternOf.matcher(matcher.group("identifier1"));
+			if (matcherOf.find()) {
+				Atributo atributo = validaAtributo(dataDivision);
+				multiplica = atributo;
 				if (atributo.getClasses() != null) {
 					imports.add(atributo.getImport());
+				}
+			}
+			matcherOf = patternOf.matcher(matcher.group("identifier2"));
+			while (matcherOf.find()) {
+				Atributo atributo = validaAtributo(dataDivision);
+				por.add(atributo);
+				if (atributo.getClasses() != null) {
+					imports.add(atributo.getImport());
+				}
+			}
+			if (matcher.group("giving") != null) {
+				matcherOf = patternOf.matcher(matcher.group("giving"));
+				while (matcherOf.find()) {
+					Atributo atributo = validaAtributo(dataDivision);
+					resultado.add(atributo);
+					if (atributo.getClasses() != null) {
+						imports.add(atributo.getImport());
+					}
 				}
 			}
 		}
