@@ -22,11 +22,6 @@ public class LinkageSection extends DataDivisionCriaVariaveis {
 
 	public AtributoGrupo popula(String codigoCobol) {
 
-		String regexNivelNome = "(?<nivel>\\d+)\\s+(?<nome>\\w+)";
-		String regexPicTipoTamanho = "\\s*((PIC|PICTURE)\\s+(?<tipo>\\w+)\\s*(\\((?<tamanho>\\d+)\\))?(V(?<tipoDecimal>\\w+)\\s*(\\((?<tamanhoDecimal>\\d+)\\))?)?)?";
-		String regexValue = "\\s*(VALUE\\s+(IS\\s+)?(\\'(?<valor>(\\w+\\s*)+)\\'|(?<valorNumerico>\\d+\\.?\\d+?)))?";
-		String regexOccurs = "\\s*(OCCURS\\s+\\(?\\s+?(?<occurs>\\w+)\\s+?\\)?\\s+?TIMES)?";
-
 		Pattern pattern = Pattern
 				.compile("(?i)" + regexNivelNome + regexPicTipoTamanho + regexValue + regexOccurs + "\\.");
 		Matcher matcher = pattern.matcher(codigoCobol);

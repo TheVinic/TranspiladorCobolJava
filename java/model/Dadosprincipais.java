@@ -4,6 +4,8 @@ import com.trans.transpiladorCobolJava.model.Teste1;
 
 import java.math.BigDecimal;
 
+import javax.persistence.JoinColumn;
+
 public class Dadosprincipais{
 	private Integer suma;
 	private Integer numa;

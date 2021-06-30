@@ -4,7 +4,15 @@ import com.trans.transpiladorCobolJava.model.Teste2;
 
 import java.math.BigDecimal;
 
+import javax.persistence.JoinColumn;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Teste1{
+	@Id
+	@JoinColumn
 	private Teste2 teste2 = new Teste2();
 
 	public Teste2 getTeste2() {

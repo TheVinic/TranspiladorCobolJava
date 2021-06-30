@@ -17,7 +17,7 @@ public class TranspiladorService {
 
 	DataDivision dataDivision = new DataDivision();
 
-	ProcedureDivision procedureDivision = new ProcedureDivision("Controller", "Controller");
+	ProcedureDivision procedureDivision = new ProcedureDivision("controller", "Controller");
 
 	public VariaveisResponse processa(String path) throws IOException {
 		// Lê código cobol

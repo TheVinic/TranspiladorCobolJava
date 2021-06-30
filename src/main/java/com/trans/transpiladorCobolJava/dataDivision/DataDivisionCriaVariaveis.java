@@ -14,6 +14,11 @@ public abstract class DataDivisionCriaVariaveis {
 	private Integer contadorFiller = 1;
 
 	String classeMain = "DadosPrincipal";
+	
+	protected String regexNivelNome = "(?<nivel>\\d+)\\s+(?<nome>\\w+)";
+	protected String regexPicTipoTamanho = "\\s*((PIC|PICTURE)(\\sIS)?\\s+(?<tipo>\\w+)\\s*(\\((?<tamanho>\\d+)\\))?(V(?<tipoDecimal>\\w+)\\s*(\\((?<tamanhoDecimal>\\d+)\\))?)?)?";
+	protected String regexValue = "\\s*(VALUE\\s+(IS\\s+)?(\\'(?<valor>(\\w+\\s*)+)\\'|(?<valorNumerico>\\d+\\.?\\d+?)))?";
+	protected String regexOccurs = "\\s*(OCCURS\\s+\\(?\\s*(?<occurs>\\w+)\\s*\\)?\\s+?TIMES)?";
 
 	protected Atributo criaItem(Matcher matcher, List<String> classe, SecoesDataDivision local) {
 

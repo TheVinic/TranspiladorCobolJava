@@ -72,15 +72,15 @@ public class DataDivision {
 
 	public Atributo localizaAtributo(String nomeVariavel) {
 		nomeVariavel = nomeVariavel.replace(".", "").replaceAll("-", "_");
+		Atributo atributo = null;
 		if (atributosWorkingStorage != null) {
-			Atributo atributo = atributosWorkingStorage.getLocalizaAtributo(nomeVariavel);
-			if (atributo == null) {
-				atributo = atributosLinkageSection.getLocalizaAtributo(nomeVariavel);
-			}
+			atributo = atributosWorkingStorage.getLocalizaAtributo(nomeVariavel);
 			return atributo;
-		} else {
-			return null;
 		}
+		if (atributo == null && atributosLinkageSection != null) {
+			atributo = atributosLinkageSection.getLocalizaAtributo(nomeVariavel);
+		}
+		return atributo;
 	}
 
 	public Atributo localizaAtributo(String nomeVariavel, String proximaInstrucaoLeitura) {
@@ -101,4 +101,33 @@ public class DataDivision {
 		return new DataDivisionResponse(atributosWorkingStorage, atributosLinkageSection);
 	}
 
+	public String setAtributoIsTabela(String nomeTabela) {
+		String nomeRepository;
+		if (atributosWorkingStorage != null) {
+			nomeRepository = atributosWorkingStorage.setAtributoIsTabela(nomeTabela);
+			if (nomeRepository != null && !nomeRepository.isEmpty()) {
+				return nomeRepository;
+			}
+		}
+		if (atributosLinkageSection != null) {
+			nomeRepository = atributosLinkageSection.setAtributoIsTabela(nomeTabela);
+			if (nomeRepository != null && !nomeRepository.isEmpty()) {
+				return nomeRepository;
+			}
+		}
+		return null;
+	}
+
+	public void setIntrucaoRepository(String instrucao, String tabela) {
+		if (atributosWorkingStorage != null) {
+			if (atributosWorkingStorage.setIntrucaoRepository(instrucao, tabela)) {
+				return;
+			}
+		}
+		if (atributosLinkageSection != null) {
+			if (atributosLinkageSection.setIntrucaoRepository(instrucao, tabela)) {
+				return;
+			}
+		}
+	}
 }

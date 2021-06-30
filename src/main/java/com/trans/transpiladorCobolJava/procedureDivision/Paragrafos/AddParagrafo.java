@@ -9,11 +9,11 @@ import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 
 public class AddParagrafo extends Paragrafo {
 
-	ArrayList<Atributo> somar = new ArrayList<>();
+	ArrayList<Atributo> somar = new ArrayList<Atributo>();
 
-	ArrayList<Atributo> somarCom = new ArrayList<>();
+	ArrayList<Atributo> somarCom = new ArrayList<Atributo>();
 
-	ArrayList<Atributo> gravarEm = new ArrayList<>();
+	ArrayList<Atributo> gravarEm = new ArrayList<Atributo>();
 
 	public AddParagrafo(String instrucao, DataDivision dataDivision) {
 

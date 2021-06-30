@@ -26,7 +26,7 @@ public class IfParagrafo extends Paragrafo {
 
 		if (matcherInterno.find()) {
 			Pattern patternInterno = Pattern
-					.compile("(?i)(?<variavel>((\\w+)|[+-/()<>=]|[*]+))|(?<variavelOf>(\\w+)\\sOF\\s(?<of>\\w+))");
+					.compile("(?i)(?<variavel>((\\w+)|([<]|[>])[=]|[+-/()*<>=]|[*]{2}))|(?<variavelOf>(\\w+)\\sOF\\s(?<of>\\w+))");
 			matcherOf = patternInterno.matcher(matcherInterno.group("condition"));
 			while (matcherOf.find()) {
 				Atributo atributo = validaAtributo(dataDivision);

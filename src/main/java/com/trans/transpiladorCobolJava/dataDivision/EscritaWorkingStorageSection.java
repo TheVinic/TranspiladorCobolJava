@@ -39,6 +39,9 @@ public class EscritaWorkingStorageSection {
 
 		// escrever toObjeto
 		atributosWorkingStorage.escreveToObject();
+		
+		atributosWorkingStorage.escreveRepository();
+		
 	}
 
 	@Override

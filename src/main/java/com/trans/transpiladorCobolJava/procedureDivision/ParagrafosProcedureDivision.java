@@ -12,12 +12,12 @@ public enum ParagrafosProcedureDivision {
 	DELETE("DELETE", false),
 	DISPLAY("DISPLAY", true),
 	DIVIDE("DIVIDE", true),
-	ENDEXEC("END-EXEC", true),
 	ENDIF("END-IF", true),
+	ENDEVALUATE("END-EVALUATE", true),
 	ENDPERFORM("END-PERFORM", true),
 	ELSE("ELSE", true),
 	ENTRY("ENTRY", false),
-	EVALUATE("EVALUATE", false),
+	EVALUATE("EVALUATE", true),
 	EXECSQL("EXEC SQL", true),
 	EXIT("EXIT", true),
 	EXITMETHOD("EXIT-METHOD", false),
@@ -45,6 +45,7 @@ public enum ParagrafosProcedureDivision {
 	STRING("STRING", false),
 	SUBTRACT("SUBTRACT", true),
 	UNSTRING("UNSTRING", false),
+	WHEN("WHEN", true),
 	WRITE("WRITE", false),
 	XMLGENERATE("XML", false),
 	XMLPARSE("XML", false),
@@ -67,9 +68,9 @@ public enum ParagrafosProcedureDivision {
 	}
 
 	public static ParagrafosProcedureDivision encontraParagrafo(String instrucaoAtualLeitura) {
-		instrucaoAtualLeitura = instrucaoAtualLeitura.replace(".", "");
+		//instrucaoAtualLeitura = instrucaoAtualLeitura.replace(".", "");
 		for(ParagrafosProcedureDivision paragrafo : ParagrafosProcedureDivision.values()) {
-			if (paragrafo.getDescricao().equals(instrucaoAtualLeitura)) {
+			if (paragrafo.getDescricao().equalsIgnoreCase(instrucaoAtualLeitura)) {
 				return paragrafo;
 			}
 		}

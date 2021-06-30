@@ -13,11 +13,41 @@
        01  NUMC PIC 9(12).   
 000870 Linkage section.
 000920 Procedure division.
-       Mainline.
-       perform mainline 5 times.
-           if 10>5
-              subtract 100.0 from NUMA GIVING NUMB
-           else
-              DISPLAY "Enter NUmber a".
-           end-if
+           
+           PERFORM VARYING numa from 0 by 5 until numa<20.
+           add 5 to numa.
+           
+           EVALUATE SUMA + 9 ALSO NUMC - 9
+              WHEN 5 ALSO 3
+                  ADD 5 TO NUMA
+              WHEN OTHER
+                  ADD 6 TO NUMA
+           END-EVALUATE.
+           
+           mainline section.
+           
+           
+           EXEC SQL
+              SELECT SUMA, SUMA
+              INTO :SUMA, :SUMA FROM teste1
+              WHERE SUMA=1004
+           END-EXEC.
+           
+           EXEC SQL
+               INSERT INTO teste1(SUMA, NUMA)
+               VALUES (:NUMB, :NUMC)
+           END-EXEC.
+           
+           EXEC SQL
+              UPDATE teste1 SET NUMB=:SUMA
+              WHERE NUMB=1003 AND numa<5
+           END-EXEC.
+           
+           EXIT.
+           
+           EXEC SQL
+              DELETE FROM teste1
+              WHERE NUMB=:NUMA
+           END-EXEC.
+           
            DISPLAY "Enter NUmber a".

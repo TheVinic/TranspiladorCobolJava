@@ -1,6 +1,7 @@
 package com.trans.transpiladorCobolJava.arquivo;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -14,7 +15,31 @@ public class ArquivoLeitura {
 
 	// Realiza a abertura do arquivo com o código cobol
 	public void abreArquivo(String path) {
-
+		for(File file : new File("java\\controller").listFiles()) {
+			if(!file.isDirectory()) {
+				file.delete();
+			}
+		}
+		for(File file : new File("java\\DTO").listFiles()) {
+			if(!file.isDirectory()) {
+				file.delete();
+			}
+		}
+		for(File file : new File("java\\model").listFiles()) {
+			if(!file.isDirectory()) {
+				file.delete();
+			}
+		}
+		for(File file : new File("java\\repository").listFiles()) {
+			if(!file.isDirectory()) {
+				file.delete();
+			}
+		}
+		for(File file : new File("java\\service").listFiles()) {
+			if(!file.isDirectory()) {
+				file.delete();
+			}
+		}
 		System.out.println("Abertura do arquivo");
 		try {
 			arquivoCobol = new FileReader(path);

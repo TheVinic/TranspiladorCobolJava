@@ -99,7 +99,7 @@ public abstract class Atributo {
 		return "get" + toUpperFistCase(getNome()) + "()";
 	}
 
-	public String getSentencaSet(String valor) {
+	public String getSentencaSet(Object valor) {
 		return "set" + toUpperFistCase(nome) + "(" + valor + ")";
 	}
 
