@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,21 +32,21 @@ public class TranspiladorController {
 	private ServletContext servletContext;
 
 	@PostMapping("/transpilacoes/geraVariaveis")
-	public ResponseEntity<?> NovaTranspilacao(@NotNull @NotEmpty @RequestParam("file") MultipartFile file) throws IOException {
+	public ResponseEntity<?> novaTranspilacao(@NotNull @NotEmpty @RequestParam("file") MultipartFile file) throws IOException {
 		String path = null;
 		if (file != null && !file.isEmpty()) {
 			path = servletContext.getRealPath("/") + "resources\\" + "codigoCobol" + ".txt";
-			saveFile(path, file);
+			salvaArquivoTranspilar(path, file);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 
-		transpilador = new TranspiladorService();
-
-		VariaveisResponse variaveisReponse = transpilador.processa(path);
+		VariaveisResponse variaveisReponse = transpilador.processaNovaTranspilacao(path);
 
 		return ResponseEntity.ok(variaveisReponse);
 	}
 
-	public static void saveFile(String path, MultipartFile file) {
+	private static void salvaArquivoTranspilar(String path, MultipartFile file) {
 
 		File saveFile = new File(path);
 		try {

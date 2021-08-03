@@ -13,6 +13,8 @@ public class EvaluateModel extends Paragrafo {
 
 	ArrayList<WhenEvaluateModel> when = new ArrayList<WhenEvaluateModel>();
 
+	
+	//TODO validar utilização do also, de erro de string index outr of range
 	@Override
 	public String escreveArquivo(Integer nivel) {
 		String imprimir = new String();
@@ -37,7 +39,7 @@ public class EvaluateModel extends Paragrafo {
 			for (Paragrafo paragrafo : passoWhen.getInstrucoes()) {
 				imprimir += paragrafo.escreveArquivo(nivel + 1);
 			}
-			imprimir += fazTabulacao(nivel) + "} else ";
+			imprimir += "\n" + fazTabulacao(nivel) + "} else ";
 		}
 		imprimir = imprimir.substring(0, imprimir.length() - 6) + "\n";
 		return imprimir;

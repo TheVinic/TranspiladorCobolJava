@@ -8,16 +8,15 @@ import com.trans.transpiladorCobolJava.dataDivision.DataDivision;
 import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoItemGrupo;
 
-public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
+public class DisplayParagrafo extends Paragrafo {
 
 	ArrayList<Atributo> texto = new ArrayList<Atributo>();
 
 	public DisplayParagrafo(String instrucao, DataDivision dataDivision) {
 		instrucao = instrucao.replaceFirst("(?i)DISPLAY", "");
-		Pattern pattern = Pattern
-				.compile("(?i)((\"(?<string>[a-zA-Z0-9+-/=()*: ]+)\"\\s*)|(?<valor>\\w+\\s*))");
+		Pattern pattern = Pattern.compile("(?i)((\"(?<string>[a-zA-Z0-9+-/=()*: ]+)\"\\s*)|(?<valor>[a-zA-Z0-9-]+\\s*))\\.?");
 		Matcher matcher = pattern.matcher(instrucao);
 
 		while (matcher.find()) {
@@ -25,7 +24,7 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 			if (matcher.group("string") != null) {
 				texto.add(new AtributoElementar(new String(), null, matcher.group("string").length(), null,
 						TipoAtributo.CARACTERE, matcher.group("string"), null, null, null));
-			} else {
+			} else if (matcher.group("valor") != null) {
 				matcherOf = patternOf.matcher(matcher.group("valor"));
 				while (matcherOf.find()) {
 					Atributo atributo = validaAtributo(dataDivision);
@@ -46,11 +45,12 @@ public class DisplayParagrafo extends Paragrafo implements ParagrafoImpl {
 				imprimir += "\"" + ((AtributoElementar) elemento).getValor() + "\"" + " + ";
 			} else {
 				imprimir += toLowerFistCase(elemento.getClassesSucessoras())
-						+ ((elemento instanceof AtributoGrupo) ? "toTrancode()" : elemento.getSentencaGet()) + " + ";
+						+ ((elemento instanceof AtributoItemGrupo) ? "toTrancode()" : elemento.getSentencaGet())
+						+ " + ";
 			}
 		}
 		imprimir = imprimir.substring(0, imprimir.length() - 3);
-		return fazTabulacao(nivel) + "System.out.println(" + imprimir + ");\n";
+		return fazTabulacao(nivel) + "System.out.println(" + imprimir + ");";
 	}
 
 	public ArrayList<Atributo> getTexto() {

@@ -97,20 +97,20 @@ public class DivideParagrafo extends Paragrafo {
 			for (Atributo elemento : dividendo) {
 				imprimirDividento = elemento.getStringEscritaPorTipo();
 				imprimirQuociente += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";\n");
+						+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";");
 
 			}
 		} else {
 			imprimirDividento = dividendo.get(0).getStringEscritaPorTipo();
 			for (Atributo elemento : quociente) {
 				imprimirQuociente += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";\n");
+						+ elemento.getSentencaSet(imprimirDividento + " / " + imprimirDivisor) + ";");
 			}
 		}
-
+//TODO Validar o valor do dividendo
 		for (Atributo elemento : resto) {
-			imprimirResto += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-					+ elemento.getSentencaSet(imprimirDividento + " % " + imprimirDivisor) + ";\n");
+			imprimirResto += "\n" + (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
+					+ elemento.getSentencaSet(imprimirDividento + " % " + imprimirDivisor) + ";");
 		}
 		return imprimirQuociente + imprimirResto;
 	}

@@ -32,16 +32,25 @@ import com.trans.transpiladorCobolJava.procedureDivision.Paragrafos.SubtractPara
 
 @Component
 public class ProcedureDivision {
+	
+	private ArrayList<Paragrafo> paragrafos = new ArrayList<Paragrafo>();
 
-	ArrayList<Paragrafo> paragrafos = new ArrayList<Paragrafo>();
+	private ArrayList<ProcedureDivisionSection> secoes = new ArrayList<ProcedureDivisionSection>();
 
-	ArrayList<ProcedureDivisionSection> secoes = new ArrayList<ProcedureDivisionSection>();
-
-	ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
-	String nomeClasse;
-	String path;
+	private ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
+	private String nomeClasse;
+	private String path;
+	private String nomePrograma;
 
 	public ProcedureDivision() {
+		super();
+	}
+
+	public ProcedureDivision(String nomeClasse, String path, String nomePrograma) {
+		super();
+		this.nomeClasse = nomeClasse;
+		this.path = path;
+		this.nomePrograma = nomePrograma;
 	}
 
 	public ProcedureDivision(String nomeClasse, String path) {
@@ -50,17 +59,18 @@ public class ProcedureDivision {
 		this.path = path;
 	}
 
-	public void preparaLeitura(String codigoCobol, DataDivision dataDivision) {
+	public void preparaAnalises(String codigoCobol, DataDivision dataDivision) {
 		System.out.println("Inicio leitura da PROCEDURE DIVISION");
 
-		codigoCobol = codigoCobol.trim().replaceAll("\\s+", " ").replaceAll("(?i)PROCEDURE\\sDIVISION\\.", "")
+		codigoCobol = codigoCobol.trim().replaceAll("\\s+", " ").replaceAll("(?i)PROCEDURE\\s+DIVISION\\s*\\.", "")
 				.replaceAll("(?i)\\sACCEPT\\s", "  ACCEPT ").replaceAll("(?i)\\sADD\\s", "  ADD ")
 				.replaceAll("(?i)\\sALTER\\s", "  ALTER ").replaceAll("(?i)\\sCALL\\s", "  CALL ")
 				.replaceAll("(?i)\\sCANCEL\\s", "  CANCEL ").replaceAll("(?i)\\sCLOSE\\s", "  CLOSE ")
 				.replaceAll("(?i)\\sCOMPUTE\\s", "  COMPUTE ").replaceAll("(?i)\\sCONTINUE\\s", "  CONTINUE ")
 				/* .replaceAll("(?i)\\sDELETE\\s", "  DELETE ") */.replaceAll("(?i)\\sDISPLAY\\s", "  DISPLAY ")
 				.replaceAll("(?i)\\sDIVIDE\\s", "  DIVIDE ").replaceAll("(?i)\\sELSE\\s", "  ELSE ")
-				.replaceAll("(?i)\\sEND-IF(\\s|\\.)", "  END-IF ").replaceAll("(?i)\\sEND-EVALUATE(\\s|\\.)", "  END-EVALUATE ")
+				.replaceAll("(?i)\\sEND-IF(\\s|\\.)", "  END-IF ")
+				.replaceAll("(?i)\\sEND-EVALUATE(\\s|\\.)", "  END-EVALUATE ")
 				.replaceAll("(?i)\\sEND-PERFORM(\\s|\\.)", "  END-PERFORM ").replaceAll("(?i)\\sENTRY\\s", "  ENTRY ")
 				.replaceAll("(?i)\\sEVALUATE\\s", "  EVALUATE ").replaceAll("(?i)\\sEXEC\\sSQL\\s", "  EXEC SQL ")
 				.replaceAll("(?i)\\sEXIT(\\s|\\.)", "  EXIT ").replaceAll("(?i)\\sEXITMETHOD(\\s|\\.)", "  EXITMETHOD ")
@@ -69,10 +79,11 @@ public class ProcedureDivision {
 				.replaceAll("(?i)\\sINSPECT\\s", "  INSPECT ").replaceAll("(?i)\\sINVOKE\\s", "  INVOKE ")
 				.replaceAll("(?i)\\sMERGE\\s", "  MERGE ").replaceAll("(?i)\\sMOVE\\s", "  MOVE ")
 				.replaceAll("(?i)\\sMULTIPLY\\s", "  MULTIPLY ")
-				.replaceAll("(?i)\\sNEXT\\sSENTENCE(\\s|\\.)", "  NEXT SENTENCE ").replaceAll("(?i)\\sOPEN\\s", "  OPEN ")
-				.replaceAll("(?i)\\sPERFORM\\s", "  PERFORM ").replaceAll("(?i)\\sREAD\\s", "  READ ")
-				.replaceAll("(?i)\\sRELEASE\\s", "  RELEASE ").replaceAll("(?i)\\sRETURN(\\s|\\.)", "  RETURN ")
-				.replaceAll("(?i)\\sREWRITE\\s", "  REWRITE ").replaceAll("(?i)\\sSEARCH\\s", "  SEARCH ")
+				.replaceAll("(?i)\\sNEXT\\sSENTENCE(\\s|\\.)", "  NEXT SENTENCE ")
+				.replaceAll("(?i)\\sOPEN\\s", "  OPEN ").replaceAll("(?i)\\sPERFORM\\s", "  PERFORM ")
+				.replaceAll("(?i)\\sREAD\\s", "  READ ").replaceAll("(?i)\\sRELEASE\\s", "  RELEASE ")
+				.replaceAll("(?i)\\sRETURN(\\s|\\.)", "  RETURN ").replaceAll("(?i)\\sREWRITE\\s", "  REWRITE ")
+				.replaceAll("(?i)\\sSEARCH\\s", "  SEARCH ")
 				/* .replaceAll("(?i)\\sSET\\s", "  SET ") */.replaceAll("(?i)\\sSORT\\s", "  SORT ")
 				.replaceAll("(?i)\\sSTART\\s", "  START ").replaceAll("(?i)\\sSTOP\\s", "  STOP ")
 				.replaceAll("(?i)\\sSTRING\\s", "  STRING ").replaceAll("(?i)\\sSUBTRACT\\s", "  SUBTRACT ")
@@ -80,19 +91,18 @@ public class ProcedureDivision {
 				.replaceAll("(?i)\\sWRITE\\s", "  WRITE ").replaceAll("(?i)\\sXMLGENERATE\\s", "  XMLGENERATE ")
 				.replaceAll("(?i)\\sXMLPARSE\\s", "  XMLPARSE ") + "  ";
 
-		String regex = "((?<display>DISPLAY)\\s(\")([a-zA-Z0-9+-/=()*:]+\\s*)+(\")\\s?([a-zA-Z0-9-+/=()*.]+\\s?)*(\\s\\s))"
+		String regex = "((?<display>DISPLAY)\\s+(((\")([a-zA-Z0-9+-/=()*:.]+\\s*)+(\"))|(([a-zA-Z0-9-+/=()*]+\\s?)))*(\\s\\s))"
 				+ "|"
 				+ "((?<instrucao>[a-zA-Z0-9-]+)\\s?(((?<instrucao2>[a-zA-Z0-9-]+)\\s?)?(([a-zA-Z0-9<>=*+/'\"():,]|[-])+\\s?)*)"
 				+ "([.]|(\\s\\s)))";
-		// [a-zA-Z0-9+-/\"='()*<>:]+
 
 		Pattern pattern = Pattern.compile("(?i)" + regex);
 		Matcher matcher = pattern.matcher(codigoCobol);
-		leitura(matcher, dataDivision, secoes);
+		analisesProcedureDivision(matcher, dataDivision, secoes);
 	}
 
-	public ArrayList<Paragrafo> leitura(Matcher matcher, DataDivision dataDivision,
-			ArrayList<ProcedureDivisionSection> secoes) {
+	public ArrayList<Paragrafo> analisesProcedureDivision(Matcher matcher, DataDivision atributosDataDivision,
+			ArrayList<ProcedureDivisionSection> secoesProcedureDivision) {
 
 		while (matcher.find()) {
 			matcher.group();
@@ -109,10 +119,9 @@ public class ProcedureDivision {
 			if (paragrafo.isConstruido()) {
 				switch (paragrafo) {
 				case ACCEPT:
-					// paragrafos.add(new AcceptParagrafo(umaSecao, dataDivision));
 					break;
 				case ADD:
-					paragrafos.add(new AddParagrafo(matcher.group(), dataDivision));
+					paragrafos.add(new AddParagrafo(matcher.group(), atributosDataDivision));
 					break;
 				case ALTER:
 					break;
@@ -123,17 +132,17 @@ public class ProcedureDivision {
 				case CLOSE:
 					break;
 				case COMPUTE:
-					paragrafos.add(new ComputeParagrafo(matcher.group(), dataDivision));
+					paragrafos.add(new ComputeParagrafo(matcher.group(), atributosDataDivision));
 					break;
 				case CONTINUE:
 					break;
 				case DELETE:
 					break;
 				case DISPLAY:
-					paragrafos.add(new DisplayParagrafo(matcher.group(), dataDivision));
+					paragrafos.add(new DisplayParagrafo(matcher.group(), atributosDataDivision));
 					break;
 				case DIVIDE:
-					paragrafos.add(new DivideParagrafo(matcher.group(), dataDivision));
+					paragrafos.add(new DivideParagrafo(matcher.group(), atributosDataDivision));
 					break;
 				case ELSE:
 					return paragrafos;
@@ -146,10 +155,11 @@ public class ProcedureDivision {
 				case ENTRY:
 					break;
 				case EVALUATE:
-					paragrafos.add(new EvaluateParagrafo(matcher.group(), matcher, dataDivision, secoes));
+					paragrafos.add(new EvaluateParagrafo(matcher.group(), matcher, atributosDataDivision,
+							secoesProcedureDivision));
 					break;
 				case EXECSQL:
-					paragrafos.add(new ExecSqlParagrafo(matcher.group(), dataDivision));
+					paragrafos.add(new ExecSqlParagrafo(matcher.group(), atributosDataDivision));
 					break;
 				case EXIT:
 					return paragrafos;
@@ -159,7 +169,8 @@ public class ProcedureDivision {
 				case GOBACK:
 					break;
 				case IF:
-					paragrafos.add(new IfParagrafo(matcher.group(), matcher, dataDivision, secoes));
+					paragrafos.add(
+							new IfParagrafo(matcher.group(), matcher, atributosDataDivision, secoesProcedureDivision));
 					break;
 				case INITIALIZE:
 					break;
@@ -170,17 +181,18 @@ public class ProcedureDivision {
 				case MERGE:
 					break;
 				case MOVE:
-					paragrafos.add(new MoveParagrafo(matcher.group(), dataDivision));
+					paragrafos.add(new MoveParagrafo(matcher.group(), atributosDataDivision));
 					break;
 				case MULTIPLY:
-					paragrafos.add(new MultiplyParagrafo(matcher.group(), dataDivision));
+					paragrafos.add(new MultiplyParagrafo(matcher.group(), atributosDataDivision));
 					break;
 				case NEXTSENTENSE:
 					break;
 				case OPEN:
 					break;
 				case PERFORM:
-					paragrafos.add(new PerformParagrafo(matcher.group(), matcher, dataDivision, secoes));
+					paragrafos.add(new PerformParagrafo(matcher.group(), matcher, atributosDataDivision,
+							secoesProcedureDivision));
 					break;
 				case READ:
 					break;
@@ -203,7 +215,7 @@ public class ProcedureDivision {
 				case STRING:
 					break;
 				case SUBTRACT:
-					paragrafos.add(new SubtractParagrafo(matcher.group(), dataDivision));
+					paragrafos.add(new SubtractParagrafo(matcher.group(), atributosDataDivision));
 					break;
 				case UNSTRING:
 					break;
@@ -217,8 +229,9 @@ public class ProcedureDivision {
 					break;
 				case SECTION:
 					ProcedureDivisionSection secao = new ProcedureDivisionSection(matcher.group("instrucao"));
-					secao.leitura(matcher, dataDivision, secoes);
-					secoes.add(secao);
+					secao.analisesProcedureDivision(matcher, atributosDataDivision, secoesProcedureDivision);
+					secoesProcedureDivision.add(secao);
+
 					if (paragrafos.isEmpty()) {
 						paragrafos.add(new SectionParagrafo(instrucao));
 					}
@@ -230,30 +243,33 @@ public class ProcedureDivision {
 				System.out.println("Instrução não criada: " + matcher.group());
 			}
 
-			if ((this instanceof ProcedureDivisionSection || this instanceof ProcedureDivisionPerforming
-					|| this instanceof ProcedureDivisionIf || this instanceof ProcedureDivisionWhenEvaluate)
-					&& (matcher.group().endsWith("."))) {
+			if ((this instanceof ProcedureDivisionPerforming || this instanceof ProcedureDivisionIf
+					|| this instanceof ProcedureDivisionWhenEvaluate) && (matcher.group().endsWith("."))) {
 				return paragrafos;
 			}
 
 		}
 		for (Paragrafo paragrafo : paragrafos) {
 			if (paragrafo instanceof SectionParagrafo) {
-				((SectionParagrafo) paragrafo).setImportSecao(secoes);
+				((SectionParagrafo) paragrafo).setImportSecao(secoesProcedureDivision);
 			}
 		}
 		return paragrafos;
 	}
 
-	public void escreve() throws IOException {
+	public void preTratamentoTraducaoEscrita() throws IOException {
 		for (ProcedureDivisionSection secao : secoes) {
-			secao.escreve(secoes);
+			secao.traduzEscrita(secoes);
 		}
-		escreve(secoes);
+		traduzEscrita(secoes);
 	}
 
-	public Set<String> escreve(ArrayList<ProcedureDivisionSection> secoes) throws IOException {
+	public void traduzEscrita(ArrayList<ProcedureDivisionSection> secoes) throws IOException {
 		System.out.println("Inicio escrita da PROCEDURE DIVISION " + nomeClasse);
+
+		if (paragrafos == null || paragrafos.isEmpty()) {
+			return;
+		}
 
 		arquivoEscrita.abreArquivo(path + "\\" + nomeClasse + ".java");
 		arquivoEscrita.escreveLinha("package com.trans.transpiladorCobolJava." + path + "." + nomeClasse + ";\n");
@@ -274,7 +290,7 @@ public class ProcedureDivision {
 				for (ProcedureDivisionSection secao : secoes) {
 					if (secao.getNomeClasse().equalsIgnoreCase(nomeSecao)) {
 						String imprimir = new String();
-						for (String elemento : secao.getImports()) {
+						for (String elemento : secao.getImportsSecao()) {
 							imprimir += elemento.toLowerCase() + ", ";
 						}
 						if (!imprimir.isEmpty()) {
@@ -294,7 +310,18 @@ public class ProcedureDivision {
 		for (String elemento : importCompleto) {
 			arquivoEscrita.escreveLinha(elemento);
 		}
-		arquivoEscrita.escreveLinha("");
+
+		if (nomePrograma != null && !nomePrograma.isEmpty()) {
+			arquivoEscrita.escreveLinha("");
+			arquivoEscrita.escreveLinha("import org.springframework.beans.factory.annotation.Autowired;");
+			arquivoEscrita.escreveLinha("import org.springframework.web.bind.annotation.RequestBody;");
+			arquivoEscrita.escreveLinha("import org.springframework.web.bind.annotation.PostMapping;");
+			arquivoEscrita.escreveLinha("import org.springframework.web.bind.annotation.RestController;");
+			arquivoEscrita.escreveLinha("");
+			arquivoEscrita.escreveLinha("@RestController");
+		} else {
+			arquivoEscrita.escreveLinha("");
+		}
 
 		arquivoEscrita.escreveLinha("public class " + toUpperFistCase(nomeClasse) + " {");
 
@@ -303,17 +330,31 @@ public class ProcedureDivision {
 		if (!declaracao.isEmpty()) {
 			if (this instanceof ProcedureDivisionSection) {
 				String parametros = new String();
-				for (String elemento : declaracao) {
-					parametros += elemento + " " + elemento.toLowerCase() + ", ";
+				if (!declaracao.isEmpty()) {
+					for (String elemento : declaracao) {
+						parametros += elemento + " " + elemento.toLowerCase() + ", ";
+					}
+					parametros = parametros.substring(0, parametros.length() - 2);
 				}
-				parametros = parametros.substring(0, parametros.length() - 2);
 				arquivoEscrita.escreveLinha("\n\tpublic void " + nomeClasse.toLowerCase() + "(" + parametros + "){\n");
 			} else {
-				for (String elemento : declaracao) {
-					arquivoEscrita.escreveLinha("\n\t" + toUpperFistCase(elemento) + " " + elemento.toLowerCase()
-							+ " = new " + toUpperFistCase(elemento) + "();");
+				String stringAutowired = "";
+				if (nomePrograma != null && !nomePrograma.isEmpty()) {
+					stringAutowired = "@Autowired";
+					for (String elemento : declaracao) {
+						arquivoEscrita.escreveLinha("\n\t" + stringAutowired + "\n\t" + toUpperFistCase(elemento) + " "
+								+ elemento.toLowerCase() + ";");
+					}
+					arquivoEscrita.escreveLinha(
+							"\n\t@PostMapping(\"/" + nomePrograma.toLowerCase().replaceAll("\\s", "").replace("\"", "") + "\")");
+					arquivoEscrita.escreveLinha("\tpublic void " + nomeClasse.toLowerCase() + "(){\n");
+				} else {
+					for (String elemento : declaracao) {
+						arquivoEscrita.escreveLinha("\n\t" + stringAutowired + "\n\t" + toUpperFistCase(elemento) + " "
+								+ elemento.toLowerCase() + " = new " + toUpperFistCase(elemento) + "();");
+					}
+					arquivoEscrita.escreveLinha("\n\tpublic void " + nomeClasse.toLowerCase() + "(){\n");
 				}
-				arquivoEscrita.escreveLinha("\n\tpublic void " + nomeClasse.toLowerCase() + "(){\n");
 			}
 		} else {
 			arquivoEscrita.escreveLinha("\n\tpublic void " + nomeClasse.toLowerCase() + "(){\n");
@@ -329,8 +370,6 @@ public class ProcedureDivision {
 
 		arquivoEscrita.escreveLinha("\n\t}\n}");
 		arquivoEscrita.fechaArquivo();
-
-		return null;
 	}
 
 	public String getNomeClasse() {
@@ -342,7 +381,7 @@ public class ProcedureDivision {
 				: nome.substring(0, 1).toUpperCase() + nome.toLowerCase().substring(1);
 	}
 
-	public Set<String> getImports() {
+	public Set<String> getImportsSecao() {
 		Set<String> todosImports = new HashSet<String>();
 		for (Paragrafo paragrafo : paragrafos) {
 			Set<String> texto = paragrafo.getImports();

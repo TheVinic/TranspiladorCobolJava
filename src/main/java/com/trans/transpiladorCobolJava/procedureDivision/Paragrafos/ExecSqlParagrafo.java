@@ -84,7 +84,7 @@ public class ExecSqlParagrafo extends Paragrafo {
 			}
 
 		} else {
-			System.out.println("Erro na leitura da instrução. Recebida: \"" + instrucao  + "\"");
+			System.out.println("Erro na leitura da instrução. Recebida: \"" + instrucao + "\"");
 		}
 		for (Atributo elemento : tabelas) {
 			dataDivision.setIntrucaoRepository(getInstrucao(), elemento.getNome());
@@ -371,23 +371,16 @@ public class ExecSqlParagrafo extends Paragrafo {
 		return instrucao;
 	}
 
-	@Query
 	@Override
 	public String escreveArquivo(Integer nivel) {
 		String texto = fazTabulacao(nivel);
-		switch (declaracao) {
-		case "INSERT":
-		case "UPDATE":
-		case "DELETE":
-			break;
-		case "SELECT":
+		if (declaracao == "SELECT") {
 			// TODO validar como q cobol trata SELECT com vários campos
 			if (parametros.size() > 1) {
 				texto += "List<Object> " + nomeQuery.toLowerCase() + " = ";
 			} else {
 				texto += parametros.get(0) + " = ";
 			}
-			break;
 		}
 		texto += tabelas.get(0).getNome().toLowerCase() + "repository." + nomeQuery.toLowerCase() + "(";
 		if (values != null && !values.isEmpty()) {

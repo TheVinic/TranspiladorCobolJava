@@ -7,32 +7,30 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 
-import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoItemGrupo;
 
 @Component
 public class WorkingStorageSection extends DataDivisionCriaVariaveis {
 
-	ArrayList<Atributo> atributos = new ArrayList<Atributo>();
+	private ArrayList<Atributo> atributos = new ArrayList<Atributo>();
 
-	AtributoGrupo DadosPrincipais;
+	private AtributoItemGrupo DadosPrincipais;
 
-	Codigo codigoCompleto;
-
-	public AtributoGrupo popula(String codigoCobol) {
+	public AtributoItemGrupo analisesWorkingStorageSection(String codigoCobol) {
 
 		Pattern pattern = Pattern
-				.compile("(?i)" + regexNivelNome + regexPicTipoTamanho + regexValue + regexOccurs + "\\.");
+				.compile("(?i)" + regexNivelNome + regexPicTipoTamanho + regexComp + regexValue + regexOccurs + "\\.");
 		Matcher matcher = pattern.matcher(codigoCobol);
 		List<String> classes = new ArrayList<String>();
 		if (matcher.find()) {
 			do {
+				matcher.group();
 				atributos.add(criaItem(matcher, classes, SecoesDataDivision.WORKINGSTORAGESECTION));
-			} while ((atributos.get(atributos.size() - 1) instanceof AtributoGrupo)
-					? ((matcher.group("nivel") == null) ? false : true)
+			} while ((atributos.get(atributos.size() - 1) instanceof AtributoItemGrupo)
+					? (matcher.hitEnd() || (matcher.group("nivel") == null) ? false : true)
 					: matcher.find());
-			DadosPrincipais = new AtributoGrupo("DadosPrincipais", 0, atributos, null, null,
+			DadosPrincipais = new AtributoItemGrupo("DadosPrincipais", 0, atributos, null, null,
 					SecoesDataDivision.WORKINGSTORAGESECTION);
 		}
 		return DadosPrincipais;

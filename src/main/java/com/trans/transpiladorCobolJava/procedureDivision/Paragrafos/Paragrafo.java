@@ -37,7 +37,7 @@ public abstract class Paragrafo implements ParagrafoImpl {
 		 * elemento.setPosicaoLeitura(elemento.getPosicaoLeitura() + 3); return
 		 * atributo; } else {
 		 */
-		return dataDivision.localizaAtributo(elemento);
+		return dataDivision.localizaAtributoArvoreObjetos(elemento);
 		// }
 	}
 
@@ -51,14 +51,14 @@ public abstract class Paragrafo implements ParagrafoImpl {
 
 	protected Atributo criaAtributo(String elemento, DataDivision dataDivision) {
 		if (elemento.matches("[0-9]+")) {
-			// Tipo númerico
+			// Tipo n�merico
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.NUMERO, elemento, null,
 					null, null));
 		} else if (elemento.matches("[0-9]+\\,[0-9]+")) {
 			// Tipo decimal
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.DECIMAL, elemento, null,
 					null, null));
-		} else if (elemento.matches("(?i)LESS|GREATER|OR")) {
+		} else if (elemento.matches("(?i)LESS|GREATER|OR|EQUAL|=")) {
 			String valor = null;
 			switch (elemento) {
 			case "OR":
@@ -69,6 +69,10 @@ public abstract class Paragrafo implements ParagrafoImpl {
 				break;
 			case "LESS":
 				valor = "<";
+				break;
+			case "EQUAL":
+			case "=":
+				valor = "==";
 				break;
 			}
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.CARACTERE, valor, null,
@@ -81,7 +85,7 @@ public abstract class Paragrafo implements ParagrafoImpl {
 
 	protected Atributo encontraCriaAtributo(String elemento, DataDivision dataDivision) {
 		if (elemento.matches("[0-9]+")) {
-			// Tipo númerico
+			// Tipo n�merico
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.NUMERO, elemento, null,
 					null, null));
 		} else if (elemento.matches("[0-9]+\\,[0-9]+")) {
@@ -91,7 +95,7 @@ public abstract class Paragrafo implements ParagrafoImpl {
 		} else if (validaCondicao(elemento)) {
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.CARACTERE, elemento, null,
 					null, null));
-		} else if (elemento.matches("(?i)LESS|GREATER|OR|OTHER|FALSE|TRUE|AND")) {
+		} else if (elemento.matches("(?i)LESS|GREATER|OR|OTHER|FALSE|TRUE|AND|SPACE|SPACES")) {
 			String valor = null;
 			switch (elemento.toUpperCase()) {
 			case "OR":
@@ -115,6 +119,10 @@ public abstract class Paragrafo implements ParagrafoImpl {
 			case "AND":
 				valor = "&&";
 				break;
+			case "SPACE":
+			case "SPACES":
+				valor = " ";
+				break;
 			}
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.CARACTERE, valor, null,
 					null, null));
@@ -127,7 +135,7 @@ public abstract class Paragrafo implements ParagrafoImpl {
 	// TODO VALIDAR OF
 	protected Atributo encontraCriaAtributo(String elemento, String of, DataDivision dataDivision) {
 		if (elemento.matches("[0-9]+")) {
-			// Tipo númerico
+			// Tipo n�merico
 			return (new AtributoElementar(null, null, elemento.length(), null, TipoAtributo.NUMERO, elemento, null,
 					null, null));
 		} else if (elemento.matches("[0-9]+\\,[0-9]+")) {

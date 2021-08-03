@@ -1,0 +1,1532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UMLLabProfile="http:///schemas/UMLLabProfile/NS/0" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Cbg-oOnJEeur86ufxBm1QA">
+  <eAnnotations xmi:id="_KpDIEOz7EeuVw-4FNdbrow" source="http://ns.yatta.de/umllab">
+    <contents xsi:type="ecore:EAnnotation" xmi:id="_KpDIEez7EeuVw-4FNdbrow" source="dangling-refs">
+      <contents xsi:type="UMLLabProfile:Annotations" xmi:id="_A_soMOz7EeuVw-4FNdbrow">
+        <base_Element xsi:type="uml:Property" href="TranspiladorCobolJava2.uml#_DtSvkOnJEeur86ufxBm1QA"/>
+      </contents>
+    </contents>
+  </eAnnotations>
+  <modelElement href="TranspiladorCobolJava2.uml#_DSYVMunJEeur86ufxBm1QA"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_Fa9LQOnJEeur86ufxBm1QA" sourceAnchor="679.0,0.0" targetAnchor="14.0,44.0" target="_7PTaIOnJEeur86ufxBm1QA" source="_FbAOkOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvLl8enJEeur86ufxBm1QA"/>
+    <stereotypes xmi:id="_Fa9LQenJEeur86ufxBm1QA" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvMNAOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_Fa9LQunJEeur86ufxBm1QA" text="">
+      <visualProperties xmi:id="_7UTO4OnJEeur86ufxBm1QA" position="2.0,20.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_Fa9LQ-nJEeur86ufxBm1QA" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvLl8unJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_7USn1-nJEeur86ufxBm1QA" position="2.0,-133.0"/>
+      <visibility xmi:id="_Fa9LROnJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_Fa9LRenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_Fa9LRunJEeur86ufxBm1QA" aggregationKind="NONE" name="evaluate" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DstgwOnJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_7UT18OnJEeur86ufxBm1QA" position="-61.0,59.000000000000014"/>
+      <stereotypes xmi:id="_g312YOy3EeuVw-4FNdbrow" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_DstgwenJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <stereotypes xmi:id="_g312Yey3EeuVw-4FNdbrow" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DsuH0enJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_Fa9LR-nJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_Fa9LSOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_Fa_AcOnJEeur86ufxBm1QA" sourceAnchor="696.0,125.0" targetAnchor="61.0,22.0" target="_7PTaIOnJEeur86ufxBm1QA" source="_FbAOkOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvMNAenJEeur86ufxBm1QA"/>
+    <bendpoints xmi:id="_-ZooIenJEeur86ufxBm1QA" sourceX="378" sourceY="2" targetX="348" targetY="312"/>
+    <bendpoints xmi:id="_-ZooIunJEeur86ufxBm1QA" sourceX="377" sourceY="-310" targetX="347"/>
+    <stereotypes xmi:id="_Fa_AcenJEeur86ufxBm1QA" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvMNA-nJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_Fa_AcunJEeur86ufxBm1QA" text="">
+      <visualProperties xmi:id="_7UUdAOnJEeur86ufxBm1QA" position="-38.0,99.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_Fa_Ac-nJEeur86ufxBm1QA" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvMNAunJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_7UT18enJEeur86ufxBm1QA" position="34.0,-47.0"/>
+      <visibility xmi:id="_Fa_AdOnJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_Fa_AdenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_Fa_AdunJEeur86ufxBm1QA" aggregationKind="NONE" name="when" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsuH0unJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_7UUdAenJEeur86ufxBm1QA" position="38.0,2.0"/>
+      <stereotypes xmi:id="_g34SoOy3EeuVw-4FNdbrow" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dsuu4OnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <stereotypes xmi:id="_g34Soey3EeuVw-4FNdbrow" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DsvV8OnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_Fa_Ad-nJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_Fa_AeOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_Fc3PwOnJEeur86ufxBm1QA" sourceAnchor="341.0,0.0" targetAnchor="344.0,187.0" target="_FbAOkOnJEeur86ufxBm1QA" source="_FdcekOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvMNBOnJEeur86ufxBm1QA"/>
+    <stereotypes xmi:id="_FdY0MenJEeur86ufxBm1QA" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvM0EOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_FdYNIOnJEeur86ufxBm1QA" text="">
+      <visualProperties xmi:id="_FpYo0enJEeur86ufxBm1QA" position="2.0,-10.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_FdYNIenJEeur86ufxBm1QA" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvMNBenJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_FpYo0OnJEeur86ufxBm1QA" position="41.0,-37.0"/>
+      <visibility xmi:id="_FdbQcOnJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FdapYOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_FdY0MOnJEeur86ufxBm1QA" aggregationKind="NONE" name="evaluate" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsvV8enJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_FpZP4OnJEeur86ufxBm1QA" position="-61.0,-9.0"/>
+      <stereotypes xmi:id="_g35gwOy3EeuVw-4FNdbrow" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dsv9AOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_FdbQcunJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_FdbQcenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_LYaBIOnJEeur86ufxBm1QA" sourceAnchor="340.0,0.0" targetAnchor="270.0,346.0" superClass="_LYjLGenJEeur86ufxBm1QA" subClass="_FbAOkOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DqFqkOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_LYjyIOnJEeur86ufxBm1QA" position="406.0,51.0"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_LYaoMOnJEeur86ufxBm1QA" sourceAnchor="0.0,36.0" targetAnchor="270.0,346.0" superClass="_LYjLGenJEeur86ufxBm1QA" subClass="_FdcekOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DqG4sOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_P-usAOnJEeur86ufxBm1QA" position="405.0,274.0"/>
+    <bendpoints xmi:id="_-ZoBEOnJEeur86ufxBm1QA" sourceX="-18" targetX="-355" targetY="327"/>
+    <bendpoints xmi:id="_-ZoBEenJEeur86ufxBm1QA" sourceX="-18" sourceY="-281" targetX="-355" targetY="46"/>
+    <bendpoints xmi:id="_-ZooIOnJEeur86ufxBm1QA" sourceX="337" sourceY="-281" targetY="46"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_LYbPQOnJEeur86ufxBm1QA" source="_LYjLGenJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvUI1OnJEeur86ufxBm1QA"/>
+    <stereotypes xmi:id="_LYgHwenJEeur86ufxBm1QA" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvUv4OnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_LYfgsOnJEeur86ufxBm1QA" text=""/>
+    <sourceRole xmi:id="_LYfgsenJEeur86ufxBm1QA" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvUI1enJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYhV4enJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_LYhV4OnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_LYgHwOnJEeur86ufxBm1QA" aggregationKind="NONE" name="matcherOf" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtC38enJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_g36H0Oy3EeuVw-4FNdbrow" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtC38unJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_LYh88enJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYh88OnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_LYjLEOnJEeur86ufxBm1QA" source="_LYjLGenJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvUI0enJEeur86ufxBm1QA"/>
+    <stereotypes xmi:id="_LYjLEenJEeur86ufxBm1QA" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvUI0-nJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_LYjLEunJEeur86ufxBm1QA" text=""/>
+    <sourceRole xmi:id="_LYjLE-nJEeur86ufxBm1QA" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvUI0unJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLFOnJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_LYjLFenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_LYjLFunJEeur86ufxBm1QA" aggregationKind="NONE" name="patternOf" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtCQ4-nJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_g37V8Oy3EeuVw-4FNdbrow" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtC38OnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_LYjLF-nJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLGOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_3HqPUOnJEeur86ufxBm1QA" sourceAnchor="125.0,0.0" targetAnchor="44.0,44.0" target="_7PTaIOnJEeur86ufxBm1QA" source="_3H0AUOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvZoYenJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_7PTaJOnJEeur86ufxBm1QA" position="985.0,66.0"/>
+    <bendpoints xmi:id="_-ZooI-nJEeur86ufxBm1QA" sourceY="-57" targetX="162" targetY="88"/>
+    <bendpoints xmi:id="_-ZooJOnJEeur86ufxBm1QA" sourceX="-162" sourceY="-57" targetY="88"/>
+    <stereotypes xmi:id="_3Hw9A-nJEeur86ufxBm1QA" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvaPcOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_3Hw9AOnJEeur86ufxBm1QA" text="">
+      <visualProperties xmi:id="_7UVrIOnJEeur86ufxBm1QA" position="-41.0,-17.999999999999986"/>
+    </nameVisual>
+    <sourceRole xmi:id="_3Hw9AenJEeur86ufxBm1QA" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvZoYunJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_7UVEEOnJEeur86ufxBm1QA" position="-56.0,-56.0"/>
+      <visibility xmi:id="_3HxkE-nJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_3HxkEunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_3Hw9AunJEeur86ufxBm1QA" aggregationKind="NONE" name="when" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtPFMOnJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_7UVrIenJEeur86ufxBm1QA" position="1.0,4.000000000000028"/>
+      <stereotypes xmi:id="_g379AOy3EeuVw-4FNdbrow" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtPFMenJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <stereotypes xmi:id="_g38kEOy3EeuVw-4FNdbrow" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtPsQenJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_3HyLIenJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_3HyLIOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_3Ht5sOnJEeur86ufxBm1QA" sourceAnchor="255.0,61.0" targetAnchor="29.0,0.0" target="_7PTaIOnJEeur86ufxBm1QA" source="_3H0AUOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvaPcenJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_7PTaJenJEeur86ufxBm1QA" position="985.0,66.0"/>
+    <bendpoints xmi:id="_-ZooJenJEeur86ufxBm1QA" sourceX="43" sourceY="2" targetX="350" targetY="255"/>
+    <bendpoints xmi:id="_-ZooJunJEeur86ufxBm1QA" sourceX="43" sourceY="-268" targetX="350" targetY="-15"/>
+    <bendpoints xmi:id="_-ZooJ-nJEeur86ufxBm1QA" sourceX="-307" sourceY="-268" targetY="-15"/>
+    <stereotypes xmi:id="_3HxkEenJEeur86ufxBm1QA" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_Dva2gOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_3Hw9BOnJEeur86ufxBm1QA" text="">
+      <visualProperties xmi:id="_7UW5QOnJEeur86ufxBm1QA" position="-194.0000000000001,-18.999999999999943"/>
+    </nameVisual>
+    <sourceRole xmi:id="_3Hw9BenJEeur86ufxBm1QA" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvaPcunJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_7UWSMOnJEeur86ufxBm1QA" position="29.0,-86.0"/>
+      <visibility xmi:id="_3HyLJenJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_3HyLJOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_3HxkEOnJEeur86ufxBm1QA" aggregationKind="NONE" name="instrucoes" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtPsQunJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_7UXgUOnJEeur86ufxBm1QA" position="47.0,-62.0"/>
+      <stereotypes xmi:id="_g39LIOy3EeuVw-4FNdbrow" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtQTUOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <stereotypes xmi:id="_g39LIey3EeuVw-4FNdbrow" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtQTUunJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_3HyLJ-nJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_3HyLJunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_lFeUcOy3EeuVw-4FNdbrow" sourceAnchor="387.0,0.0" targetAnchor="61.0,22.0" target="_7PTaIOnJEeur86ufxBm1QA" source="_lGaIkOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_Dva2genJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_mRL5xuy3EeuVw-4FNdbrow" position="1138.0,323.0"/>
+    <bendpoints xmi:id="_mXKl0Oy3EeuVw-4FNdbrow" sourceX="-1" sourceY="-355" targetX="372"/>
+    <stereotypes xmi:id="_lGN7Uey3EeuVw-4FNdbrow" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvbdkOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_lGNUQOy3EeuVw-4FNdbrow" text="">
+      <visualProperties xmi:id="_lUIbguy3EeuVw-4FNdbrow" position="-192.0,2.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_lGNUQey3EeuVw-4FNdbrow" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_Dva2gunJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_lUIbgey3EeuVw-4FNdbrow" position="2.0,-85.0"/>
+      <visibility xmi:id="_lGVQEOy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGUpAOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_lGN7UOy3EeuVw-4FNdbrow" aggregationKind="NONE" name="paragrafos" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtSvkOnJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_lUJCkOy3EeuVw-4FNdbrow" position="51.0,-46.99999999999994"/>
+      <stereotypes xmi:id="_BABYUOz7EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_BATFIOz7EeuVw-4FNdbrow" name="Annotations"/>
+      <stereotypes xmi:id="_J_9HwOz7EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_J_-88Oz7EeuVw-4FNdbrow" name="Annotations"/>
+      <visibility xmi:id="_lGVQEuy3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_lGVQEey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_lF5LMOy3EeuVw-4FNdbrow" sourceAnchor="0.0,150.0" targetAnchor="29.0,44.0" target="_7PTaIOnJEeur86ufxBm1QA" source="_lGaIkOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvbdkenJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_mRMgsOy3EeuVw-4FNdbrow" position="1138.0,323.0"/>
+    <bendpoints xmi:id="_mXLM4Oy3EeuVw-4FNdbrow" sourceX="-17" sourceY="-1" targetY="482"/>
+    <stereotypes xmi:id="_lGN7Vey3EeuVw-4FNdbrow" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvcEoOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_lGN7Uuy3EeuVw-4FNdbrow" text="">
+      <visualProperties xmi:id="_lUKQsey3EeuVw-4FNdbrow" position="2.0,-252.00000000000003"/>
+    </nameVisual>
+    <sourceRole xmi:id="_lGN7U-y3EeuVw-4FNdbrow" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvbdkunJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_lUKQsOy3EeuVw-4FNdbrow" position="-16.0,-47.0"/>
+      <visibility xmi:id="_lGVQFey3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGVQFOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_lGN7VOy3EeuVw-4FNdbrow" aggregationKind="NONE" name="secoes" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtTWoOnJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_lUK3wOy3EeuVw-4FNdbrow" position="-52.0,40.0"/>
+      <stereotypes xmi:id="_ZADp4Oz7EeuVw-4FNdbrow" name="Generics"/>
+      <visibility xmi:id="_lGV3Iey3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_lGV3IOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_lGK4AOy3EeuVw-4FNdbrow" sourceAnchor="86.0,0.0" targetAnchor="390.0,325.0" superClass="_lGaIkOy3EeuVw-4FNdbrow" subClass="_T3OAgOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DqSe4enJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_l87g4-y3EeuVw-4FNdbrow" position="1138.0,323.0"/>
+    <bendpoints xmi:id="_twWZ4uy3EeuVw-4FNdbrow" sourceY="-39" targetX="-405" targetY="37"/>
+    <bendpoints xmi:id="_twWZ4-y3EeuVw-4FNdbrow" sourceX="405" sourceY="-39" targetY="37"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_lGZhgOy3EeuVw-4FNdbrow" sourceAnchor="588.0,0.0" targetAnchor="131.0,138.0" target="_mRL5qey3EeuVw-4FNdbrow" source="_lGaIkOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvcEoenJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_mRMgsey3EeuVw-4FNdbrow" position="1138.0,323.0"/>
+    <stereotypes xmi:id="_lGZhgey3EeuVw-4FNdbrow" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvcrsOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_lGZhguy3EeuVw-4FNdbrow" text="">
+      <visualProperties xmi:id="_mXNCEOy3EeuVw-4FNdbrow" position="2.0,-8.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_lGZhg-y3EeuVw-4FNdbrow" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvcEounJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_mXMbAOy3EeuVw-4FNdbrow" position="-17.0,-46.0"/>
+      <visibility xmi:id="_lGZhhOy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGZhhey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_lGZhhuy3EeuVw-4FNdbrow" aggregationKind="NONE" name="arquivoEscrita" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtTWounJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_mXNCEey3EeuVw-4FNdbrow" position="41.0,1.0"/>
+      <visibility xmi:id="_lGZhh-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_lGZhiOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_l82oYOy3EeuVw-4FNdbrow" sourceAnchor="72.0,0.0" targetAnchor="390.0,325.0" superClass="_lGaIkOy3EeuVw-4FNdbrow" subClass="_l832gOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DqR30OnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_l87g4Oy3EeuVw-4FNdbrow" position="1138.0,323.0"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_l84dkOy3EeuVw-4FNdbrow" sourceAnchor="89.0,0.0" targetAnchor="390.0,325.0" superClass="_lGaIkOy3EeuVw-4FNdbrow" subClass="_l85EoOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DqR30enJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_l87g4ey3EeuVw-4FNdbrow" position="1138.0,323.0"/>
+    <bendpoints xmi:id="_twWZ4Oy3EeuVw-4FNdbrow" sourceY="-40" targetX="-173" targetY="37"/>
+    <bendpoints xmi:id="_twWZ4ey3EeuVw-4FNdbrow" sourceX="173" sourceY="-40" targetY="37"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_l85rsOy3EeuVw-4FNdbrow" sourceAnchor="212.0,0.0" targetAnchor="390.0,325.0" superClass="_lGaIkOy3EeuVw-4FNdbrow" subClass="_l8650Oy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DqSe4OnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_l87g4uy3EeuVw-4FNdbrow" position="1138.0,323.0"/>
+    <bendpoints xmi:id="_twVy0Oy3EeuVw-4FNdbrow" sourceY="-30" targetX="293" targetY="37"/>
+    <bendpoints xmi:id="_twVy0ey3EeuVw-4FNdbrow" sourceX="-293" sourceY="-30" targetY="37"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_mREk4Oy3EeuVw-4FNdbrow" sourceAnchor="192.0,173.0" targetAnchor="204.0,0.0" target="_lGaIkOy3EeuVw-4FNdbrow" source="_mRJdaey3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvE4QOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_mRL5xey3EeuVw-4FNdbrow" position="1138.0,323.0"/>
+    <stereotypes xmi:id="_mRFzBOy3EeuVw-4FNdbrow" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvE4QunJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_mRFzAey3EeuVw-4FNdbrow" text="">
+      <visualProperties xmi:id="_mXLM4uy3EeuVw-4FNdbrow" position="-39.0,-9.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_mRFzAuy3EeuVw-4FNdbrow" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvE4QenJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_mXLM4ey3EeuVw-4FNdbrow" position="-56.0,-12.0"/>
+      <visibility xmi:id="_mRHBJey3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRHBJOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_mRFzA-y3EeuVw-4FNdbrow" aggregationKind="NONE" name="procedureDivision" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsjvwunJEeur86ufxBm1QA"/>
+      <visualProperties xmi:id="_mXLz8Oy3EeuVw-4FNdbrow" position="2.0,-34.0"/>
+      <stereotypes xmi:id="_MotvMOz6EeuVw-4FNdbrow" name="Annotations"/>
+      <visibility xmi:id="_mRHoMey3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRHoMOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_mRFzAOy3EeuVw-4FNdbrow" source="_mRJdaey3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvERMenJEeur86ufxBm1QA"/>
+    <stereotypes xmi:id="_mRHBI-y3EeuVw-4FNdbrow" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvERM-nJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_mRHBIOy3EeuVw-4FNdbrow" text=""/>
+    <sourceRole xmi:id="_mRHBIey3EeuVw-4FNdbrow" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvERMunJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRHoM-y3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRHoMuy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_mRHBIuy3EeuVw-4FNdbrow" aggregationKind="NONE" name="dataDivision" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsjvwenJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_MoshEOz6EeuVw-4FNdbrow" name="Annotations"/>
+      <visibility xmi:id="_mRHoNey3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRHoNOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_mRIPQOy3EeuVw-4FNdbrow" source="_mRJdaey3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvDqIenJEeur86ufxBm1QA"/>
+    <stereotypes xmi:id="_mRIPQey3EeuVw-4FNdbrow" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvERMOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_mRIPQuy3EeuVw-4FNdbrow" text=""/>
+    <sourceRole xmi:id="_mRIPQ-y3EeuVw-4FNdbrow" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvDqIunJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRIPROy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRIPRey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_mRIPRuy3EeuVw-4FNdbrow" aggregationKind="NONE" name="identificationDivision" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsjvwOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_Mn3aoOz6EeuVw-4FNdbrow" name="Annotations"/>
+      <visibility xmi:id="_mRIPR-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRIPSOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_mRI2UOy3EeuVw-4FNdbrow" source="_mRJdaey3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DvE4Q-nJEeur86ufxBm1QA"/>
+    <stereotypes xmi:id="_mRI2Uey3EeuVw-4FNdbrow" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvFfUOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_mRI2Uuy3EeuVw-4FNdbrow" text=""/>
+    <sourceRole xmi:id="_mRI2U-y3EeuVw-4FNdbrow" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_DvE4ROnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRI2VOy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRI2Vey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_mRI2Vuy3EeuVw-4FNdbrow" aggregationKind="NONE" name="environmentDivision" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DskW0OnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_MoynsOz6EeuVw-4FNdbrow" name="Annotations"/>
+      <visibility xmi:id="_mRI2V-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRI2WOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_mRLSkOy3EeuVw-4FNdbrow" source="_mRL5qey3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_Du5SEenJEeur86ufxBm1QA"/>
+    <stereotypes xmi:id="_mRLSkey3EeuVw-4FNdbrow" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_Du5SE-nJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_mRLSkuy3EeuVw-4FNdbrow" text=""/>
+    <sourceRole xmi:id="_mRLSk-y3EeuVw-4FNdbrow" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_Du5SEunJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRLSlOy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRLSley3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_mRLSluy3EeuVw-4FNdbrow" aggregationKind="NONE" name="arquivoJava" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_Dr6PgenJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRLSl-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRLSmOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_mRL5oOy3EeuVw-4FNdbrow" source="_mRL5qey3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_Du55IOnJEeur86ufxBm1QA"/>
+    <stereotypes xmi:id="_mRL5oey3EeuVw-4FNdbrow" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_Du55IunJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <nameVisual xmi:id="_mRL5ouy3EeuVw-4FNdbrow" text=""/>
+    <sourceRole xmi:id="_mRL5o-y3EeuVw-4FNdbrow" aggregationKind="NONE" name="">
+      <modelElement href="TranspiladorCobolJava2.uml#_Du55IenJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRL5pOy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRL5pey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_mRL5puy3EeuVw-4FNdbrow" aggregationKind="NONE" name="gravaCodigo" navigable="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_Dr62kenJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRL5p-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRL5qOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_FbAOkOnJEeur86ufxBm1QA" name="EvaluateModel" associationsIn="_Fc3PwOnJEeur86ufxBm1QA" associationsOut="_Fa9LQOnJEeur86ufxBm1QA _Fa_AcOnJEeur86ufxBm1QA" generalizations="_LYaBIOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DZwvkOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_FbAOkenJEeur86ufxBm1QA" position="36.0,0.0" size="-1.0,-1.0" visible="false"/>
+    <visibility xmi:id="_FbAOkunJEeur86ufxBm1QA" label="+"/>
+    <attributes xmi:id="_FbAOk-nJEeur86ufxBm1QA" defaultValue="new ArrayList&lt;ArrayList&lt;Atributo>>()" name="evaluate">
+      <modelElement href="TranspiladorCobolJava2.uml#_DstgwOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_g4aeIOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4cTUOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4dhcOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4dhcey3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4unMOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4vOQOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <visibility xmi:id="_FbAOlunJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_FbAOl-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <type xmi:id="_FbAOmOnJEeur86ufxBm1QA" name="ArrayList">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_FbAOmenJEeur86ufxBm1QA" defaultValue="new ArrayList&lt;WhenEvaluateModel>()" name="when">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsuH0unJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_g4evkOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4fWoOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4f9sOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4gkwOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4v1UOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4wcYOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <visibility xmi:id="_FbAOnOnJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_FbAOnenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <type xmi:id="_FbAOnunJEeur86ufxBm1QA" name="ArrayList">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_FbAOn-nJEeur86ufxBm1QA" name="escreveArquivo">
+      <modelElement href="TranspiladorCobolJava2.uml#_DZx9sOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_FbAOoOnJEeur86ufxBm1QA" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZykwOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <stereotypes xmi:id="_FbAOoenJEeur86ufxBm1QA" name="Annotations">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZykwenJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_FbAOounJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FbAOo-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_FbAOpOnJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZx9sunJEeur86ufxBm1QA"/>
+        <type xmi:id="_FbAOpenJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_FbAOpunJEeur86ufxBm1QA" name="nivel">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZx9senJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAOp-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAOqOnJEeur86ufxBm1QA" name="Integer">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_FbAOqenJEeur86ufxBm1QA" name="getEvaluate">
+      <modelElement href="TranspiladorCobolJava2.uml#_DZykw-nJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_FbAOqunJEeur86ufxBm1QA" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZzy4OnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_FbAOq-nJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FbAOrOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_FbAOrenJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrKooOnJEeur86ufxBm1QA"/>
+        <type xmi:id="_FbAOrunJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_FbAOr-nJEeur86ufxBm1QA" name="getWhen">
+      <modelElement href="TranspiladorCobolJava2.uml#_DZzy4enJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_FbAOsOnJEeur86ufxBm1QA" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZ1BAOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_FbAOsenJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FbAOsunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_FbAOs-nJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrL2wOnJEeur86ufxBm1QA"/>
+        <type xmi:id="_FbAOtOnJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_FbAOtenJEeur86ufxBm1QA" name="addEvaluate">
+      <modelElement href="TranspiladorCobolJava2.uml#_DqDOUOnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_FbAOtunJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FbAOt-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <parameters xmi:id="_FbAOuOnJEeur86ufxBm1QA" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqD1YOnJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAOuenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAOuunJEeur86ufxBm1QA" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_FbAOu-nJEeur86ufxBm1QA" name="regexAlso">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqD1YenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAOvOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAOvenJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_FbAOvunJEeur86ufxBm1QA" name="identificador1">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqD1YunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAOv-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAOwOnJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_FbAOwenJEeur86ufxBm1QA" name="identificadorAlso">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqD1Y-nJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAOwunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAOw-nJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_FbAOxOnJEeur86ufxBm1QA" name="criaWhen">
+      <modelElement href="TranspiladorCobolJava2.uml#_DqEccOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_FbAOxenJEeur86ufxBm1QA" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqFDgOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_FbAOxunJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FbAOx-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_FbAOyOnJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrMd0enJEeur86ufxBm1QA"/>
+        <type xmi:id="_FbAOyenJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_FbAOyunJEeur86ufxBm1QA" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqEccenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAOy-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAOzOnJEeur86ufxBm1QA" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_FbAOzenJEeur86ufxBm1QA" name="regexAlso">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqEccunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAOzunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAOz-nJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_FbAO0OnJEeur86ufxBm1QA" name="instrucaoWhen">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqEcc-nJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAO0enJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAO0unJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_FbAO0-nJEeur86ufxBm1QA" name="instrucaoAlso">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqEcdOnJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAO1OnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAO1enJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_FbAO1unJEeur86ufxBm1QA" name="addWhen">
+      <modelElement href="TranspiladorCobolJava2.uml#_DqFDgenJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_FbAO1-nJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FbAO2OnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <parameters xmi:id="_FbAO2enJEeur86ufxBm1QA" name="when">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqFDgunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAO2unJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAO2-nJEeur86ufxBm1QA" name="WhenEvaluateModel">
+          <modelElement href="TranspiladorCobolJava2.uml#_Da9CYOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_FbAO3OnJEeur86ufxBm1QA" name="setEvaluate">
+      <modelElement href="TranspiladorCobolJava2.uml#_DrKooenJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_FbAO3enJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FbAO3unJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <parameters xmi:id="_FbAO3-nJEeur86ufxBm1QA" name="evaluate">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrKoounJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbAO4OnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbAO4enJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_FbAO4unJEeur86ufxBm1QA" name="setWhen">
+      <modelElement href="TranspiladorCobolJava2.uml#_DrL2wenJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_FbAO4-nJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FbAO5OnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <parameters xmi:id="_FbA1oOnJEeur86ufxBm1QA" name="when">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrL2wunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FbA1oenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FbA1ounJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_3H0AUOnJEeur86ufxBm1QA" name="WhenEvaluateModel" associationsOut="_3HqPUOnJEeur86ufxBm1QA _3Ht5sOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_Da9CYOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_3H0AUenJEeur86ufxBm1QA" position="782.0,-16.0" size="-1.0,-1.0" visible="false"/>
+    <visibility xmi:id="_3H0AUunJEeur86ufxBm1QA" label="+"/>
+    <attributes xmi:id="_3H0AU-nJEeur86ufxBm1QA" defaultValue="new ArrayList&lt;ArrayList&lt;Atributo>>()" name="when">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtPFMOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_g4n5gOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4ogkOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4qVwOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4q80Oy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4xDcOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4xqgOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <visibility xmi:id="_3H0AVunJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_3H0AV-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <type xmi:id="_3H0AWOnJEeur86ufxBm1QA" name="ArrayList">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_3H0AWenJEeur86ufxBm1QA" defaultValue="new ArrayList&lt;Paragrafo>()" name="instrucoes">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtPsQunJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_g4sK8Oy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4syAOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4tZEOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4uAIOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4yRkOy3EeuVw-4FNdbrow" name="Generics"/>
+      <stereotypes xmi:id="_g4y4oOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <visibility xmi:id="_3H0AXOnJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_3H0AXenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <type xmi:id="_3H0AXunJEeur86ufxBm1QA" name="ArrayList">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_3H0AX-nJEeur86ufxBm1QA" name="getWhen">
+      <modelElement href="TranspiladorCobolJava2.uml#_Da9pcOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_3H0AYOnJEeur86ufxBm1QA" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_Da-QgOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_3H0AYenJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_3H0AYunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_3H0AY-nJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_Drc8gOnJEeur86ufxBm1QA"/>
+        <type xmi:id="_3H0AZOnJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_3H0AZenJEeur86ufxBm1QA" name="getInstrucoes">
+      <modelElement href="TranspiladorCobolJava2.uml#_Da-3kOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_3H0AZunJEeur86ufxBm1QA" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_Da_eoOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_3H0AZ-nJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_3H0AaOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_3H0AaenJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DreKoenJEeur86ufxBm1QA"/>
+        <type xmi:id="_3H0AaunJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_3H0Aa-nJEeur86ufxBm1QA" name="setWhen">
+      <modelElement href="TranspiladorCobolJava2.uml#_DrdjkOnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_3H0AbOnJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_3H0AbenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <parameters xmi:id="_3H0AbunJEeur86ufxBm1QA" name="when">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrdjkenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_3H0Ab-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_3H0AcOnJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_3H0AcenJEeur86ufxBm1QA" name="setInstrucoes">
+      <modelElement href="TranspiladorCobolJava2.uml#_DrexsOnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_3H0AcunJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_3H0Ac-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <parameters xmi:id="_3H0AdOnJEeur86ufxBm1QA" name="instrucoes">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrexsenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_3H0AdenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_3H0AdunJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_3H0Ad-nJEeur86ufxBm1QA" name="addWhen">
+      <modelElement href="TranspiladorCobolJava2.uml#_DrfYwenJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_3H0AeOnJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_3H0AeenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <parameters xmi:id="_3H0AeunJEeur86ufxBm1QA" name="auxiliar">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrfYwunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_3H0Ae-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_3H0AfOnJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_LYjLGenJEeur86ufxBm1QA" name="Paragrafo" abstractClass="true" associationsOut="_LYbPQOnJEeur86ufxBm1QA _LYjLEOnJEeur86ufxBm1QA" subclassedBy="_LYaBIOnJEeur86ufxBm1QA _LYaoMOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DajZwOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_LYjLGunJEeur86ufxBm1QA" position="106.0,-422.0" size="-1.0,-1.0" visible="false"/>
+    <visibility xmi:id="_LYjLG-nJEeur86ufxBm1QA" label="+"/>
+    <attributes xmi:id="_LYjLHOnJEeur86ufxBm1QA" defaultValue="new HashSet&lt;String>()" name="imports">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtBp0OnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_LYjLHenJEeur86ufxBm1QA" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtCQ4unJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_LYjLHunJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLH-nJEeur86ufxBm1QA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_LYjLIOnJEeur86ufxBm1QA" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_LYjLIenJEeur86ufxBm1QA" defaultValue="Pattern.compile(&#xD;&#xA;&#x9;&#x9;&#x9;&quot;(?i)((?&lt;variavelOf>[a-zA-Z0-9-]+)\\sOF\\s(?&lt;of>[a-zA-Z0-9-]+))&quot; + &quot;|(?&lt;string>('\&quot;)[a-zA-Z0-9-]+('\&quot;))&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;+ &quot;|(?&lt;operacao>(([>]|[&lt;])=)|([>&lt;*=+-/]))&quot; + &quot;|(?&lt;variavel>[a-zA-Z0-9-]+)&quot;)" name="patternOf">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtCQ4-nJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_g4ldQOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4mrYOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g40t0Oy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <visibility xmi:id="_LYjLI-nJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLJOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <type xmi:id="_LYjLJenJEeur86ufxBm1QA" name="Pattern">
+        <modelElement href="TranspiladorCobolJava2.uml#_DpoXkOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_LYjLJunJEeur86ufxBm1QA" name="matcherOf">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtC38enJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_g4jBAOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4kPIOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4178Oy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <visibility xmi:id="_LYjLKOnJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLKenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <type xmi:id="_LYjLKunJEeur86ufxBm1QA" name="Matcher">
+        <modelElement href="TranspiladorCobolJava2.uml#_DpjfEOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_LYjLK-nJEeur86ufxBm1QA" name="toLowerFistCase" staticOperation="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_Dakn4OnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLLOnJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLLenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_LYjLLunJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dakn4unJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLL-nJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLMOnJEeur86ufxBm1QA" name="nome">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dakn4enJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLMenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLMunJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_LYjLM-nJEeur86ufxBm1QA" name="toUpperFistCase" staticOperation="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DalO8OnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLNOnJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLNenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_LYjLNunJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DalO8unJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLN-nJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLOOnJEeur86ufxBm1QA" name="nome">
+        <modelElement href="TranspiladorCobolJava2.uml#_DalO8enJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLOenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLOunJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_LYjLO-nJEeur86ufxBm1QA" name="validaCondicao">
+      <modelElement href="TranspiladorCobolJava2.uml#_DamdEOnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLPOnJEeur86ufxBm1QA" label="-"/>
+      <cardinality xmi:id="_LYjLPenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_LYjLPunJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DamdEunJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLP-nJEeur86ufxBm1QA" name="boolean">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLQOnJEeur86ufxBm1QA" name="elemento">
+        <modelElement href="TranspiladorCobolJava2.uml#_DamdEenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLQenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLQunJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_LYjLQ-nJEeur86ufxBm1QA" name="getImports">
+      <modelElement href="TranspiladorCobolJava2.uml#_DanEIOnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLROnJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_LYjLRenJEeur86ufxBm1QA" label="1..*" max="-1" min="1"/>
+      <outParameters xmi:id="_LYjLRunJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DanEIenJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLR-nJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_LYjLSOnJEeur86ufxBm1QA" name="fazTabulacao">
+      <modelElement href="TranspiladorCobolJava2.uml#_DanrMOnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLSenJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLSunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_LYjLS-nJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DanrMunJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLTOnJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLTenJEeur86ufxBm1QA" name="nivel">
+        <modelElement href="TranspiladorCobolJava2.uml#_DanrMenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLTunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLT-nJEeur86ufxBm1QA" name="Integer">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_LYjLUOnJEeur86ufxBm1QA" name="escreveImports">
+      <modelElement href="TranspiladorCobolJava2.uml#_DanrM-nJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLUenJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_LYjLUunJEeur86ufxBm1QA" label="1..*" max="-1" min="1"/>
+      <outParameters xmi:id="_LYjLU-nJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DaoSQOnJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLVOnJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_LYjLVenJEeur86ufxBm1QA" name="encontraIdentificador">
+      <modelElement href="TranspiladorCobolJava2.uml#_DqTF8OnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLVunJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLV-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_LYjLWOnJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqTtAOnJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLWenJEeur86ufxBm1QA" name="Atributo">
+          <modelElement href="TranspiladorCobolJava2.uml#_DYe9MOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLWunJEeur86ufxBm1QA" name="elemento">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqTF8enJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLW-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLXOnJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_LYjLXenJEeur86ufxBm1QA" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqTF8unJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLXunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLX-nJEeur86ufxBm1QA" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_LYjLYOnJEeur86ufxBm1QA" name="criaAtributo">
+      <modelElement href="TranspiladorCobolJava2.uml#_DqTtAenJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLYenJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLYunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_LYjLY-nJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqTtBOnJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLZOnJEeur86ufxBm1QA" name="Atributo">
+          <modelElement href="TranspiladorCobolJava2.uml#_DYe9MOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLZenJEeur86ufxBm1QA" name="elemento">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqTtAunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLZunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLZ-nJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_LYjLaOnJEeur86ufxBm1QA" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqTtA-nJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLaenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLaunJEeur86ufxBm1QA" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_LYjLdunJEeur86ufxBm1QA" name="encontraCriaAtributo">
+      <modelElement href="TranspiladorCobolJava2.uml#_DqU7IenJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLd-nJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLeOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_LYjLeenJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqU7JenJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLeunJEeur86ufxBm1QA" name="Atributo">
+          <modelElement href="TranspiladorCobolJava2.uml#_DYe9MOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLe-nJEeur86ufxBm1QA" name="elemento">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqU7IunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLfOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLfenJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_LYjLfunJEeur86ufxBm1QA" name="of">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqU7I-nJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLf-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLgOnJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_LYjLgenJEeur86ufxBm1QA" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqU7JOnJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLgunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLg-nJEeur86ufxBm1QA" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_LYjLhOnJEeur86ufxBm1QA" name="validaAtributo">
+      <modelElement href="TranspiladorCobolJava2.uml#_DqViMOnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLhenJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLhunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_LYjLh-nJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqViMunJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLiOnJEeur86ufxBm1QA" name="Atributo">
+          <modelElement href="TranspiladorCobolJava2.uml#_DYe9MOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLienJEeur86ufxBm1QA" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqViMenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLiunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLi-nJEeur86ufxBm1QA" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_LYjLjOnJEeur86ufxBm1QA" name="criaVariavel">
+      <modelElement href="TranspiladorCobolJava2.uml#_DqViM-nJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLjenJEeur86ufxBm1QA" label="#"/>
+      <cardinality xmi:id="_LYjLjunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_LYjLj-nJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqViNenJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLkOnJEeur86ufxBm1QA" name="Atributo">
+          <modelElement href="TranspiladorCobolJava2.uml#_DYe9MOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLkenJEeur86ufxBm1QA" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqViNOnJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLkunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLk-nJEeur86ufxBm1QA" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_LYjLlOnJEeur86ufxBm1QA" name="escreveImportsParagrago">
+      <modelElement href="TranspiladorCobolJava2.uml#_DrVAsOnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_LYjLlenJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_LYjLlunJEeur86ufxBm1QA" label="1..*" max="-1" min="1"/>
+      <outParameters xmi:id="_LYjLl-nJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrVAsunJEeur86ufxBm1QA"/>
+        <type xmi:id="_LYjLmOnJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_LYjLmenJEeur86ufxBm1QA" name="imports">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrVAsenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_LYjLmunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_LYjLm-nJEeur86ufxBm1QA" name="Set">
+          <modelElement href="TranspiladorCobolJava2.uml#_DqJ8AenJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_JbKDgOz5EeuVw-4FNdbrow" name="encontraCriaAtributo">
+      <modelElement href="TranspiladorCobolJava2.uml#_Ja3IkOz5EeuVw-4FNdbrow"/>
+      <visibility xmi:id="_JbKDgez5EeuVw-4FNdbrow" label="#"/>
+      <cardinality xmi:id="_JbKDguz5EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_JbKDg-z5EeuVw-4FNdbrow">
+        <modelElement href="TranspiladorCobolJava2.uml#_Ja4WsOz5EeuVw-4FNdbrow"/>
+        <type xmi:id="_JbKqkOz5EeuVw-4FNdbrow" name="Atributo">
+          <modelElement href="TranspiladorCobolJava2.uml#_DYe9MOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_JbKqkez5EeuVw-4FNdbrow" name="elemento">
+        <modelElement href="TranspiladorCobolJava2.uml#_Ja3Ikez5EeuVw-4FNdbrow"/>
+        <cardinality xmi:id="_JbKqkuz5EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_JbKqk-z5EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_JbKqlOz5EeuVw-4FNdbrow" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_Ja3voOz5EeuVw-4FNdbrow"/>
+        <cardinality xmi:id="_JbKqlez5EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_JbKqluz5EeuVw-4FNdbrow" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_FdcekOnJEeur86ufxBm1QA" name="EvaluateParagrafo" associationsOut="_Fc3PwOnJEeur86ufxBm1QA" generalizations="_LYaoMOnJEeur86ufxBm1QA">
+    <modelElement href="TranspiladorCobolJava2.uml#_DZ3dQOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_FdcekenJEeur86ufxBm1QA" position="39.0,215.0" size="-1.0,-1.0" visible="false"/>
+    <visibility xmi:id="_FdcekunJEeur86ufxBm1QA" label="+"/>
+    <attributes xmi:id="_Fdcek-nJEeur86ufxBm1QA" defaultValue="new EvaluateModel()" name="evaluate">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsvV8enJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_g4hL0Oy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g4iZ8Oy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_g42jAOy3EeuVw-4FNdbrow" name="LegacyStyledElement"/>
+      <visibility xmi:id="_FdcelenJEeur86ufxBm1QA" label="~"/>
+      <cardinality xmi:id="_FdcelunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <type xmi:id="_Fdcel-nJEeur86ufxBm1QA" name="EvaluateModel">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZwvkOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_FdcemOnJEeur86ufxBm1QA" name="escreveArquivo">
+      <modelElement href="TranspiladorCobolJava2.uml#_DZ4rYOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_FdcemenJEeur86ufxBm1QA" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZ5ScenJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <stereotypes xmi:id="_FdcemunJEeur86ufxBm1QA" name="Annotations">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZ55gOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_Fdcem-nJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FdcenOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_FdcenenJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZ5ScOnJEeur86ufxBm1QA"/>
+        <type xmi:id="_FdcenunJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_Fdcen-nJEeur86ufxBm1QA" name="nivel">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZ4rYenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FdceoOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FdceoenJEeur86ufxBm1QA" name="Integer">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_FdceounJEeur86ufxBm1QA" name="EvaluateParagrafo">
+      <modelElement href="TranspiladorCobolJava2.uml#_DrNE4OnJEeur86ufxBm1QA"/>
+      <keywords xmi:id="_Fdceo-nJEeur86ufxBm1QA" keyword="create"/>
+      <visibility xmi:id="_FdcepOnJEeur86ufxBm1QA" label="+"/>
+      <cardinality xmi:id="_FdcepenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_FdcepunJEeur86ufxBm1QA">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrNE5-nJEeur86ufxBm1QA"/>
+        <type xmi:id="_Fdcep-nJEeur86ufxBm1QA" name="EvaluateParagrafo">
+          <modelElement href="TranspiladorCobolJava2.uml#_DZ3dQOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_FdceqOnJEeur86ufxBm1QA" name="instrucao">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrNE4enJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FdceqenJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FdcequnJEeur86ufxBm1QA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_Fdceq-nJEeur86ufxBm1QA" name="matcherGeral">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrNE4unJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FdcerOnJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FdcerenJEeur86ufxBm1QA" name="Matcher">
+          <modelElement href="TranspiladorCobolJava2.uml#_DpjfEOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_FdcerunJEeur86ufxBm1QA" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrNE4-nJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_Fdcer-nJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_FdcesOnJEeur86ufxBm1QA" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_FdcesenJEeur86ufxBm1QA" name="secoes">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrNE5OnJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_FdcesunJEeur86ufxBm1QA" label="1" max="1" min="1"/>
+        <type xmi:id="_Fdces-nJEeur86ufxBm1QA" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_mRL5qey3EeuVw-4FNdbrow" name="ArquivoEscrita" associationsIn="_lGZhgOy3EeuVw-4FNdbrow" associationsOut="_mRLSkOy3EeuVw-4FNdbrow _mRL5oOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DXL8sOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_mRL5quy3EeuVw-4FNdbrow" position="1205.0,-22.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_mRL5q-y3EeuVw-4FNdbrow" label="+"/>
+    <attributes xmi:id="_mRL5rOy3EeuVw-4FNdbrow" name="arquivoJava">
+      <modelElement href="TranspiladorCobolJava2.uml#_Dr6PgenJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_mRL5rey3EeuVw-4FNdbrow" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dr62kOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_mRL5ruy3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRL5r-y3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_mRL5sOy3EeuVw-4FNdbrow" name="FileWriter">
+        <modelElement href="TranspiladorCobolJava2.uml#_DpZHAenJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_mRL5sey3EeuVw-4FNdbrow" name="gravaCodigo">
+      <modelElement href="TranspiladorCobolJava2.uml#_Dr62kenJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_mRL5suy3EeuVw-4FNdbrow" name="LegacyStyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dr62kunJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_mRL5s-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRL5tOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_mRL5tey3EeuVw-4FNdbrow" name="PrintWriter">
+        <modelElement href="TranspiladorCobolJava2.uml#_DpaVIenJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_mRL5tuy3EeuVw-4FNdbrow" name="abreArquivo">
+      <modelElement href="TranspiladorCobolJava2.uml#_DXNx4OnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRL5t-y3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRL5uOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <parameters xmi:id="_mRL5uey3EeuVw-4FNdbrow" name="nomeClasse">
+        <modelElement href="TranspiladorCobolJava2.uml#_DXNx4enJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_mRL5uuy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_mRL5u-y3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_mRL5vOy3EeuVw-4FNdbrow" name="escreveLinha">
+      <modelElement href="TranspiladorCobolJava2.uml#_DXOY8OnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRL5vey3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRL5vuy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <parameters xmi:id="_mRL5v-y3EeuVw-4FNdbrow" name="escreveArquivo">
+        <modelElement href="TranspiladorCobolJava2.uml#_DXOY8enJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_mRL5wOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_mRL5wey3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_mRL5wuy3EeuVw-4FNdbrow" name="fechaArquivo">
+      <modelElement href="TranspiladorCobolJava2.uml#_DXPAAOnJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_mRL5w-y3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRL5xOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_lGaIkOy3EeuVw-4FNdbrow" name="ProcedureDivision" associationsIn="_mREk4Oy3EeuVw-4FNdbrow" associationsOut="_lFeUcOy3EeuVw-4FNdbrow _lF5LMOy3EeuVw-4FNdbrow _lGZhgOy3EeuVw-4FNdbrow" subclassedBy="_lGK4AOy3EeuVw-4FNdbrow _l82oYOy3EeuVw-4FNdbrow _l84dkOy3EeuVw-4FNdbrow _l85rsOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DbOIIOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_lGavoOy3EeuVw-4FNdbrow" position="748.0,170.0" size="-1.0,-1.0"/>
+    <stereotypes xmi:id="_lGavoey3EeuVw-4FNdbrow" name="LegacyStyledElement">
+      <modelElement href="TranspiladorCobolJava2.uml#_DbOvMOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <stereotypes xmi:id="_lGavouy3EeuVw-4FNdbrow" name="Annotations">
+      <modelElement href="TranspiladorCobolJava2.uml#_DbTnsenJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <visibility xmi:id="_lGavo-y3EeuVw-4FNdbrow" label="+"/>
+    <attributes xmi:id="_lGavpOy3EeuVw-4FNdbrow" defaultValue="new ArrayList&lt;Paragrafo>()" name="paragrafos">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtSvkOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_lGavpey3EeuVw-4FNdbrow" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtSvkenJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <stereotypes xmi:id="_A_yu0Oz7EeuVw-4FNdbrow" modelElement="_A_soMOz7EeuVw-4FNdbrow" name="Annotations"/>
+      <visibility xmi:id="_lGavpuy3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_lGavp-y3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_lGavqOy3EeuVw-4FNdbrow" name="ArrayList">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_lGavqey3EeuVw-4FNdbrow" defaultValue="new ArrayList&lt;ProcedureDivisionSection>()" name="secoes">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtTWoOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_lGavquy3EeuVw-4FNdbrow" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtTWoenJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_lGavq-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_lGavrOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_lGavrey3EeuVw-4FNdbrow" name="ArrayList">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_lGavruy3EeuVw-4FNdbrow" defaultValue="new ArquivoEscrita()" name="arquivoEscrita">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtTWounJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_lGavr-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_lGavsOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_lGavsey3EeuVw-4FNdbrow" name="ArquivoEscrita">
+        <modelElement href="TranspiladorCobolJava2.uml#_DXL8sOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_lGavsuy3EeuVw-4FNdbrow" name="nomeClasse">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtT9sOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_lGavs-y3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DtT9senJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_lGavtOy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGavtey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_lGavtuy3EeuVw-4FNdbrow" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_lGavt-y3EeuVw-4FNdbrow" name="path">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtT9sunJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_lGavuOy3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_lGavuey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_lGavuuy3EeuVw-4FNdbrow" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_lGavu-y3EeuVw-4FNdbrow" name="nomePrograma">
+      <modelElement href="TranspiladorCobolJava2.uml#_DtT9s-nJEeur86ufxBm1QA"/>
+      <visibility xmi:id="_lGavvOy3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_lGavvey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_lGavvuy3EeuVw-4FNdbrow" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_lGavv-y3EeuVw-4FNdbrow" name="ProcedureDivision">
+      <modelElement href="TranspiladorCobolJava2.uml#_DbP9UOnJEeur86ufxBm1QA"/>
+      <keywords xmi:id="_lGavwOy3EeuVw-4FNdbrow" keyword="create"/>
+      <stereotypes xmi:id="_lGavwey3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbP9VOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_lGavwuy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGavw-y3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_lGavxOy3EeuVw-4FNdbrow">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbP9U-nJEeur86ufxBm1QA"/>
+        <type xmi:id="_lGavxey3EeuVw-4FNdbrow" name="ProcedureDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DbOIIOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_lGavxuy3EeuVw-4FNdbrow" name="ProcedureDivision">
+      <modelElement href="TranspiladorCobolJava2.uml#_DbQkYOnJEeur86ufxBm1QA"/>
+      <keywords xmi:id="_lGavx-y3EeuVw-4FNdbrow" keyword="create"/>
+      <stereotypes xmi:id="_lGavyOy3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbQkZ-nJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_lGavyey3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGavyuy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_lGavy-y3EeuVw-4FNdbrow">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbQkZunJEeur86ufxBm1QA"/>
+        <type xmi:id="_lGavzOy3EeuVw-4FNdbrow" name="ProcedureDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DbOIIOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_lGavzey3EeuVw-4FNdbrow" name="nomeClasse">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbQkYenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGavzuy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGavz-y3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_lGav0Oy3EeuVw-4FNdbrow" name="path">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbQkYunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGav0ey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGav0uy3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_lGav0-y3EeuVw-4FNdbrow" name="nomePrograma">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbQkY-nJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGav1Oy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGav1ey3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_lGav1uy3EeuVw-4FNdbrow" name="ProcedureDivision">
+      <modelElement href="TranspiladorCobolJava2.uml#_DbRLcOnJEeur86ufxBm1QA"/>
+      <keywords xmi:id="_lGav1-y3EeuVw-4FNdbrow" keyword="create"/>
+      <stereotypes xmi:id="_lGav2Oy3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbRygOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_lGav2ey3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGav2uy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_lGav2-y3EeuVw-4FNdbrow">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbRLdenJEeur86ufxBm1QA"/>
+        <type xmi:id="_lGav3Oy3EeuVw-4FNdbrow" name="ProcedureDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DbOIIOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_lGav3ey3EeuVw-4FNdbrow" name="nomeClasse">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbRLcenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGav3uy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGav3-y3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_lGav4Oy3EeuVw-4FNdbrow" name="path">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbRLcunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGav4ey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGav4uy3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_lGav4-y3EeuVw-4FNdbrow" name="toUpperFistCase" staticOperation="true">
+      <modelElement href="TranspiladorCobolJava2.uml#_DbSZkenJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_lGav5Oy3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbTAoenJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_lGav5ey3EeuVw-4FNdbrow" label="#"/>
+      <cardinality xmi:id="_lGav5uy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_lGav5-y3EeuVw-4FNdbrow">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbTAoOnJEeur86ufxBm1QA"/>
+        <type xmi:id="_lGav6Oy3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_lGav6ey3EeuVw-4FNdbrow" name="nome">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbSZkunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGav6uy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGav6-y3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_lGav7Oy3EeuVw-4FNdbrow" name="getImportsSecao">
+      <modelElement href="TranspiladorCobolJava2.uml#_DbTAounJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_lGav7ey3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbTnsOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_lGav7uy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGav7-y3EeuVw-4FNdbrow" label="1..*" max="-1" min="1"/>
+      <outParameters xmi:id="_lGav8Oy3EeuVw-4FNdbrow">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbTAo-nJEeur86ufxBm1QA"/>
+        <type xmi:id="_lGav8ey3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_lGav8uy3EeuVw-4FNdbrow" name="preparaAnalises">
+      <modelElement href="TranspiladorCobolJava2.uml#_DqesIOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_lGav8-y3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqfTMunJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_lGav9Oy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGav9ey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <parameters xmi:id="_lGav9uy3EeuVw-4FNdbrow" name="codigoCobol">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqfTMOnJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGav9-y3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGav-Oy3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_lGav-ey3EeuVw-4FNdbrow" name="dataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DqfTMenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGav-uy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGav--y3EeuVw-4FNdbrow" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_lGav_Oy3EeuVw-4FNdbrow" name="analisesProcedureDivision">
+      <modelElement href="TranspiladorCobolJava2.uml#_Drh1AOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_lGav_ey3EeuVw-4FNdbrow" name="Generics">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrjDIOnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <stereotypes xmi:id="_lGav_uy3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrjDIunJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_lGav_-y3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGawAOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_lGawAey3EeuVw-4FNdbrow">
+        <modelElement href="TranspiladorCobolJava2.uml#_DrjDIenJEeur86ufxBm1QA"/>
+        <type xmi:id="_lGawAuy3EeuVw-4FNdbrow" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_lGawA-y3EeuVw-4FNdbrow" name="matcher">
+        <modelElement href="TranspiladorCobolJava2.uml#_DricEOnJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGawBOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGawBey3EeuVw-4FNdbrow" name="Matcher">
+          <modelElement href="TranspiladorCobolJava2.uml#_DpjfEOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_lGawBuy3EeuVw-4FNdbrow" name="atributosDataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DricEenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGawB-y3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGawCOy3EeuVw-4FNdbrow" name="DataDivision">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_lGawCey3EeuVw-4FNdbrow" name="secoesProcedureDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DricEunJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_lGawCuy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGawC-y3EeuVw-4FNdbrow" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_lGawDOy3EeuVw-4FNdbrow" name="preTratamentoTraducaoEscrita">
+      <modelElement href="TranspiladorCobolJava2.uml#_jd_ZQOy3EeuVw-4FNdbrow"/>
+      <stereotypes xmi:id="_lGawDey3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_jeFf4Oy3EeuVw-4FNdbrow"/>
+      </stereotypes>
+      <visibility xmi:id="_lGawDuy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGawD-y3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+    </operations>
+    <operations xmi:id="_lGawEOy3EeuVw-4FNdbrow" name="traduzEscrita">
+      <modelElement href="TranspiladorCobolJava2.uml#_jeAAUOy3EeuVw-4FNdbrow"/>
+      <stereotypes xmi:id="_lGawEey3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_jeFf4ey3EeuVw-4FNdbrow"/>
+      </stereotypes>
+      <visibility xmi:id="_lGawEuy3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_lGawE-y3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <parameters xmi:id="_lGawFOy3EeuVw-4FNdbrow" name="secoes">
+        <modelElement href="TranspiladorCobolJava2.uml#_jeAnYOy3EeuVw-4FNdbrow"/>
+        <cardinality xmi:id="_lGawFey3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_lGawFuy3EeuVw-4FNdbrow" name="ArrayList">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_7PTaIOnJEeur86ufxBm1QA" name="ArrayList" associationsIn="_Fa9LQOnJEeur86ufxBm1QA _Fa_AcOnJEeur86ufxBm1QA _3HqPUOnJEeur86ufxBm1QA _3Ht5sOnJEeur86ufxBm1QA _lFeUcOy3EeuVw-4FNdbrow _lF5LMOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_7PTaIenJEeur86ufxBm1QA" position="701.0,-207.0" size="-1.0,-1.0" visible="false"/>
+    <stereotypes xmi:id="_7PTaIunJEeur86ufxBm1QA" name="Reference">
+      <modelElement href="TranspiladorCobolJava2.uml#_Dpi4AenJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <visibility xmi:id="_7PTaI-nJEeur86ufxBm1QA" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_mRJdaey3EeuVw-4FNdbrow" name="TranspiladorService" associationsOut="_mREk4Oy3EeuVw-4FNdbrow _mRFzAOy3EeuVw-4FNdbrow _mRIPQOy3EeuVw-4FNdbrow _mRI2UOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DZbYYOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_mRJdauy3EeuVw-4FNdbrow" position="760.0,-25.0" size="-1.0,-1.0"/>
+    <stereotypes xmi:id="_mRJda-y3EeuVw-4FNdbrow" name="LegacyStyledElement">
+      <modelElement href="TranspiladorCobolJava2.uml#_DZb_cOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <stereotypes xmi:id="_mRJdbOy3EeuVw-4FNdbrow" name="Annotations">
+      <modelElement href="TranspiladorCobolJava2.uml#_DZd0oOnJEeur86ufxBm1QA"/>
+    </stereotypes>
+    <visibility xmi:id="_mRJdbey3EeuVw-4FNdbrow" label="+"/>
+    <attributes xmi:id="_mRJdbuy3EeuVw-4FNdbrow" name="identificationDivision">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsjvwOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_Mn2MgOz6EeuVw-4FNdbrow" name="Annotations">
+        <modelElement href="TranspiladorCobolJava2.uml#_MnxUAOz6EeuVw-4FNdbrow"/>
+      </stereotypes>
+      <visibility xmi:id="_mRJdb-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRJdcOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_mRJdcey3EeuVw-4FNdbrow" name="IdentificationDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZK5sOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_mRJdcuy3EeuVw-4FNdbrow" name="dataDivision">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsjvwenJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_MoCZwOz6EeuVw-4FNdbrow" name="Annotations">
+        <modelElement href="TranspiladorCobolJava2.uml#_MnxUAuz6EeuVw-4FNdbrow"/>
+      </stereotypes>
+      <visibility xmi:id="_mRJdc-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRJddOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_mRJddey3EeuVw-4FNdbrow" name="DataDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DXthIOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_mRJdduy3EeuVw-4FNdbrow" name="procedureDivision">
+      <modelElement href="TranspiladorCobolJava2.uml#_DsjvwunJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_MotIIOz6EeuVw-4FNdbrow" name="Annotations">
+        <modelElement href="TranspiladorCobolJava2.uml#_Mnx7Eez6EeuVw-4FNdbrow"/>
+      </stereotypes>
+      <visibility xmi:id="_mRJdd-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRJdeOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_mRJdeey3EeuVw-4FNdbrow" name="ProcedureDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DbOIIOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_mRJdeuy3EeuVw-4FNdbrow" name="environmentDivision">
+      <modelElement href="TranspiladorCobolJava2.uml#_DskW0OnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_MovkYOz6EeuVw-4FNdbrow" name="Annotations">
+        <modelElement href="TranspiladorCobolJava2.uml#_Mnx7E-z6EeuVw-4FNdbrow"/>
+      </stereotypes>
+      <visibility xmi:id="_mRJde-y3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRJdfOy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <type xmi:id="_mRJdfey3EeuVw-4FNdbrow" name="EnvironmentDivision">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZGBMOnJEeur86ufxBm1QA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_mRJdguy3EeuVw-4FNdbrow" name="codigoCobol">
+      <modelElement href="TranspiladorCobolJava2.uml#_DskW0unJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_mRJdg-y3EeuVw-4FNdbrow" name="Array">
+        <modelElement href="TranspiladorCobolJava2.uml#_DskW1OnJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_mRJdhOy3EeuVw-4FNdbrow" label="-"/>
+      <cardinality xmi:id="_mRJdhey3EeuVw-4FNdbrow" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_mRJdhuy3EeuVw-4FNdbrow" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_mRJdh-y3EeuVw-4FNdbrow" name="processaNovaTranspilacao">
+      <modelElement href="TranspiladorCobolJava2.uml#_DZdNkOnJEeur86ufxBm1QA"/>
+      <stereotypes xmi:id="_mRJdiOy3EeuVw-4FNdbrow" name="StyledElement">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZdNkunJEeur86ufxBm1QA"/>
+      </stereotypes>
+      <visibility xmi:id="_mRJdiey3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_mRJdiuy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_mRJdi-y3EeuVw-4FNdbrow">
+        <modelElement href="TranspiladorCobolJava2.uml#_Dp8goOnJEeur86ufxBm1QA"/>
+        <type xmi:id="_mRJdjOy3EeuVw-4FNdbrow" name="VariaveisResponse">
+          <modelElement href="TranspiladorCobolJava2.uml#_DXEn8OnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_mRJdjey3EeuVw-4FNdbrow" name="path">
+        <modelElement href="TranspiladorCobolJava2.uml#_DZdNkenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_mRJdjuy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_mRJdj-y3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_l8650Oy3EeuVw-4FNdbrow" name="ProcedureDivisionSection" generalizations="_l85rsOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_Dag9gOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_l8650ey3EeuVw-4FNdbrow" position="1219.0,562.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_l8650uy3EeuVw-4FNdbrow" label="+"/>
+    <operations xmi:id="_l8650-y3EeuVw-4FNdbrow" name="ProcedureDivisionSection">
+      <modelElement href="TranspiladorCobolJava2.uml#_DahkkOnJEeur86ufxBm1QA"/>
+      <keywords xmi:id="_l8651Oy3EeuVw-4FNdbrow" keyword="create"/>
+      <visibility xmi:id="_l8651ey3EeuVw-4FNdbrow" label="+"/>
+      <cardinality xmi:id="_l8651uy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_l8651-y3EeuVw-4FNdbrow">
+        <modelElement href="TranspiladorCobolJava2.uml#_DaiLounJEeur86ufxBm1QA"/>
+        <type xmi:id="_l8652Oy3EeuVw-4FNdbrow" name="ProcedureDivisionSection">
+          <modelElement href="TranspiladorCobolJava2.uml#_Dag9gOnJEeur86ufxBm1QA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_l8652ey3EeuVw-4FNdbrow" name="name">
+        <modelElement href="TranspiladorCobolJava2.uml#_DahkkenJEeur86ufxBm1QA"/>
+        <cardinality xmi:id="_l8652uy3EeuVw-4FNdbrow" label="1" max="1" min="1"/>
+        <type xmi:id="_l8652-y3EeuVw-4FNdbrow" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_l832gOy3EeuVw-4FNdbrow" name="ProcedureDivisionIf" generalizations="_l82oYOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DafIUOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_l832gey3EeuVw-4FNdbrow" position="1066.0,571.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_l832guy3EeuVw-4FNdbrow" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_l85EoOy3EeuVw-4FNdbrow" name="ProcedureDivisionPerforming" generalizations="_l84dkOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DagWcOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_l85Eoey3EeuVw-4FNdbrow" position="876.0,572.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_l85Eouy3EeuVw-4FNdbrow" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_T3OAgOnJEeur86ufxBm1QA" name="ProcedureDivisionWhenEvaluate" generalizations="_lGK4AOy3EeuVw-4FNdbrow">
+    <modelElement href="TranspiladorCobolJava2.uml#_DaiysOnJEeur86ufxBm1QA"/>
+    <visualProperties xmi:id="_T3OAgenJEeur86ufxBm1QA" position="647.0,571.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_T3OAgunJEeur86ufxBm1QA" label="+"/>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>

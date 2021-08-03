@@ -5,24 +5,16 @@ import java.io.IOException;
 import org.springframework.stereotype.Component;
 
 import com.trans.transpiladorCobolJava.arquivo.ArquivoEscrita;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoItemGrupo;
 
 @Component
 public class EscritaLinkageSection {
 
-	public String getNomeClasse() {
-		return nomeClasse;
-	}
+	private ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
+	private String nomeClasse = "DadosPrincipaisDTO";
+	private String localArquivo = "DTO";
 
-	public void setNomeClasse(String nomeClasse) {
-		this.nomeClasse = nomeClasse;
-	}
-
-	ArquivoEscrita arquivoEscrita = new ArquivoEscrita();
-	String nomeClasse = "DadosPrincipaisDTO";
-	String localArquivo = "DTO";
-
-	public void escreve(AtributoGrupo atributosLinkiageSection) throws IOException {
+	public void escreve(AtributoItemGrupo atributosLinkiageSection) throws IOException {
 
 		// escrever atributos
 		atributosLinkiageSection.escreveImportDataDivision(localArquivo);
@@ -34,9 +26,17 @@ public class EscritaLinkageSection {
 		atributosLinkiageSection.escreveGetSet();
 
 		// escrever toTrancode
-		atributosLinkiageSection.escreveToString();
+		atributosLinkiageSection.escreveToTrancode();
 
 		// escrever toObjeto
 		atributosLinkiageSection.escreveToObject();
+	}
+
+	public String getNomeClasse() {
+		return nomeClasse;
+	}
+
+	public void setNomeClasse(String nomeClasse) {
+		this.nomeClasse = nomeClasse;
 	}
 }

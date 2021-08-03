@@ -7,33 +7,31 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 
-import com.trans.transpiladorCobolJava.arquivo.Codigo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoItemGrupo;
 
 @Component
 public class LinkageSection extends DataDivisionCriaVariaveis {
 
-	ArrayList<Atributo> atributos = new ArrayList<Atributo>();
+	private ArrayList<Atributo> atributos = new ArrayList<Atributo>();
 
-	AtributoGrupo DadosPrincipais;
+	private AtributoItemGrupo DadosPrincipais;
 
-	Codigo codigoCompleto;
-
-	public AtributoGrupo popula(String codigoCobol) {
+	public AtributoItemGrupo analisesLinkageSection(String codigoCobol) {
 
 		Pattern pattern = Pattern
-				.compile("(?i)" + regexNivelNome + regexPicTipoTamanho + regexValue + regexOccurs + "\\.");
+				.compile("(?i)" + regexNivelNome + regexPicTipoTamanho + regexComp + regexValue + regexOccurs + "\\.");
 		Matcher matcher = pattern.matcher(codigoCobol);
-		matcher.find();
 		List<String> classes = new ArrayList<String>();
+		// TODO correção do local após a criação do item quando vem da linkage section,
+		// ao tentar consultar esta mostrando Dadosprincipais
 		if (matcher.find()) {
 			do {
-				atributos.add(criaItem(matcher, classes, SecoesDataDivision.WORKINGSTORAGESECTION));
-			} while ((atributos.get(atributos.size() - 1) instanceof AtributoGrupo)
+				atributos.add(criaItem(matcher, classes, SecoesDataDivision.LINKAGESECTION));
+			} while ((atributos.get(atributos.size() - 1) instanceof AtributoItemGrupo)
 					? ((matcher.group("nivel") == null) ? false : true)
 					: matcher.find());
-			DadosPrincipais = new AtributoGrupo("DadosPrincipaisDTO", 0, atributos, null, null,
+			DadosPrincipais = new AtributoItemGrupo("DadosPrincipaisDTO", 0, atributos, null, null,
 					SecoesDataDivision.LINKAGESECTION);
 		}
 		return DadosPrincipais;

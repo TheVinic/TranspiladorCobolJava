@@ -67,14 +67,14 @@ public class MultiplyParagrafo extends Paragrafo {
 			for (Atributo elemento : por) {
 				imprimirPor = elemento.getStringEscritaPorTipo();
 				imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaSet(imprimirMultiplicar + " * " + imprimirPor) + ";\n");
+						+ elemento.getSentencaSet(imprimirMultiplicar + " * " + imprimirPor) + ";");
 
 			}
 		} else {
 			imprimirPor = por.get(0).getStringEscritaPorTipo();
 			for (Atributo elemento : resultado) {
 				imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaSet(imprimirMultiplicar + " * " + imprimirPor) + ";\n");
+						+ elemento.getSentencaSet(imprimirMultiplicar + " * " + imprimirPor) + ";");
 			}
 		}
 

@@ -15,7 +15,7 @@ public class ComputeParagrafo extends Paragrafo {
 
 	public ComputeParagrafo(String instrucao, DataDivision dataDivision) {
 
-		String regex = "(?i)COMPUTE\\s(?<resultado>[a-zA-Z0-9+-/()* ]+)(=|(EQUAL))(?<calculo>[a-zA-Z0-9+-/=()* ]+)";
+		String regex = "(?i)COMPUTE\\s(?<resultado>[a-zA-Z0-9 ]+)(=|(EQUAL))(?<calculo>[a-zA-Z0-9+-/=()* ]+)";
 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(instrucao);
@@ -34,7 +34,7 @@ public class ComputeParagrafo extends Paragrafo {
 		}
 
 		Pattern patternInterno = Pattern
-				.compile("(?i)(?<variavel>(\\w+)|[+-/()]|[*]+)|(?<variavelOf>(\\w+)\\sOF\\s(?<of>\\w+))");
+				.compile("(?i)(?<variavel>((\\w+[-]?)+)|[+-/()]|[*]+)|(?<variavelOf>(\\w+)\\sOF\\s(?<of>\\w+))");
 		matcherOf = patternInterno.matcher(matcher.group("calculo"));
 		while (matcherOf.find()) {
 			Atributo atributo = validaAtributo(dataDivision);
@@ -55,16 +55,13 @@ public class ComputeParagrafo extends Paragrafo {
 			if (elementoParaImprimir.equals("**")) {
 				// TODO incluir trato para exponencial
 				imprimirCalculo += "/*Exponencial não implementado*/*";
-			} else
-
-			{
+			} else {
 				imprimirCalculo += elemento.getStringEscritaPorTipo();
 			}
 		}
-
 		for (Atributo elemento : resultado) {
 			imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-					+ elemento.getSentencaSet(imprimirCalculo) + ";\n");
+					+ elemento.getSentencaSet(imprimirCalculo) + ";");
 		}
 
 		return imprimirResultado;

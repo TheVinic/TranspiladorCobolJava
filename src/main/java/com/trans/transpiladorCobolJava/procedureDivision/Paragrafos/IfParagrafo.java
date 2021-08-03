@@ -26,7 +26,7 @@ public class IfParagrafo extends Paragrafo {
 
 		if (matcherInterno.find()) {
 			Pattern patternInterno = Pattern
-					.compile("(?i)(?<variavel>((\\w+)|([<]|[>])[=]|[+-/()*<>=]|[*]{2}))|(?<variavelOf>(\\w+)\\sOF\\s(?<of>\\w+))");
+					.compile("(?i)(?<variavel>((\\w+[-]?)+|([<]|[>])[=]|[+/()*<>=]|[-]|[*]{2}))|(?<variavelOf>(\\w+)\\sOF\\s(?<of>\\w+))");
 			matcherOf = patternInterno.matcher(matcherInterno.group("condition"));
 			while (matcherOf.find()) {
 				Atributo atributo = validaAtributo(dataDivision);
@@ -37,10 +37,10 @@ public class IfParagrafo extends Paragrafo {
 			}
 		}
 
-		entao = new ProcedureDivisionIf().leitura(matcherGeral, dataDivision, secoes);
+		entao = new ProcedureDivisionIf().analisesProcedureDivision(matcherGeral, dataDivision, secoes);
 
 		if (matcherGeral.group().toUpperCase().startsWith("ELSE")) {
-			seNao = new ProcedureDivisionIf().leitura(matcherGeral, dataDivision, secoes);
+			seNao = new ProcedureDivisionIf().analisesProcedureDivision(matcherGeral, dataDivision, secoes);
 		}
 	}
 
@@ -56,12 +56,12 @@ public class IfParagrafo extends Paragrafo {
 		for (Paragrafo paragrafo : entao) {
 			imprimirCondicao += paragrafo.escreveArquivo(nivel + 1);
 		}
-		imprimirCondicao += fazTabulacao(nivel) + "}";
+		imprimirCondicao += "\n" + fazTabulacao(nivel) + "}";
 
 		if (seNao != null) {
 			imprimirCondicao += " else {\n";
 			for (Paragrafo paragrafo : seNao) {
-				imprimirCondicao += paragrafo.escreveArquivo(nivel + 1);
+				imprimirCondicao += paragrafo.escreveArquivo(nivel + 1) + "\n";
 			}
 			imprimirCondicao += fazTabulacao(nivel) + "}";
 		} else {

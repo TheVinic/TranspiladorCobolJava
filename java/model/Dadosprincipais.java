@@ -4,14 +4,12 @@ import com.trans.transpiladorCobolJava.model.Teste1;
 
 import java.math.BigDecimal;
 
-import javax.persistence.JoinColumn;
-
 public class Dadosprincipais{
 	private Integer suma;
 	private Integer numa;
 	private Integer numb;
 	private Teste1 teste1 = new Teste1();
-	private Integer numc;
+	private Integer numd;
 
 	public Integer getSuma() {
 		return suma;
@@ -45,23 +43,23 @@ public class Dadosprincipais{
 		this.teste1 = teste1;
 	}
 
-	public Integer getNumc() {
-		return numc;
+	public Integer getNumd() {
+		return numd;
 	}
 
-	public void setNumc(Integer numc) {
-		this.numc = numc;
+	public void setNumd(Integer numd) {
+		this.numd = numd;
 	}
 
 	public String toTrancode() { 
-		return String.format("|0%12d|", suma) + String.format("|0%12d|", numa) + String.format("|0%12d|", numb) + teste1.toTrancode() + String.format("|0%12d|", numc);
+		return String.format("|0%12d|", suma) + String.format("|0%12d|", numa) + String.format("|0%12d|", numb) + teste1.toTrancode() + String.format("|0%12d|", numd);
 	}
 
 	public void toObject(String trancode) { 
-		this.suma = trancode.substring(0, 12);
-		this.numa = trancode.substring(12, 24);
-		this.numb = trancode.substring(24, 36);
-		this.teste1.toObject(trancode.substring(36, 48));
-		this.numc = trancode.substring(48, 60);
+		this.suma = Integer.parseInt(trancode.substring(0, 12));
+		this.numa = Integer.parseInt(trancode.substring(12, 24));
+		this.numb = Integer.parseInt(trancode.substring(24, 36));
+		this.teste1.toObject(trancode.substring(36, 60));
+		this.numd = Integer.parseInt(trancode.substring(60, 72));
 	}
 }

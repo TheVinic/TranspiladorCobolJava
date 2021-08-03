@@ -1,53 +1,39 @@
 000800 Identification division.
 000810*>=============================
-000820 Program-id. Addition is initial.
+000820 Program-id. CRUD.
        AUTHOR. VINICIUS.
 000840 Data division.
+000810*>=============================
        WORKING-STORAGE SECTION.    
        77  SUMA PICTURE 9(12).    
        77  NUMA PIC 9(12).    
        77  NUMB PIC 9(12).  
        01 teste1.
-       02 teste2. 
        03  NUMTMP PIC 9(12).     
-       01  NUMC PIC 9(12).   
+       03  NUMC PIC 9(12).    
+       01  NUMD PIC 9(12).  
+000810*>============================= 
 000870 Linkage section.
+000810*>=============================
 000920 Procedure division.
-           
-           PERFORM VARYING numa from 0 by 5 until numa<20.
-           add 5 to numa.
-           
-           EVALUATE SUMA + 9 ALSO NUMC - 9
-              WHEN 5 ALSO 3
-                  ADD 5 TO NUMA
-              WHEN OTHER
-                  ADD 6 TO NUMA
-           END-EVALUATE.
-           
-           mainline section.
-           
-           
+000810*>=============================
            EXEC SQL
-              SELECT SUMA, SUMA
+              SELECT NUMIMP, NUMC
               INTO :SUMA, :SUMA FROM teste1
               WHERE SUMA=1004
            END-EXEC.
            
            EXEC SQL
-               INSERT INTO teste1(SUMA, NUMA)
+               INSERT INTO teste1(NUMIMP, NUMC)
                VALUES (:NUMB, :NUMC)
            END-EXEC.
            
            EXEC SQL
-              UPDATE teste1 SET NUMB=:SUMA
+              UPDATE teste1 SET NUMC=:SUMA
               WHERE NUMB=1003 AND numa<5
            END-EXEC.
-           
-           EXIT.
            
            EXEC SQL
               DELETE FROM teste1
               WHERE NUMB=:NUMA
            END-EXEC.
-           
-           DISPLAY "Enter NUmber a".

@@ -70,13 +70,13 @@ public class AddParagrafo extends Paragrafo {
 				imprimirSomarLocal = imprimirSomar + toLowerFistCase(elemento.getClassesSucessoras())
 						+ elemento.getSentencaGet();
 				imprimirSomarEm += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaSet(imprimirSomarLocal) + ";\n");
+						+ elemento.getSentencaSet(imprimirSomarLocal) + ";");
 			}
 		} else {
-			imprimirSomarLocal = somarCom.get(0).getStringEscritaPorTipo();
+			imprimirSomarLocal = imprimirSomar + somarCom.get(0).getStringEscritaPorTipo();
 			for (Atributo elemento : gravarEm) {
 				imprimirSomarEm += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaSet((somarCom.isEmpty()) ? imprimirSomar : imprimirSomarLocal) + ";\n");
+						+ elemento.getSentencaSet((somarCom.isEmpty()) ? imprimirSomar : imprimirSomarLocal) + ";");
 			}
 			imprimirSomarEm = imprimirSomarEm.replaceAll("\s\\+\s\\)", ")");
 		}

@@ -7,38 +7,41 @@ import java.util.regex.Matcher;
 import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoElementar;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoItemGrupo;
 
 public abstract class DataDivisionCriaVariaveis {
 
 	private Integer contadorFiller = 1;
 
-	String classeMain = "DadosPrincipal";
-	
-	protected String regexNivelNome = "(?<nivel>\\d+)\\s+(?<nome>\\w+)";
-	protected String regexPicTipoTamanho = "\\s*((PIC|PICTURE)(\\sIS)?\\s+(?<tipo>\\w+)\\s*(\\((?<tamanho>\\d+)\\))?(V(?<tipoDecimal>\\w+)\\s*(\\((?<tamanhoDecimal>\\d+)\\))?)?)?";
-	protected String regexValue = "\\s*(VALUE\\s+(IS\\s+)?(\\'(?<valor>(\\w+\\s*)+)\\'|(?<valorNumerico>\\d+\\.?\\d+?)))?";
-	protected String regexOccurs = "\\s*(OCCURS\\s+\\(?\\s*(?<occurs>\\w+)\\s*\\)?\\s+?TIMES)?";
+	private String classeMain = "DadosPrincipais";
 
+	private Integer nivel;
+	private String nomeAtributo;
+	private String tipo;
+	private Integer comprimento;
+	private Integer comprimentoDecimal;
+	private String value;
+	private String occurs;
+
+	protected String regexNivelNome = "(?<nivel>\\d+)\\s+(?<nome>[a-zA-Z1-9-]+)";
+	protected String regexPicTipoTamanho = "\\s*((PIC|PICTURE)(\\sIS)?\\s+(?<tipo>\\w+)\\s*(\\((?<tamanho>\\d+)\\))?(V(?<tipoDecimal>\\w+)\\s*(\\((?<tamanhoDecimal>\\d+)\\))?)?)?";
+	protected String regexComp = "\\s*(COMP([-]\\d+)?)?";
+	protected String regexValue = "\\s*(VALUE\\s+(IS\\s+)?((?<valorNumerico>\\d+(\\.?\\d+)?)|((\'|\")?(?<valor>(\\w+\\s*)+)(\'|\")?)))?";
+	protected String regexOccurs = "\\s*(OCCURS\\s+\\(?\\s*(?<occurs>\\w+)\\s*\\)?\\s+?TIMES)?";
+	
 	protected Atributo criaItem(Matcher matcher, List<String> classe, SecoesDataDivision local) {
 
-		Integer nivel = null;
-		String nomeAtributo = null;
-		String tipo = null;
-		Integer tamanho = null;
-		String tipoDecimal = null;
-		Integer tamanhoDecimal = null;
-		String valor = null;
-		String occurs = null;
-
+		String tipoDecimal;
+		
 		nivel = Integer.parseInt(matcher.group("nivel"));
 		nomeAtributo = matcher.group("nome");
+		//TODO Corrigir tipo do campo e comprimento quando S9999999V99999
 		tipo = matcher.group("tipo");
-		tamanho = matcher.group("tamanho") != null ? Integer.parseInt(matcher.group("tamanho")) : null;
+		comprimento = matcher.group("tamanho") != null ? Integer.parseInt(matcher.group("tamanho")) : null;
 		tipoDecimal = matcher.group("tipoDecimal");
-		tamanhoDecimal = matcher.group("tamanhoDecimal") != null ? Integer.parseInt(matcher.group("tamanhoDecimal"))
+		comprimentoDecimal = matcher.group("tamanhoDecimal") != null ? Integer.parseInt(matcher.group("tamanhoDecimal"))
 				: null;
-		valor = (matcher.group("valor") == null) ? matcher.group("valorNumerico") : matcher.group("valor");
+		value = (matcher.group("valor") == null) ? matcher.group("valorNumerico") : matcher.group("valor");
 		occurs = matcher.group("occurs");
 
 		System.out.println("Criando novo item " + nomeAtributo);
@@ -48,7 +51,7 @@ public abstract class DataDivisionCriaVariaveis {
 		}
 
 		if (tipo == null) {
-			return criaGrupo(nivel, nomeAtributo, occurs, classe, local, matcher);
+			return criaItemGrupo(nivel, nomeAtributo, occurs, classe, local, matcher);
 		} else {
 			if (nivel.equals(1) || classe.isEmpty()) {
 				classe = new ArrayList<String>();
@@ -56,14 +59,14 @@ public abstract class DataDivisionCriaVariaveis {
 			}
 
 			System.out.println("Item Elementar " + nomeAtributo + " criado.");
-			return new AtributoElementar(nomeAtributo, nivel, (tamanho == null) ? tipo.length() : tamanho,
-					(tamanhoDecimal == null) ? (tipoDecimal == null) ? null : tipoDecimal.length() : tamanhoDecimal,
-					(tipoDecimal == null) ? validaTipoAtributo(tipo) : TipoAtributo.DECIMAL, valor, classe, occurs,
+			return new AtributoElementar(nomeAtributo, nivel, (comprimento == null) ? tipo.length() : comprimento,
+					(comprimentoDecimal == null) ? (tipoDecimal == null) ? null : tipoDecimal.length() : comprimentoDecimal,
+					(tipoDecimal == null) ? validaTipoAtributo(tipo) : TipoAtributo.DECIMAL, value, classe, occurs,
 					local);
 		}
 	}
 
-	protected AtributoGrupo criaGrupo(Integer nivel, String nomeAtributo, String occurs, List<String> classe,
+	protected AtributoItemGrupo criaItemGrupo(Integer nivel, String nomeAtributo, String occurs, List<String> classe,
 			SecoesDataDivision local, Matcher matcher) {
 
 		List<String> novaClasse = new ArrayList<String>();
@@ -79,10 +82,12 @@ public abstract class DataDivisionCriaVariaveis {
 		matcher.find();
 		do {
 			filhos.add(criaItem(matcher, (novaClasse == null) ? classe : novaClasse, local));
-		} while (((filhos.get(filhos.size() - 1) instanceof AtributoGrupo) ? ((matcher.group("nivel") == null) ? false : true) : matcher.find())
+		} while (((filhos.get(filhos.size() - 1) instanceof AtributoItemGrupo)
+				? ((matcher.group("nivel") == null) ? false : true)
+				: matcher.find())
 				&& ((matcher.group("nivel") == null) ? false : Integer.parseInt(matcher.group("nivel")) > nivel));
 
-		return new AtributoGrupo(nomeAtributo, nivel, filhos, (novaClasse == null) ? classe : novaClasse, occurs,
+		return new AtributoItemGrupo(nomeAtributo, nivel, filhos, (novaClasse == null) ? classe : novaClasse, occurs,
 				local);
 	}
 

@@ -7,28 +7,38 @@ import org.springframework.stereotype.Component;
 
 import com.trans.transpiladorCobolJava.DTO.DataDivisionResponse;
 import com.trans.transpiladorCobolJava.dataDivision.model.atributo.Atributo;
-import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoGrupo;
+import com.trans.transpiladorCobolJava.dataDivision.model.atributo.AtributoItemGrupo;
 
 @Component
 public class DataDivision {
 
 	@Autowired
-	WorkingStorageSection workingStorageSection;
+	private WorkingStorageSection workingStorageSection;
+	
+	private AtributoItemGrupo atributosWorkingStorage;
 
 	@Autowired
-	LinkageSection linkageSection;
-
-	AtributoGrupo atributosWorkingStorage;
+	private EscritaWorkingStorageSection escritaWorkingStorageSection;
 
 	@Autowired
-	EscritaWorkingStorageSection escritaWorkingStorageSection;
-
-	AtributoGrupo atributosLinkageSection;
+	private LinkageSection linkageSection;
+	
+	private AtributoItemGrupo atributosLinkageSection;
 
 	@Autowired
-	EscritaLinkageSection escritaLinkageSection;
-
-	public void leitura(String file, String working, String local, String linkage) {
+	private EscritaLinkageSection escritaLinkageSection;
+	
+	
+	private EscritaLocalStorageSection escritaLocalStorageSection;
+	
+	private AtributoItemGrupo atributosLocalStorageSection;
+	
+	
+	private EscritaFileSection escritaFileSection;
+	
+	private AtributoItemGrupo atributosFileSection;
+	
+	public void analisesDataDivision(String file, String working, String local, String linkage) {
 
 		System.out.println("Iniciando DATA DIVISION");
 
@@ -41,7 +51,7 @@ public class DataDivision {
 		if (linkage != null && !linkage.isEmpty()) {
 			System.out.println("Iniciando Linkage Section");
 			linkageSection = new LinkageSection();
-			atributosLinkageSection = linkageSection.popula(linkage);
+			atributosLinkageSection = linkageSection.analisesLinkageSection(linkage);
 			System.out.println("Fim Linkage Section");
 		}
 
@@ -54,12 +64,12 @@ public class DataDivision {
 		if (working != null && !working.isEmpty()) {
 			System.out.println("Iniciando WORKING-STOREAGE");
 			workingStorageSection = new WorkingStorageSection();
-			atributosWorkingStorage = workingStorageSection.popula(working);
+			atributosWorkingStorage = workingStorageSection.analisesWorkingStorageSection(working);
 			System.out.println("Fim WORKING-STOREAGE");
 		}
 	}
 
-	public void escreve() throws IOException {
+	public void traduzDataDivision() throws IOException {
 		if (atributosWorkingStorage != null) {
 			escritaWorkingStorageSection = new EscritaWorkingStorageSection();
 			escritaWorkingStorageSection.escreve(atributosWorkingStorage);
@@ -70,12 +80,11 @@ public class DataDivision {
 		}
 	}
 
-	public Atributo localizaAtributo(String nomeVariavel) {
+	public Atributo localizaAtributoArvoreObjetos(String nomeVariavel) {
 		nomeVariavel = nomeVariavel.replace(".", "").replaceAll("-", "_");
 		Atributo atributo = null;
 		if (atributosWorkingStorage != null) {
 			atributo = atributosWorkingStorage.getLocalizaAtributo(nomeVariavel);
-			return atributo;
 		}
 		if (atributo == null && atributosLinkageSection != null) {
 			atributo = atributosLinkageSection.getLocalizaAtributo(nomeVariavel);
@@ -83,16 +92,16 @@ public class DataDivision {
 		return atributo;
 	}
 
-	public Atributo localizaAtributo(String nomeVariavel, String proximaInstrucaoLeitura) {
+	public Atributo localizaAtributoArvoreObjetoOf(String nomeVariavel, String proximaInstrucaoLeitura) {
 		nomeVariavel = nomeVariavel.replace(".", "");
 		proximaInstrucaoLeitura = proximaInstrucaoLeitura.replace(".", "");
 		Atributo grupo = atributosWorkingStorage.getLocalizaAtributo(proximaInstrucaoLeitura);
-		if (grupo instanceof AtributoGrupo) {
-			return ((AtributoGrupo) grupo).getLocalizaAtributo(nomeVariavel);
+		if (grupo instanceof AtributoItemGrupo) {
+			return ((AtributoItemGrupo) grupo).getLocalizaAtributo(nomeVariavel);
 		}
 		grupo = atributosLinkageSection.getLocalizaAtributo(proximaInstrucaoLeitura);
-		if (grupo instanceof AtributoGrupo) {
-			return ((AtributoGrupo) grupo).getLocalizaAtributo(nomeVariavel);
+		if (grupo instanceof AtributoItemGrupo) {
+			return ((AtributoItemGrupo) grupo).getLocalizaAtributo(nomeVariavel);
 		}
 		return null;
 	}

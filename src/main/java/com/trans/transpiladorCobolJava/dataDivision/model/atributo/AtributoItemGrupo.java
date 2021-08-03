@@ -7,24 +7,25 @@ import java.util.List;
 import com.trans.transpiladorCobolJava.DTO.AtributoGrupoResponse;
 import com.trans.transpiladorCobolJava.arquivo.ArquivoEscrita;
 import com.trans.transpiladorCobolJava.dataDivision.SecoesDataDivision;
+import com.trans.transpiladorCobolJava.dataDivision.model.TipoAtributo;
 
-public class AtributoGrupo extends Atributo {
+public class AtributoItemGrupo extends Atributo {
 
-	ArquivoEscrita arquivoEscrita;
+	private ArquivoEscrita arquivoEscrita;
 
-	ArquivoEscrita repository;
+	private ArquivoEscrita repositoryJPA;
+	private List<String> instrucoesRepository;
 
 	private List<Atributo> atributos;
-	private List<String> instrucoesRepository;
 
 	private Integer comprimento;
 
 	private boolean isTabela;
 	private boolean isEmbeddable;
 
-	private Integer quantidadeQuerys;
+	private Integer quantidadeQuerysRespository;
 
-	public AtributoGrupo(String nomeAtributo, Integer nivel, List<Atributo> atributos, List<String> classe,
+	public AtributoItemGrupo(String nomeAtributo, Integer nivel, List<Atributo> atributos, List<String> classe,
 			String occurs, SecoesDataDivision local) {
 		super(nomeAtributo, nivel, classe, occurs, local);
 		this.atributos = atributos;
@@ -35,7 +36,7 @@ public class AtributoGrupo extends Atributo {
 		this.arquivoEscrita = new ArquivoEscrita();
 		this.isTabela = false;
 		this.isEmbeddable = false;
-		this.quantidadeQuerys = 0;
+		this.quantidadeQuerysRespository = 0;
 	}
 
 	public List<Atributo> getAtributos() {
@@ -55,12 +56,11 @@ public class AtributoGrupo extends Atributo {
 		arquivoEscrita.abreArquivo(local + "\\" + getNome() + ".java");
 		arquivoEscrita.escreveLinha("package com.trans.transpiladorCobolJava." + local + "." + getNome() + ";\n");
 		for (Atributo atributoUnitario : atributos) {
-			if (atributoUnitario instanceof AtributoGrupo) {
-				arquivoEscrita.escreveLinha(((AtributoGrupo) atributoUnitario).escreveImportDataDivision(local));
+			if (atributoUnitario instanceof AtributoItemGrupo) {
+				arquivoEscrita.escreveLinha(((AtributoItemGrupo) atributoUnitario).escreveImportDataDivision(local));
 			}
 		}
 		arquivoEscrita.escreveLinha("import java.math.BigDecimal;\n");
-		arquivoEscrita.escreveLinha("import javax.persistence.JoinColumn;\n");
 		return "import com.trans.transpiladorCobolJava." + local + "." + getNome() + ";\n";
 	}
 
@@ -87,13 +87,13 @@ public class AtributoGrupo extends Atributo {
 		for (Atributo atributoUnitario : atributos) {
 			arquivoEscrita.escreveLinha(atributoUnitario.escreveGet());
 			arquivoEscrita.escreveLinha(atributoUnitario.escreveSet());
-			if (atributoUnitario instanceof AtributoGrupo) {
-				((AtributoGrupo) atributoUnitario).escreveGetSet();
+			if (atributoUnitario instanceof AtributoItemGrupo) {
+				((AtributoItemGrupo) atributoUnitario).escreveGetSet();
 			}
 		}
 	}
 
-	public void escreveToString() {
+	public void escreveToTrancode() {
 		arquivoEscrita.escreveLinha("\n\tpublic String toTrancode() { ");
 		String toString = "\t\treturn ";
 		for (Atributo atributoUnitario : atributos) {
@@ -102,7 +102,7 @@ public class AtributoGrupo extends Atributo {
 						+ atributoUnitario.getNome().toLowerCase() + ") + ";
 			} else {
 				toString += atributoUnitario.getNome().toLowerCase() + ".toTrancode() + ";
-				((AtributoGrupo) atributoUnitario).escreveToString();
+				((AtributoItemGrupo) atributoUnitario).escreveToTrancode();
 			}
 		}
 		toString = toString.substring(0, toString.length() - 3);
@@ -114,14 +114,19 @@ public class AtributoGrupo extends Atributo {
 		Integer posicao = 0;
 		for (Atributo atributoUnitario : atributos) {
 			if (atributoUnitario instanceof AtributoElementar) {
-				arquivoEscrita.escreveLinha(
-						"\t\tthis." + atributoUnitario.getNome().toLowerCase() + " = " + "trancode.substring(" + posicao
-								+ ", " + (posicao += atributoUnitario.getComprimento()) + ");");
+				arquivoEscrita.escreveLinha("\t\tthis." + atributoUnitario.getNome().toLowerCase() + " = "
+						+ ((((AtributoElementar) atributoUnitario).getTipoAtributo().equals(TipoAtributo.NUMERO))
+								? "Integer.parseInt("
+								: "")
+						+ "trancode.substring(" + posicao + ", " + (posicao += atributoUnitario.getComprimento()) + ")"
+						+ ((((AtributoElementar) atributoUnitario).getTipoAtributo().equals(TipoAtributo.NUMERO)) ? ")"
+								: "")
+						+ ";");
 			} else {
 				arquivoEscrita.escreveLinha(
 						"\t\tthis." + atributoUnitario.getNome().toLowerCase() + ".toObject(trancode.substring("
 								+ posicao + ", " + (posicao += atributoUnitario.getComprimento()) + "));");
-				((AtributoGrupo) atributoUnitario).escreveToObject();
+				((AtributoItemGrupo) atributoUnitario).escreveToObject();
 			}
 		}
 		arquivoEscrita.escreveLinha("\t}");
@@ -138,8 +143,8 @@ public class AtributoGrupo extends Atributo {
 		for (Atributo atributo : atributos) {
 			if (atributo.getNome().equalsIgnoreCase(nomeVariavel)) {
 				return atributo;
-			} else if (atributo instanceof AtributoGrupo) {
-				Atributo subAtributo = ((AtributoGrupo) atributo).getLocalizaAtributo(nomeVariavel);
+			} else if (atributo instanceof AtributoItemGrupo) {
+				Atributo subAtributo = ((AtributoItemGrupo) atributo).getLocalizaAtributo(nomeVariavel);
 				if (subAtributo != null) {
 					return subAtributo;
 				}
@@ -161,8 +166,8 @@ public class AtributoGrupo extends Atributo {
 			this.isTabela = true;
 			this.instrucoesRepository = new ArrayList<String>();
 			for (Atributo atributo : atributos) {
-				if (atributo instanceof AtributoGrupo) {
-					((AtributoGrupo) atributo).isEmbedable();
+				if (atributo instanceof AtributoItemGrupo) {
+					((AtributoItemGrupo) atributo).isEmbedable();
 				}
 			}
 		}
@@ -171,22 +176,22 @@ public class AtributoGrupo extends Atributo {
 	public void isEmbedable() {
 		this.isEmbeddable = true;
 		for (Atributo atributo : atributos) {
-			if (atributo instanceof AtributoGrupo) {
-				((AtributoGrupo) atributo).isEmbedable();
+			if (atributo instanceof AtributoItemGrupo) {
+				((AtributoItemGrupo) atributo).isEmbedable();
 			}
 		}
 	}
 
 	public String setAtributoIsTabela(String nomeTabela) {
 		for (Atributo atributo : atributos) {
-			if (atributo instanceof AtributoGrupo) {
+			if (atributo instanceof AtributoItemGrupo) {
 				if (atributo.getNome().equalsIgnoreCase(nomeTabela)) {
-					((AtributoGrupo) atributo).setIsTabela();
-					return atributo.getNome() + (++quantidadeQuerys);
+					((AtributoItemGrupo) atributo).setIsTabela();
+					return atributo.getNome() + (++quantidadeQuerysRespository);
 				} else {
-					String nomeRepository = ((AtributoGrupo) atributo).setAtributoIsTabela(nomeTabela);
+					String nomeRepository = ((AtributoItemGrupo) atributo).setAtributoIsTabela(nomeTabela);
 					if (nomeRepository != null && !nomeRepository.isEmpty()) {
-						return nomeRepository + (++quantidadeQuerys);
+						return nomeRepository + (++quantidadeQuerysRespository);
 					}
 				}
 			}
@@ -196,40 +201,40 @@ public class AtributoGrupo extends Atributo {
 
 	public void escreveRepository() throws IOException {
 		if (isTabela) {
-			repository = new ArquivoEscrita();
-			repository.abreArquivo("repository" + "\\" + toUpperFistCase(getNome()) + "Repository" + ".java");
-			repository.escreveLinha("package com.trans.transpiladorCobolJava." + "repository" + "."
+			repositoryJPA = new ArquivoEscrita();
+			repositoryJPA.abreArquivo("repository" + "\\" + toUpperFistCase(getNome()) + "Repository" + ".java");
+			repositoryJPA.escreveLinha("package com.trans.transpiladorCobolJava." + "repository" + "."
 					+ toUpperFistCase(getNome()) + "Repository" + ";\n");
-			repository.escreveLinha("import java.math.BigDecimal;");
-			repository.escreveLinha("import java.util.Optional;\n");
-			repository.escreveLinha("import org.springframework.data.jpa.repository.JpaRepository;");
-			repository.escreveLinha("import org.springframework.stereotype.Repository;");
-			repository.escreveLinha("import org.springframework.data.jpa.repository.Query;\n");
-			repository.escreveLinha("@Repository");
-			repository
+			repositoryJPA.escreveLinha("import java.math.BigDecimal;");
+			repositoryJPA.escreveLinha("import java.util.Optional;\n");
+			repositoryJPA.escreveLinha("import org.springframework.data.jpa.repository.JpaRepository;");
+			repositoryJPA.escreveLinha("import org.springframework.stereotype.Repository;");
+			repositoryJPA.escreveLinha("import org.springframework.data.jpa.repository.Query;\n");
+			repositoryJPA.escreveLinha("@Repository");
+			repositoryJPA
 					.escreveLinha("public interface " + toUpperFistCase(getNome()) + "Repository extends JpaRepository<"
 							+ toUpperFistCase(getNome()) + ", " + atributos.get(0).tipoObjeto() + ">{\n");
 			for (String instrucaoRepository : instrucoesRepository) {
-				repository.escreveLinha(instrucaoRepository + "\n");
+				repositoryJPA.escreveLinha(instrucaoRepository + "\n");
 			}
-			repository.escreveLinha("}");
-			repository.fechaArquivo();
+			repositoryJPA.escreveLinha("}");
+			repositoryJPA.fechaArquivo();
 		}
 		for (Atributo atributoUnitario : atributos) {
-			if (atributoUnitario instanceof AtributoGrupo) {
-				((AtributoGrupo) atributoUnitario).escreveRepository();
+			if (atributoUnitario instanceof AtributoItemGrupo) {
+				((AtributoItemGrupo) atributoUnitario).escreveRepository();
 			}
 		}
 	}
 
 	public boolean setIntrucaoRepository(String instrucao, String tabela) {
 		for (Atributo atributo : atributos) {
-			if (atributo instanceof AtributoGrupo) {
+			if (atributo instanceof AtributoItemGrupo) {
 				if (atributo.getNome().equalsIgnoreCase(tabela)) {
-					((AtributoGrupo) atributo).setInstrucao(instrucao);
+					((AtributoItemGrupo) atributo).setInstrucao(instrucao);
 					return true;
 				} else {
-					String nomeRepository = ((AtributoGrupo) atributo).setAtributoIsTabela(tabela);
+					String nomeRepository = ((AtributoItemGrupo) atributo).setAtributoIsTabela(tabela);
 					if (nomeRepository != null && !nomeRepository.isEmpty()) {
 						return true;
 					}

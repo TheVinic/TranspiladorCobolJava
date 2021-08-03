@@ -131,7 +131,7 @@ public abstract class Atributo {
 					}
 				}
 			}
-		} else if (this instanceof AtributoGrupo) {
+		} else if (this instanceof AtributoItemGrupo) {
 			return "Integer.parseInt(" + toLowerFistCase(getClassesSucessoras()) + getSentencaGet() + ".toTrancode())";
 		}
 		return null;

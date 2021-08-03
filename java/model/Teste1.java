@@ -1,10 +1,6 @@
 package com.trans.transpiladorCobolJava.model.Teste1;
 
-import com.trans.transpiladorCobolJava.model.Teste2;
-
 import java.math.BigDecimal;
-
-import javax.persistence.JoinColumn;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,22 +8,31 @@ import javax.persistence.Id;
 @Entity
 public class Teste1{
 	@Id
-	@JoinColumn
-	private Teste2 teste2 = new Teste2();
+	private Integer numtmp;
+	private Integer numc;
 
-	public Teste2 getTeste2() {
-		return teste2;
+	public Integer getNumtmp() {
+		return numtmp;
 	}
 
-	public void setTeste2(Teste2 teste2) {
-		this.teste2 = teste2;
+	public void setNumtmp(Integer numtmp) {
+		this.numtmp = numtmp;
+	}
+
+	public Integer getNumc() {
+		return numc;
+	}
+
+	public void setNumc(Integer numc) {
+		this.numc = numc;
 	}
 
 	public String toTrancode() { 
-		return teste2.toTrancode();
+		return String.format("|0%12d|", numtmp) + String.format("|0%12d|", numc);
 	}
 
 	public void toObject(String trancode) { 
-		this.teste2.toObject(trancode.substring(0, 12));
+		this.numtmp = Integer.parseInt(trancode.substring(0, 12));
+		this.numc = Integer.parseInt(trancode.substring(12, 24));
 	}
 }

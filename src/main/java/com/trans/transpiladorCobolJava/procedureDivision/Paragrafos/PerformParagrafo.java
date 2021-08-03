@@ -38,11 +38,11 @@ public class PerformParagrafo extends Paragrafo {
 		String regex1 = "(?i)";
 		String regexProcedureName = "PERFORM\\s(?<procedureName1>[a-zA-Z0-9-]+)(\\s\\s(THROUGH|THRU)\\s(?<procedureName2>))?(\\s(?<times1>(\\w)+)\\s\\sTIMES)?"
 				+ "(\\s\\sTEST\\s(?<order1>(BEFORE)|(AFTER)))?"
-				+ "(\\s\\sVARYING\\s(?<varying1>(\\w)+)\\sFROM\\s(?<from1>(\\w)+)\\sBY\\s(?<by1>(\\w)+))?(\\s\\sUNTIL\\s(?<until1>((\\w+)|([<]|[>])[=]|[+/()<>=]|[-])+))?"
+				+ "(\\s\\sVARYING\\s+(?<varying1>(\\w)+)\\sFROM\\s(?<from1>(\\w)+)\\sBY\\s(?<by1>(\\w)+))?(\\s\\sUNTIL\\s(?<until1>((\\\\w+)|([+/*<>=]+)|[-]|([*]{2})|(\\\\s))+))?"
 				+ "(\\s(?<phrase2>(AFTER\\s(\\w)+\\sFROM\\s(\\w)+\\sBY\\s(\\w)+\\sUNTIL\\s(\\w)+)*))?";
 		String regexImperativeStatement = "PERFORM(\\s(?<times2>(\\w)+)\\s\\sTIMES)?(\\s\\sTEST\\s(?<order2>(BEFORE)|(AFTER)))?"
-				+ "(\\s\\sVARYING\\s(?<varying2>(\\w)+)\\sFROM\\s(?<from2>(\\w)+)\\sBY\\s(?<by2>(\\w)+))?"
-				+ "(\\s\\sUNTIL\\s(?<until2>((\\w+)|([<]|[>])[=]|[+/()<>=]|[-]|[*]{2})+))?";
+				+ "(\\s\\sVARYING\\s+(?<varying2>(\\w)+)\\sFROM\\s(?<from2>(\\w)+)\\sBY\\s(?<by2>(\\w)+))?"
+				+ "(\\s\\sUNTIL\\s+(?<until2>((\\w+)|([+/*<>=]+)|[-]|([*]{2})|(\\s))+))?";
 
 		Pattern pattern = Pattern.compile(regex1 + "((?<procedureName>" + regexProcedureName
 				+ ")|(?<imperativeStatement>" + regexImperativeStatement + "))");
@@ -57,7 +57,7 @@ public class PerformParagrafo extends Paragrafo {
 			matcher.group("varying1");
 			matcher.group("from1");
 			matcher.group("by1");
-			matcher.group("until1");
+			matcher.group("until2");
 			matcher.group("phrase2");
 
 			if (matcher.group("procedureName") != null) {
@@ -177,7 +177,8 @@ public class PerformParagrafo extends Paragrafo {
 					}
 				}
 
-				instrucoes = new ProcedureDivisionPerforming().leitura(matcherGeral, dataDivision, secoes);
+				instrucoes = new ProcedureDivisionPerforming().analisesProcedureDivision(matcherGeral, dataDivision,
+						secoes);
 			}
 		}
 	}
@@ -229,41 +230,46 @@ public class PerformParagrafo extends Paragrafo {
 				imprimirCondicao += fazTabulacao(nivel) + "}\n";
 			}
 		} else {
-			if (times != null) {
-				imprimirCondicao += fazTabulacao(nivel) + "for (int i=0; i<" + times.getStringEscritaPorTipo()
-						+ "; i++){\n";
-			} else if (varying != null) {
-				imprimirCondicao += fazTabulacao(nivel) + "for (" + toLowerFistCase(varying.getClassesSucessoras())
-						+ varying.getSentencaSet(((from.getNome() == null) ? ((AtributoElementar) from).getValor()
-								: from.getStringEscritaPorTipo()))
-						+ "; ";
-				for (Atributo elemento : until) {
-					imprimirCondicao += elemento.getStringEscritaPorTipo() + " ";
-				}
-				imprimirCondicao += "; ";
-				imprimirCondicao += toLowerFistCase(varying.getClassesSucessoras()) + varying
-						.getSentencaSet(toLowerFistCase(varying.getClassesSucessoras()) + varying.getSentencaGet()
-								+ " + " + (((by.getNome() == null) ? ((AtributoElementar) by).getValor()
-										: by.getStringEscritaPorTipo())))
-						+ "){\n";
-			} else if (test == null || test.equals("BEFORE")) {
-				imprimirCondicao += fazTabulacao(nivel) + "while (";
-				for (Atributo elemento : until) {
-					imprimirCondicao += elemento.getStringEscritaPorTipo() + " ";
-				}
+			if (times == null && varying == null && test == null) {
+				imprimirCondicao += fazTabulacao(nivel) + nomeSecao.toLowerCase() + "." + nomeSecao.toLowerCase()
+						+ "(" + importsSection + ");";
 			} else {
-				imprimirCondicao += "do{\n";
-			}
-			imprimirCondicao += fazTabulacao(nivel+1) + nomeSecao.toLowerCase() + "." + nomeSecao.toLowerCase() + "(" + importsSection + ");\n";
-			if (test != null && test.equals("AFTER")) {
-				imprimirCondicao += "} while (";
-				for (Atributo elemento : until) {
-					imprimirCondicao += elemento.getStringEscritaPorTipo() + " ";
+				if (times != null) {
+					imprimirCondicao += fazTabulacao(nivel) + "for (int i=0; i<" + times.getStringEscritaPorTipo()
+							+ "; i++){\n";
+				} else if (varying != null) {
+					imprimirCondicao += fazTabulacao(nivel) + "for (" + toLowerFistCase(varying.getClassesSucessoras())
+							+ varying.getSentencaSet(((from.getNome() == null) ? ((AtributoElementar) from).getValor()
+									: from.getStringEscritaPorTipo()))
+							+ "; ";
+					for (Atributo elemento : until) {
+						imprimirCondicao += elemento.getStringEscritaPorTipo() + " ";
+					}
+					imprimirCondicao += "; ";
+					imprimirCondicao += toLowerFistCase(varying.getClassesSucessoras()) + varying
+							.getSentencaSet(toLowerFistCase(varying.getClassesSucessoras()) + varying.getSentencaGet()
+									+ " + " + (((by.getNome() == null) ? ((AtributoElementar) by).getValor()
+											: by.getStringEscritaPorTipo())))
+							+ "){\n";
+				} else if ((until != null && !until.isEmpty()) || test.equals("BEFORE")) {
+					imprimirCondicao += fazTabulacao(nivel) + "while (";
+					for (Atributo elemento : until) {
+						imprimirCondicao += elemento.getStringEscritaPorTipo() + " ";
+					}
+				} else {
+					imprimirCondicao += "do{\n";
 				}
-				imprimirCondicao += ");\n";
-			} else {
-				imprimirCondicao += fazTabulacao(nivel) + "}\n";
-
+				imprimirCondicao += fazTabulacao(nivel + 1) + nomeSecao.toLowerCase() + "." + nomeSecao.toLowerCase()
+						+ "(" + importsSection + ");\n";
+				if (test != null && test.equals("AFTER")) {
+					imprimirCondicao += "} while (";
+					for (Atributo elemento : until) {
+						imprimirCondicao += elemento.getStringEscritaPorTipo() + " ";
+					}
+					imprimirCondicao += ");\n";
+				} else {
+					imprimirCondicao += fazTabulacao(nivel) + "}";
+				}
 			}
 		}
 		return imprimirCondicao;
@@ -283,7 +289,7 @@ public class PerformParagrafo extends Paragrafo {
 			}
 		}
 		if (nomeSecao != null) {
-			importsDosParagrafos.add("import com.trans.transpiladorCobolJava." + nomeSecao + ";");
+			importsDosParagrafos.add("import com.trans.transpiladorCobolJava.service." + nomeSecao + ";");
 		}
 
 		return importsDosParagrafos;
@@ -357,9 +363,9 @@ public class PerformParagrafo extends Paragrafo {
 				for (Atributo elemento : until) {
 					imprimirCondicao += elemento.getStringEscritaPorTipo() + " ";
 				}
-				imprimirCondicao += ");\n";
+				imprimirCondicao += ");";
 			} else {
-				imprimirCondicao += fazTabulacao(nivel) + "}\n";
+				imprimirCondicao += "\n" + fazTabulacao(nivel) + "}";
 			}
 		}
 		return imprimirCondicao;

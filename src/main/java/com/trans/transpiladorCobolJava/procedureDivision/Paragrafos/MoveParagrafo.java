@@ -48,7 +48,7 @@ public class MoveParagrafo extends Paragrafo {
 
 		for (Atributo elemento : para) {
 			imprimirMove += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-					+ elemento.getSentencaSet(imprimirDe) + ";\n");
+					+ elemento.getSentencaSet(imprimirDe) + ";");
 		}
 		return imprimirMove;
 	}

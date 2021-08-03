@@ -6,11 +6,11 @@ import java.io.PrintWriter;
 
 public class ArquivoEscrita {
 
-	FileWriter arquivoJava;
-	PrintWriter gravaCodigo;
+	private FileWriter arquivoJava;
+	private PrintWriter gravaCodigo;
 	
-	public void abreArquivo(String string) throws IOException {
-		arquivoJava = new FileWriter("java\\" + string);
+	public void abreArquivo(String nomeClasse) throws IOException {
+		arquivoJava = new FileWriter("java\\" + nomeClasse);
 		gravaCodigo = new PrintWriter(arquivoJava);
 		
 	}

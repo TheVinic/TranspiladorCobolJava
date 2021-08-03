@@ -71,13 +71,13 @@ public class SubtractParagrafo extends Paragrafo {
 			for (Atributo elemento : de) {
 				imprimirDe = elemento.getStringEscritaPorTipo();
 				imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaSet(imprimirSubtrair + " - " + imprimirDe) + ";\n");
+						+ elemento.getSentencaSet(imprimirSubtrair + " - " + imprimirDe) + ";");
 			}
 		} else {
 			imprimirDe = de.get(0).getStringEscritaPorTipo();
 			for (Atributo elemento : resultado) {
 				imprimirResultado += (fazTabulacao(nivel) + toLowerFistCase(elemento.getClassesSucessoras())
-						+ elemento.getSentencaSet(imprimirSubtrair + " - " + imprimirDe) + ";\n");
+						+ elemento.getSentencaSet(imprimirSubtrair + " - " + imprimirDe) + ";");
 			}
 		}
 

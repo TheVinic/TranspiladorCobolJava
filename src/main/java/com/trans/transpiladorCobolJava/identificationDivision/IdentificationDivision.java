@@ -9,21 +9,13 @@ import org.springframework.stereotype.Component;
 
 import com.trans.transpiladorCobolJava.DTO.IdentificationDivisionResponse;
 
-import lombok.Getter;
-
 @Component
 public class IdentificationDivision {
-	@Getter
 	private String programId;
-	@Getter
 	private String author;
-	@Getter
 	private String installation;
-	@Getter
 	private String dataWritten;
-	@Getter
 	private String dateCompiled;
-	@Getter
 	private String security;
 
 	public void leitura(String codigoCobol) {
@@ -57,6 +49,8 @@ public class IdentificationDivision {
 			case SECURITY:
 				System.out.println("Security: " + (security = valor.getValue()));
 				break;
+			case OUTRO:
+				break;
 			}
 		}
 		System.out.println("Fim da IDENTIFICATION DIVISION");
@@ -65,7 +59,7 @@ public class IdentificationDivision {
 	private static LinkedHashMap<String, String> getByRegex(String texto) {
 		LinkedHashMap<String, String> divisao = new LinkedHashMap<String, String>();
 
-		String regex = "(?i)(PROGRAM-ID|AUTHOR|INSTALLATION|DATA-WRITTEN|DATA-COMPILED|SECURITY)\\.\\s*((\\w+\\s*)+)\\.";
+		String regex = "(?i)(PROGRAM-ID|AUTHOR|INSTALLATION|DATA-WRITTEN|DATA-COMPILED|SECURITY)\\.\\s*(([a-zA-Z\"()]+\\s*)+)\\.";
 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(texto);
@@ -79,5 +73,53 @@ public class IdentificationDivision {
 
 	public IdentificationDivisionResponse toResponse() {
 		return new IdentificationDivisionResponse(programId, author, installation, dataWritten, dateCompiled, security);
+	}
+
+	public String getProgramId() {
+		return programId;
+	}
+
+	public void setProgramId(String programId) {
+		this.programId = programId;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getInstallation() {
+		return installation;
+	}
+
+	public void setInstallation(String installation) {
+		this.installation = installation;
+	}
+
+	public String getDataWritten() {
+		return dataWritten;
+	}
+
+	public void setDataWritten(String dataWritten) {
+		this.dataWritten = dataWritten;
+	}
+
+	public String getDateCompiled() {
+		return dateCompiled;
+	}
+
+	public void setDateCompiled(String dateCompiled) {
+		this.dateCompiled = dateCompiled;
+	}
+
+	public String getSecurity() {
+		return security;
+	}
+
+	public void setSecurity(String security) {
+		this.security = security;
 	}
 }

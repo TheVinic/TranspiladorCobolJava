@@ -5,7 +5,9 @@ import com.trans.transpiladorCobolJava.procedureDivision.ProcedureDivision;
 public class ProcedureDivisionSection extends ProcedureDivision{
 
 	public ProcedureDivisionSection(String name) {
-		super(name, "Service");
+		super(name, "service");
 	}
+	
+	
 
 }

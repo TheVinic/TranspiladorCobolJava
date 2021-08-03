@@ -42,13 +42,14 @@ public class EvaluateParagrafo extends Paragrafo {
 					ultimoValorDoWhen = matcherGeral.group("instrucao2");
 					do {
 						// Inclui novo When
+						//TODO quando houver maid de um WHEN seguido de outro
 						matcherInterno = pattern.matcher(matcherGeral.group().replaceAll("\\sALSO\\s", "  ALSO "));
 						if (matcherGeral.group().matches(regex) && matcherInterno.find()) {
 							atributosWhen = evaluate.criaWhen(dataDivision, regexAlso,
 									matcherInterno.group("identifier1"), matcherInterno.group("identifierAlso"));
 						}
 
-						instrucoes = new ProcedureDivisionWhenEvaluate().leitura(matcherGeral, dataDivision, secoes);
+						instrucoes = new ProcedureDivisionWhenEvaluate().analisesProcedureDivision(matcherGeral, dataDivision, secoes);
 					} while (instrucoes == null && (matcherGeral.group().matches(regex)));
 					when.setWhen(atributosWhen);
 

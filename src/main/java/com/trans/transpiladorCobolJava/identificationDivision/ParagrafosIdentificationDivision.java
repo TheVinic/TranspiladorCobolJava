@@ -21,7 +21,7 @@ public enum ParagrafosIdentificationDivision {
 	
 	public static ParagrafosIdentificationDivision encontraParagrafo(String paragrafoProcurado) {
 		for(ParagrafosIdentificationDivision paragrafo : ParagrafosIdentificationDivision.values()) {
-			if(paragrafo.getDescricao().equals(paragrafoProcurado)) {
+			if(paragrafo.getDescricao().equalsIgnoreCase(paragrafoProcurado)) {
 				return paragrafo;
 			}
 		}
